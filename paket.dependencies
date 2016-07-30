@@ -1,0 +1,56 @@
+source https://nuget.org/api/v2
+
+nuget FSharp.Core redirects: force
+
+
+github fsharp/FSharp.Data src/Net/UriUtils.fs
+github fsharp/FSharp.Data src/Net/Http.fs
+
+github fsharp/FSharp.Data src/CommonRuntime/IO.fs
+github fsharp/FSharp.Data src/CommonRuntime/Caching.fs
+github fsharp/FSharp.Data src/CommonRuntime/TextConversions.fs
+github fsharp/FSharp.Data src/CommonRuntime/TextRuntime.fs
+github fsharp/FSharp.Data src/CommonRuntime/Pluralizer.fs
+github fsharp/FSharp.Data src/CommonRuntime/NameUtils.fs
+github fsharp/FSharp.Data src/CommonRuntime/StructuralTypes.fs
+github fsharp/FSharp.Data src/CommonRuntime/StructuralInference.fs
+
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fsi
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReader.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReaderReflection.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesContext.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesTesting.fs
+
+github fsharp/FSharp.Data src/CommonProviderImplementation/QuotationBuilder.fs
+github fsharp/FSharp.Data src/CommonProviderImplementation/AssemblyResolver.fs
+github fsharp/FSharp.Data src/CommonProviderImplementation/Helpers.fs
+github fsharp/FSharp.Data src/CommonProviderImplementation/ConversionsGenerator.fs
+
+github fsharp/FSharp.Data src/Json/JsonValue.fs
+github fsharp/FSharp.Data src/Json/JsonConversions.fs
+github fsharp/FSharp.Data src/Json/JsonExtensions.fs
+github fsharp/FSharp.Data src/Json/JsonRuntime.fs
+github fsharp/FSharp.Data src/Json/JsonInference.fs
+github fsharp/FSharp.Data src/Json/JsonConversionsGenerator.fs
+github fsharp/FSharp.Data src/Json/JsonGenerator.fs
+
+github fsharp/FSharp.Data src/Xml/XmlRuntime.fs
+github fsharp/FSharp.Data src/Xml/XmlInference.fs
+github fsharp/FSharp.Data src/Xml/XmlGenerator.fs
+
+group Build
+  source https://nuget.org/api/v2
+  
+  nuget SourceLink.Fake
+  nuget FAKE
+  nuget FSharp.Formatting
+
+  github fsharp/FAKE modules/Octokit/Octokit.fsx
+
+group Test
+  source https://nuget.org/api/v2
+  
+  nuget FSUnit
+  nuget NUnit ~> 2
+  nuget NUnit.Runners ~> 2

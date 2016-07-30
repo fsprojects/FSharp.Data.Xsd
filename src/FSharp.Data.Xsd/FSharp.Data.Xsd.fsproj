@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>ed25fc21-5203-4da6-b50d-010cb6ae4b5b</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FSharp.Data.Xsd</RootNamespace>
+    <AssemblyName>FSharp.Data.Xsd</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
+    <Name>FSharp.Data.Xsd</Name>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <Tailcalls>false</Tailcalls>
+    <OutputPath>.\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <OtherFlags>--warnon:1182</OtherFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
+    <OutputPath>.\bin\Release</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <DocumentationFile>.\bin\Release\FSharp.Data.Xsd.xml</DocumentationFile>
+    <OtherFlags>--warnon:1182</OtherFlags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '11.0'">
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="..\..\.paket\paket.targets" />
+  <ItemGroup>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Net\UriUtils.fs">
+      <Paket>True</Paket>
+      <Link>Net/UriUtils.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Net\Http.fs">
+      <Paket>True</Paket>
+      <Link>Net/Http.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\IO.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/IO.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\Caching.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/Caching.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\TextConversions.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/TextConversions.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\TextRuntime.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/TextRuntime.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\Pluralizer.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/Pluralizer.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\NameUtils.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/NameUtils.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\StructuralTypes.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/StructuralTypes.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonRuntime\StructuralInference.fs">
+      <Paket>True</Paket>
+      <Link>CommonRuntime/StructuralInference.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fsi">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypes.fsi</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypes.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypes.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\AssemblyReader.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/AssemblyReader.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\AssemblyReaderReflection.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/AssemblyReaderReflection.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypesContext.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypesContext.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsprojects\FSharp.TypeProviders.StarterPack\src\ProvidedTypesTesting.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/ProvidedTypesTesting.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonProviderImplementation\QuotationBuilder.fs">
+      <Paket>True</Paket>
+      <Link>CommonProviderImplementation/QuotationBuilder.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonProviderImplementation\AssemblyResolver.fs">
+      <Paket>True</Paket>
+      <Link>CommonProviderImplementation/AssemblyResolver.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonProviderImplementation\Helpers.fs">
+      <Paket>True</Paket>
+      <Link>CommonProviderImplementation/Helpers.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\CommonProviderImplementation\ConversionsGenerator.fs">
+      <Paket>True</Paket>
+      <Link>CommonProviderImplementation/ConversionsGenerator.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonValue.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonValue.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonConversions.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonConversions.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonExtensions.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonExtensions.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonRuntime.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonRuntime.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonInference.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonInference.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonConversionsGenerator.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonConversionsGenerator.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Json\JsonGenerator.fs">
+      <Paket>True</Paket>
+      <Link>Json/JsonGenerator.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Xml\XmlRuntime.fs">
+      <Paket>True</Paket>
+      <Link>Xml/XmlRuntime.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Xml\XmlInference.fs">
+      <Paket>True</Paket>
+      <Link>Xml/XmlInference.fs</Link>
+    </Compile>
+    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Xml\XmlGenerator.fs">
+      <Paket>True</Paket>
+      <Link>Xml/XmlGenerator.fs</Link>
+    </Compile>
+    <Compile Include="Xml\XsdInference.fs" />
+    <Compile Include="Xml\XmlProvider.fs" />
+    <Compile Include="Library.fs" />
+    <None Include="Script.fsx" />
+    <None Include="paket.references" />
+    <None Include="paket.template" />
+    <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,68 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FSharp.Core (4.0.0.1) - redirects: force
+GITHUB
+  remote: fsharp/FSharp.Data
+    src/CommonProviderImplementation/AssemblyResolver.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonProviderImplementation/ConversionsGenerator.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonProviderImplementation/Helpers.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonProviderImplementation/QuotationBuilder.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/Caching.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/IO.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/NameUtils.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/Pluralizer.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/StructuralInference.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/StructuralTypes.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/TextConversions.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/CommonRuntime/TextRuntime.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonConversions.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonConversionsGenerator.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonExtensions.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonGenerator.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonInference.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonRuntime.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Json/JsonValue.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Net/Http.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Net/UriUtils.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Xml/XmlGenerator.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Xml/XmlInference.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+    src/Xml/XmlRuntime.fs (e6823ab195cb567e48df4281f77a1327b64d91fd)
+  remote: fsprojects/FSharp.TypeProviders.StarterPack
+    src/AssemblyReader.fs (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+    src/AssemblyReaderReflection.fs (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+    src/ProvidedTypes.fs (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+    src/ProvidedTypes.fsi (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+    src/ProvidedTypesContext.fs (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+    src/ProvidedTypesTesting.fs (dfbca9b83fb70067e85abddcb8b89332aae4c28d)
+GROUP Build
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FAKE (4.35.1)
+    FSharp.Compiler.Service (2.0.0.6)
+    FSharp.Formatting (2.14.4)
+      FSharp.Compiler.Service (2.0.0.6)
+      FSharpVSPowerTools.Core (>= 2.3 < 2.4)
+    FSharpVSPowerTools.Core (2.3)
+      FSharp.Compiler.Service (>= 2.0.0.3)
+    Microsoft.Bcl (1.1.10) - framework: net10, net11, net20, net30, net35, net40, net40-full
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: net10, net11, net20, net30, net35, net40, net40-full
+    Microsoft.Net.Http (2.2.29) - framework: net10, net11, net20, net30, net35, net40, net40-full
+      Microsoft.Bcl (>= 1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Octokit (0.21.1)
+      Microsoft.Net.Http  - framework: net10, net11, net20, net30, net35, net40, net40-full
+    SourceLink.Fake (1.1)
+GITHUB
+  remote: fsharp/FAKE
+    modules/Octokit/Octokit.fsx (52449879bd0bcb4fcf8d4803d70b7b214fbce245)
+      Octokit (>= 0.20)
+GROUP Test
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FSharp.Core (4.0.0.1)
+    FsUnit (1.4.1)
+      FSharp.Core (>= 3.1.2.5)
+      NUnit (2.6.4)
+    NUnit (2.6.4)
+    NUnit.Runners (2.6.4)

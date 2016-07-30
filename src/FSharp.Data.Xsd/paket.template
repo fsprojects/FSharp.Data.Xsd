@@ -1,0 +1,25 @@
+type project
+title
+    FSharp.Data.Xsd
+owners
+    Giacomo Citi
+authors 
+    Giacomo Citi
+projectUrl
+    http://github.com/giacomociti/FSharp.Data.Xsd
+iconUrl
+    https://raw.githubusercontent.com/giacomociti/FSharp.Data.Xsd/master/docs/files/img/logo.png
+licenseUrl
+    http://github.com/giacomociti/FSharp.Data.Xsd/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    F# Xml Xsd
+summary
+    Xml Type Provider based on Xml Schema
+description
+    F# Xml Type Provider based on Xml Schema
+
+

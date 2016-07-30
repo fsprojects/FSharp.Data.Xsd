@@ -1,0 +1,38 @@
+FSharp.Core
+
+File:UriUtils.fs Net
+File:Http.fs     Net
+
+File:IO.fs                  CommonRuntime
+File:Caching.fs             CommonRuntime
+File:TextConversions.fs     CommonRuntime
+File:TextRuntime.fs         CommonRuntime
+File:Pluralizer.fs          CommonRuntime
+File:NameUtils.fs           CommonRuntime
+File:StructuralTypes.fs     CommonRuntime
+File:StructuralInference.fs CommonRuntime
+
+File:ProvidedTypes.fsi				
+File:ProvidedTypes.fs               
+File:AssemblyReader.fs              
+File:AssemblyReaderReflection.fs    
+File:ProvidedTypesContext.fs        
+File:ProvidedTypesTesting.fs        
+
+File:QuotationBuilder.fs     CommonProviderImplementation
+File:AssemblyResolver.fs     CommonProviderImplementation
+File:Helpers.fs              CommonProviderImplementation
+File:ConversionsGenerator.fs CommonProviderImplementation
+
+File:JsonValue.fs                Json
+File:JsonConversions.fs          Json
+File:JsonExtensions.fs           Json
+File:JsonRuntime.fs              Json
+File:JsonInference.fs            Json
+File:JsonConversionsGenerator.fs Json
+File:JsonGenerator.fs            Json
+
+
+File:XmlRuntime.fs    Xml
+File:XmlInference.fs  Xml
+File:XmlGenerator.fs  Xml
