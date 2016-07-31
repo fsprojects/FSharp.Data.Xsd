@@ -94,9 +94,9 @@ The library is available under Public Domain license, which allows modification 
 redistribution for both commercial and non-commercial purposes. For more information see the 
 [License file][license] in the GitHub repository. 
 
-  [content]: https://github.com/fsprojects/FSharp.Data.Xsd/tree/master/docs/content
-  [gh]: https://github.com/fsprojects/FSharp.Data.Xsd
-  [issues]: https://github.com/fsprojects/FSharp.Data.Xsd/issues
-  [readme]: https://github.com/fsprojects/FSharp.Data.Xsd/blob/master/README.md
-  [license]: https://github.com/fsprojects/FSharp.Data.Xsd/blob/master/LICENSE.txt
+  [content]: https://github.com/giacomociti/FSharp.Data.Xsd/tree/master/docs/content
+  [gh]: https://github.com/giacomociti/FSharp.Data.Xsd
+  [issues]: https://github.com/giacomociti/FSharp.Data.Xsd/issues
+  [readme]: https://github.com/giacomociti/FSharp.Data.Xsd/blob/master/README.md
+  [license]: https://github.com/giacomociti/FSharp.Data.Xsd/blob/master/LICENSE.txt
 *)
