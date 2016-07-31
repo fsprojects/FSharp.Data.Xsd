@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>XmlRuntime - FSharp.Data.Xsd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Giacomo Citi"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/FSharp.Data.Xsd/content/style.css" />
+    <script type="text/javascript" src="/FSharp.Data.Xsd/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/FSharp.Data.Xsd/index.html">FSharp.Data.Xsd</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>XmlRuntime</h1>
+<p>
+  <span>Namespace: FSharp.Data.Runtime</span><br />
+</p>
+<div class="xmldoc">
+<p>Static helper methods called from the generated code for working with XML</p>
+
+</div>
+  <h3>Static members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '301', 301)" onmouseover="showTip(event, '301', 301)">
+            ConvertArray(xml, nameWithNS, f)
+          </code>
+          <div class="tip" id="301">
+            <strong>Signature:</strong> (xml:XmlElement * nameWithNS:string * f:Func&lt;XmlElement,&#39;R&gt;) -&gt; &#39;R []<br />
+                          <strong>Type parameters:</strong> 'R          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L157-157" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '302', 302)" onmouseover="showTip(event, '302', 302)">
+            ConvertAsName(xml, nameWithNS, f)
+          </code>
+          <div class="tip" id="302">
+            <strong>Signature:</strong> (xml:XmlElement * nameWithNS:string * f:Func&lt;XmlElement,&#39;R&gt;) -&gt; &#39;R option<br />
+                          <strong>Type parameters:</strong> 'R          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L169-169" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns Some if the specified XmlElement has the specified name
+(otherwise None is returned). This is used when the current element
+can be one of multiple elements.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '303', 303)" onmouseover="showTip(event, '303', 303)">
+            ConvertOptional(xml, nameWithNS, f)
+          </code>
+          <div class="tip" id="303">
+            <strong>Signature:</strong> (xml:XmlElement * nameWithNS:string * f:Func&lt;XmlElement,&#39;R&gt;) -&gt; &#39;R option<br />
+                          <strong>Type parameters:</strong> 'R          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L160-160" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '304', 304)" onmouseover="showTip(event, '304', 304)">
+            ConvertOptional2(xml, nameWithNS, f)
+          </code>
+          <div class="tip" id="304">
+            <strong>Signature:</strong> (xml:XmlElement * nameWithNS:string * f:Func&lt;XmlElement,&#39;R option&gt;) -&gt; &#39;R option<br />
+                          <strong>Type parameters:</strong> 'R          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L163-163" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '305', 305)" onmouseover="showTip(event, '305', 305)">
+            CreateRecord(...)
+          </code>
+          <div class="tip" id="305">
+            <strong>Signature:</strong> (nameWithNS:string * attributes:(string * &#39;b) [] * elements:(string * obj) [] * cultureStr:string) -&gt; XmlElement<br />
+                          <strong>Type parameters:</strong> 'b          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L193-193" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '306', 306)" onmouseover="showTip(event, '306', 306)">
+            CreateValue(...)
+          </code>
+          <div class="tip" id="306">
+            <strong>Signature:</strong> (nameWithNS:string * value:obj * cultureStr:string) -&gt; XmlElement<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L189-189" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Creates a XElement with a scalar value and wraps it in a XmlElement</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '307', 307)" onmouseover="showTip(event, '307', 307)">
+            GetChild(value, nameWithNS)
+          </code>
+          <div class="tip" id="307">
+            <strong>Signature:</strong> (value:XmlElement * nameWithNS:string) -&gt; XmlElement<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L148-148" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '308', 308)" onmouseover="showTip(event, '308', 308)">
+            GetJsonValue(xml, cultureStr)
+          </code>
+          <div class="tip" id="308">
+            <strong>Signature:</strong> (xml:XmlElement * cultureStr:string) -&gt; IJsonDocument<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L174-174" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Returns the contents of the element as a JsonValue</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '309', 309)" onmouseover="showTip(event, '309', 309)">
+            TryGetAttribute(xml, nameWithNS)
+          </code>
+          <div class="tip" id="309">
+            <strong>Signature:</strong> (xml:XmlElement * nameWithNS:string) -&gt; string option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L124-124" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '310', 310)" onmouseover="showTip(event, '310', 310)">
+            TryGetJsonValue(xml, cultureStr)
+          </code>
+          <div class="tip" id="310">
+            <strong>Signature:</strong> (xml:XmlElement * cultureStr:string) -&gt; IJsonDocument option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L180-180" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Tries to return the contents of the element as a JsonValue</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '311', 311)" onmouseover="showTip(event, '311', 311)">
+            TryGetValue(xml)
+          </code>
+          <div class="tip" id="311">
+            <strong>Signature:</strong> xml:XmlElement -&gt; string option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/Xml/XmlRuntime.fs#L121-121" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/FSharp.Data.Xsd/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">FSharp.Data.Xsd</li>
+            <li><a href="/FSharp.Data.Xsd/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/FSharp.Data.Xsd">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">Source Code on GitHub</a></li>
+            <li><a href="/FSharp.Data.Xsd/license.html">License</a></li>
+            <li><a href="/FSharp.Data.Xsd/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/FSharp.Data.Xsd/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/FSharp.Data.Xsd/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/giacomociti/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

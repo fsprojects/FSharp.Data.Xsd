@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>TextConversions - FSharp.Data.Xsd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Giacomo Citi"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/FSharp.Data.Xsd/content/style.css" />
+    <script type="text/javascript" src="/FSharp.Data.Xsd/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/FSharp.Data.Xsd/index.html">FSharp.Data.Xsd</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>TextConversions</h1>
+<p>
+  <span>Namespace: FSharp.Data</span><br />
+</p>
+<div class="xmldoc">
+<p>Conversions from string to string/int/int64/decimal/float/boolean/datetime/guid options</p>
+
+</div>
+  <h3>Static members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '223', 223)" onmouseover="showTip(event, '223', 223)">
+            AsBoolean(text)
+          </code>
+          <div class="tip" id="223">
+            <strong>Signature:</strong> text:string -&gt; bool option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L81-81" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '224', 224)" onmouseover="showTip(event, '224', 224)">
+            AsDateTime(cultureInfo text)
+          </code>
+          <div class="tip" id="224">
+            <strong>Signature:</strong> cultureInfo:IFormatProvider -&gt; text:string -&gt; DateTime option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L90-90" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Parse date time using either the JSON milliseconds format or using ISO 8601
+that is, either <code>/Date(&lt;msec-since-1/1/1970&gt;)/</code> or something
+along the lines of <code>2013-01-28T00:37Z</code></p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '225', 225)" onmouseover="showTip(event, '225', 225)">
+            AsDecimal(cultureInfo text)
+          </code>
+          <div class="tip" id="225">
+            <strong>Signature:</strong> cultureInfo:IFormatProvider -&gt; text:string -&gt; decimal option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L70-70" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '226', 226)" onmouseover="showTip(event, '226', 226)">
+            AsFloat(...)
+          </code>
+          <div class="tip" id="226">
+            <strong>Signature:</strong> (missingValues:string []) -&gt; useNoneForMissingValues:bool -&gt; cultureInfo:IFormatProvider -&gt; text:string -&gt; float option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L74-74" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>if useNoneForMissingValues is true, NAs are returned as None, otherwise Some Double.NaN is used</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '227', 227)" onmouseover="showTip(event, '227', 227)">
+            AsGuid(text)
+          </code>
+          <div class="tip" id="227">
+            <strong>Signature:</strong> text:string -&gt; Guid option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L109-109" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '228', 228)" onmouseover="showTip(event, '228', 228)">
+            AsInteger(cultureInfo text)
+          </code>
+          <div class="tip" id="228">
+            <strong>Signature:</strong> cultureInfo:IFormatProvider -&gt; text:string -&gt; int option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L64-64" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '229', 229)" onmouseover="showTip(event, '229', 229)">
+            AsInteger64(cultureInfo text)
+          </code>
+          <div class="tip" id="229">
+            <strong>Signature:</strong> cultureInfo:IFormatProvider -&gt; text:string -&gt; int64 option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L67-67" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '230', 230)" onmouseover="showTip(event, '230', 230)">
+            AsString(str)
+          </code>
+          <div class="tip" id="230">
+            <strong>Signature:</strong> str:string -&gt; string option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L61-61" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Turns empty or null string value into None, otherwise returns Some</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '231', 231)" onmouseover="showTip(event, '231', 231)">
+            DefaultCurrencyAdorners
+          </code>
+          <div class="tip" id="231">
+            <strong>Signature:</strong> Set&lt;char&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L48-48" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p><code>¤</code> <code>$</code> <code>¢</code> <code>£</code> <code>¥</code> <code>₱</code> <code>﷼</code> <code>₤</code> <code>₭</code> <code>₦</code> <code>₨</code> <code>₩</code> <code>₮</code> <code>€</code> <code>฿</code> <code>₡</code> <code>៛</code> <code>؋</code> <code>₴</code> <code>₪</code> <code>₫</code> <code>₹</code> <code>ƒ</code></p>
+
+
+              <p>CompiledName: <code>get_DefaultCurrencyAdorners</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '232', 232)" onmouseover="showTip(event, '232', 232)">
+            DefaultMissingValues
+          </code>
+          <div class="tip" id="232">
+            <strong>Signature:</strong> string []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L42-42" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p><code>NaN</code> <code>NA</code> <code>N/A</code> <code>#N/A</code> <code>:</code> <code>-</code> <code>TBA</code> <code>TBD</code></p>
+
+
+              <p>CompiledName: <code>get_DefaultMissingValues</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '233', 233)" onmouseover="showTip(event, '233', 233)">
+            DefaultNonCurrencyAdorners
+          </code>
+          <div class="tip" id="233">
+            <strong>Signature:</strong> Set&lt;char&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/TextConversions.fs#L45-45" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p><code>%</code> <code>‰</code> <code>‱</code></p>
+
+
+              <p>CompiledName: <code>get_DefaultNonCurrencyAdorners</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/FSharp.Data.Xsd/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">FSharp.Data.Xsd</li>
+            <li><a href="/FSharp.Data.Xsd/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/FSharp.Data.Xsd">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">Source Code on GitHub</a></li>
+            <li><a href="/FSharp.Data.Xsd/license.html">License</a></li>
+            <li><a href="/FSharp.Data.Xsd/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/FSharp.Data.Xsd/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/FSharp.Data.Xsd/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/giacomociti/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

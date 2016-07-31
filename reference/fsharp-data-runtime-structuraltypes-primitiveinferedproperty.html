@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>PrimitiveInferedProperty - FSharp.Data.Xsd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Giacomo Citi"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/FSharp.Data.Xsd/content/style.css" />
+    <script type="text/javascript" src="/FSharp.Data.Xsd/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/FSharp.Data.Xsd/index.html">FSharp.Data.Xsd</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>PrimitiveInferedProperty</h1>
+<p>
+  <span>Namespace: FSharp.Data.Runtime.StructuralTypes</span><br />
+</p>
+<div class="xmldoc">
+<p>Represents type information about a primitive property (used mainly in the CSV provider)
+This type captures the type, unit of measure and handling of missing values (if we
+infer that the value may be missing, we can generate option<T> or nullable<T>)</p>
+
+</div>
+  <h3>Record Fields</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Record Field</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '346', 346)" onmouseover="showTip(event, '346', 346)">
+            InferedType
+          </code>
+          <div class="tip" id="346">
+            <strong>Signature:</strong> Type<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L172-172" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '347', 347)" onmouseover="showTip(event, '347', 347)">
+            Name
+          </code>
+          <div class="tip" id="347">
+            <strong>Signature:</strong> string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L171-171" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '348', 348)" onmouseover="showTip(event, '348', 348)">
+            RuntimeType
+          </code>
+          <div class="tip" id="348">
+            <strong>Signature:</strong> Type<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L173-173" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '349', 349)" onmouseover="showTip(event, '349', 349)">
+            TypeWrapper
+          </code>
+          <div class="tip" id="349">
+            <strong>Signature:</strong> TypeWrapper<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L175-175" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '350', 350)" onmouseover="showTip(event, '350', 350)">
+            UnitOfMeasure
+          </code>
+          <div class="tip" id="350">
+            <strong>Signature:</strong> Type option<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L174-174" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Static members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Static member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '351', 351)" onmouseover="showTip(event, '351', 351)">
+            Create(name, typ, optional, unit)
+          </code>
+          <div class="tip" id="351">
+            <strong>Signature:</strong> (name:string * typ:Type * optional:bool * unit:Type option) -&gt; PrimitiveInferedProperty<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L186-186" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '352', 352)" onmouseover="showTip(event, '352', 352)">
+            Create(name, typ, typWrapper, unit)
+          </code>
+          <div class="tip" id="352">
+            <strong>Signature:</strong> (name:string * typ:Type * typWrapper:TypeWrapper * unit:Type option) -&gt; PrimitiveInferedProperty<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/giacomociti/FSharp.Data.Xsd/tree/master/paket-files/fsharp/FSharp.Data/src/CommonRuntime/StructuralTypes.fs#L176-176" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/FSharp.Data.Xsd/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">FSharp.Data.Xsd</li>
+            <li><a href="/FSharp.Data.Xsd/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/FSharp.Data.Xsd">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">Source Code on GitHub</a></li>
+            <li><a href="/FSharp.Data.Xsd/license.html">License</a></li>
+            <li><a href="/FSharp.Data.Xsd/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/FSharp.Data.Xsd/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/FSharp.Data.Xsd/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/giacomociti/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

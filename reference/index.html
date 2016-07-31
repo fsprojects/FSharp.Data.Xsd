@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Namespaces - FSharp.Data.Xsd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Giacomo Citi"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/FSharp.Data.Xsd/content/style.css" />
+    <script type="text/javascript" src="/FSharp.Data.Xsd/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/FSharp.Data.Xsd/index.html">FSharp.Data.Xsd</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+<h1>FSharp.Data.Xsd</h1>
+
+
+  <h2>FSharp.Data Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-http.html">Http</a>
+          </td>
+          <td class="xmldoc"><p>Utilities for working with network via HTTP. Includes methods for downloading
+resources with specified headers, query parameters and HTTP body</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-httprequestbody.html">HttpRequestBody</a>
+          </td>
+          <td class="xmldoc"><p>The body to send in an HTTP request</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-httpresponse.html">HttpResponse</a>
+          </td>
+          <td class="xmldoc"><p>The response returned by an HTTP request</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-httpresponsebody.html">HttpResponseBody</a>
+          </td>
+          <td class="xmldoc"><p>The response body returned by an HTTP request</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-httpresponsewithstream.html">HttpResponseWithStream</a>
+          </td>
+          <td class="xmldoc"><p>The response returned by an HTTP request with direct access to the response stream</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-jsonextensions.html">JsonExtensions</a>
+          </td>
+          <td class="xmldoc"><p>Extension methods with operations on JSON values</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-jsonsaveoptions.html">JsonSaveOptions</a>
+          </td>
+          <td class="xmldoc"><p>Specifies the formatting behaviour of JSON values</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-jsonvalue.html">JsonValue</a>
+          </td>
+          <td class="xmldoc"><p>Represents a JSON value. Large numbers that do not fit in the
+Decimal type are represented using the Float case, while
+smaller numbers are represented as decimals to avoid precision loss.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-textconversions.html">TextConversions</a>
+          </td>
+          <td class="xmldoc"><p>Conversions from string to string/int/int64/decimal/float/boolean/datetime/guid options</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-xmlprovider.html">XmlProvider</a>
+          </td>
+          <td class="xmldoc"><p>Typed representation of a XML file.</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-httpcontenttypes.html">HttpContentTypes</a>
+          </td>
+          <td class="xmldoc"><p>Constants for common HTTP content types</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-httpencodings.html">HttpEncodings</a>
+          </td>
+          <td class="xmldoc"><p>Constants for common HTTP encodings</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-httpmethod.html">HttpMethod</a>
+          </td>
+          <td class="xmldoc"><p>The method to use in an HTTP request</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-httprequestheaders.html">HttpRequestHeaders</a>
+          </td>
+          <td class="xmldoc"><p>Headers that can be sent in an HTTP request</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-httpresponseheaders.html">HttpResponseHeaders</a>
+          </td>
+          <td class="xmldoc"><p>Headers that can be received in an HTTP response</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-jsonextensionsmodule.html">JsonExtensions</a>
+          </td>
+          <td class="xmldoc"><p>Provides the dynamic operator for getting a property of a JSON object</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-xelementextensions.html">XElementExtensions</a>
+          </td>
+          <td class="xmldoc"><p>Extension methods for XElement</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+  <h2>FSharp.Data.Runtime Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-jsonconversions.html">JsonConversions</a>
+          </td>
+          <td class="xmldoc"><p>Conversions from JsonValue to string/int/int64/decimal/float/boolean/datetime/guid options</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-jsonruntime.html">JsonRuntime</a>
+          </td>
+          <td class="xmldoc"><p>Static helper methods called from the generated code for working with JSON</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-textruntime.html">TextRuntime</a>
+          </td>
+          <td class="xmldoc"><p>Static helper methods called from the generated code for working with text</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-xmlruntime.html">XmlRuntime</a>
+          </td>
+          <td class="xmldoc"><p>Static helper methods called from the generated code for working with XML</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-runtime-caching.html">Caching</a>
+          </td>
+          <td class="xmldoc"><p>Implements caching using in-memory and local file system</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-runtime-io.html">IO</a>
+          </td>
+          <td class="xmldoc"><p>Helper functions called from the generated code for working with files</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-runtime-nameutils.html">NameUtils</a>
+          </td>
+          <td class="xmldoc"><p>Tools for generating nice member names that follow F# &amp; .NET naming conventions</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="fsharp-data-runtime-structuralinference.html">StructuralInference</a>
+          </td>
+          <td class="xmldoc"><p>Implements type inference for unstructured documents like XML or JSON</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+  <h2>FSharp.Data.Runtime.BaseTypes Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-basetypes-jsondocument.html">JsonDocument</a>
+          </td>
+          <td class="xmldoc"><p>Underlying representation of types generated by JsonProvider</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-basetypes-xmlelement.html">XmlElement</a>
+          </td>
+          <td class="xmldoc"><p>Underlying representation of types generated by XmlProvider</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+  <h2>FSharp.Data.Runtime.StructuralTypes Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-bit.html">Bit</a>
+          </td>
+          <td class="xmldoc"><p>Dummy type to represent that only one of "0" and "1" were found
+Will be generated as a 'bool', unless it's converted to another numerical type</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-bit0.html">Bit0</a>
+          </td>
+          <td class="xmldoc"><p>Dummy type to represent that only "0" was found.
+Will be generated as 'int', unless it's converted to Bit.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-bit1.html">Bit1</a>
+          </td>
+          <td class="xmldoc"><p>Dummy type to represent that only "1" was found
+Will be generated as 'int', unless it's converted to Bit</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-inferedmultiplicity.html">InferedMultiplicity</a>
+          </td>
+          <td class="xmldoc"><p>For heterogeneous types (types that have multiple possible forms
+such as differently named XML nodes or records and arrays mixed together)
+this type represents the number of occurrences of individual forms</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-inferedproperty.html">InferedProperty</a>
+          </td>
+          <td class="xmldoc"><p>A property of a record has a name and type and may be optional</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-inferedtype.html">InferedType</a>
+          </td>
+          <td class="xmldoc"><p>Represents inferred structural type. A type may be either primitive type
+(one of those listed by <code>primitiveTypes</code>) or it can be collection,
+(named) record and heterogeneous type. We also have <code>Null</code> type (which is
+a subtype of all non-primitive types) and universal <code>Top</code> type.</p>
+<ul>
+<li>
+<p>For collection, we infer the types of different things that appear in
+the collection and how many times they do.</p>
+</li>
+<li>
+<p>A heterogeneous type (sum type) is simply a choice containing one
+of multiple different possibilities</p>
+</li>
+</ul>
+<p>Why is collection not simply a list of Heterogeneous types? If we used that
+we would lose information about multiplicity and so we would not be able
+to generate nicer types!</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html">InferedTypeTag</a>
+          </td>
+          <td class="xmldoc"><p>For heterogeneous types, this represents the tag that defines the form
+(that is either primitive type, collection, named record etc.)</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-primitiveinferedproperty.html">PrimitiveInferedProperty</a>
+          </td>
+          <td class="xmldoc"><p>Represents type information about a primitive property (used mainly in the CSV provider)
+This type captures the type, unit of measure and handling of missing values (if we
+infer that the value may be missing, we can generate option<T> or nullable<T>)</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="fsharp-data-runtime-structuraltypes-typewrapper.html">TypeWrapper</a>
+          </td>
+          <td class="xmldoc"><p>Represents a transformation of a type</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+  <h2>ProviderImplementation Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-disposabletypeproviderfornamespaces.html">DisposableTypeProviderForNamespaces</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-xmlprovider.html">XmlProvider</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered module-list">
+    <thead>
+      <tr><td>Module</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-conversionsgenerator.html">ConversionsGenerator</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-jsonconversionsgenerator.html">JsonConversionsGenerator</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-jsoninference.html">JsonInference</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-jsontypebuilder.html">JsonTypeBuilder</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-quotationbuilder.html">QuotationBuilder</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-xmlinference.html">XmlInference</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-xsdinference.html">XsdInference</a>
+          </td>
+          <td class="xmldoc"><p>Element definitions in a schema are mapped to InferedType instances</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-xsdmodel.html">XsdModel</a>
+          </td>
+          <td class="xmldoc"><p>Simplified model to represent schemas (XSD).</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="module-name">
+            <a href="providerimplementation-xsdparsing.html">XsdParsing</a>
+          </td>
+          <td class="xmldoc"><p>A simplified schema model is built from xsd.
+The actual parsing is done using BCL classes.</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+  <h2>ProviderImplementation.ProvidedTypes Namespace</h2>
+    <div>
+      <table class="table table-bordered type-list">
+    <thead>
+      <tr><td>Type</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedassembly.html">ProvidedAssembly</a>
+          </td>
+          <td class="xmldoc"><p>A provided generated assembly</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedconstructor.html">ProvidedConstructor</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided constructor.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedevent.html">ProvidedEvent</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided property.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedfield.html">ProvidedField</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided field.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedliteralfield.html">ProvidedLiteralField</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided field.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedmeasurebuilder.html">ProvidedMeasureBuilder</a>
+          </td>
+          <td class="xmldoc"><p>Helps create erased provided unit-of-measure annotations.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedmethod.html">ProvidedMethod</a>
+          </td>
+          <td class="xmldoc"></td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedparameter.html">ProvidedParameter</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided parameter</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedproperty.html">ProvidedProperty</a>
+          </td>
+          <td class="xmldoc"><p>Represents an erased provided property.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedstaticparameter.html">ProvidedStaticParameter</a>
+          </td>
+          <td class="xmldoc"><p>Represents a provided static parameter.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedsymbolkind.html">ProvidedSymbolKind</a>
+          </td>
+          <td class="xmldoc"><p>Represents the type constructor in a provided symbol type.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedsymboltype.html">ProvidedSymbolType</a>
+          </td>
+          <td class="xmldoc"><p>Represents an array or other symbolic type involving a provided type as the argument.
+See the type provider spec for the methods that must be implemented.
+Note that the type provider specification does not require us to implement pointer-equality for provided types.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedtypebuilder.html">ProvidedTypeBuilder</a>
+          </td>
+          <td class="xmldoc"><p>Helpers to build symbolic provided types</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-providedtypedefinition.html">ProvidedTypeDefinition</a>
+          </td>
+          <td class="xmldoc"><p>Represents a provided type definition.</p>
+
+</td>
+        </tr>
+        <tr>
+          <td class="type-name">
+            <a href="providerimplementation-providedtypes-typeproviderfornamespaces.html">TypeProviderForNamespaces</a>
+          </td>
+          <td class="xmldoc"><p>A base type providing default implementations of type provider functionality when all provided
+types are of type ProvidedTypeDefinition.</p>
+
+</td>
+        </tr>
+    </tbody>
+  </table>
+
+    </div>
+
+        </div>
+        <div class="span3">
+          <img src="/FSharp.Data.Xsd/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">FSharp.Data.Xsd</li>
+            <li><a href="/FSharp.Data.Xsd/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/FSharp.Data.Xsd">Get Library via NuGet</a></li>
+            <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">Source Code on GitHub</a></li>
+            <li><a href="/FSharp.Data.Xsd/license.html">License</a></li>
+            <li><a href="/FSharp.Data.Xsd/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/FSharp.Data.Xsd/tutorial.html">Tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/FSharp.Data.Xsd/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="http://github.com/giacomociti/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
