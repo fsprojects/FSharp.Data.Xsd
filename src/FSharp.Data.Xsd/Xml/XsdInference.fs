@@ -60,7 +60,13 @@ module XsdParsing =
     
     open XsdModel
 
-    let inline ofType<'a> sequence = System.Linq.Enumerable.OfType<'a> sequence
+    //let inline ofType<'a> sequence = System.Linq.Enumerable.OfType<'a> sequence
+    let ofType<'a> (sequence: System.Collections.IEnumerable) =
+        sequence
+        |> Seq.cast<obj>
+        |> Seq.filter (fun x -> x :? 'a)
+        |> Seq.cast<'a>
+        
 
     let hasCycles x = 
         let items = System.Collections.Generic.HashSet<XmlSchemaObject>()
@@ -86,7 +92,6 @@ module XsdParsing =
     let rec parseElement (elm: XmlSchemaElement) =  
 
         if hasCycles elm then failwith "Recursive schemas are not supported yet."
-
 
         { Name = elm.QualifiedName
           Type = 
@@ -156,26 +161,6 @@ module XsdParsing =
         |> ofType<XmlSchemaElement>
         |> Seq.filter (fun x -> x.ElementSchemaType :? XmlSchemaComplexType )
         |> Seq.map parseElement
-        //|> Seq.filter (fun x -> match x.Type with XsdType.ComplexType _ -> true | _ -> false)
-
-//    let getElement elmName elmNs (schema: XmlSchemaSet) =
-//        let elms = schema.GlobalElements.Values |> ofType<XmlSchemaElement>
-//        let names = elms |> Seq.map (fun x -> x.QualifiedName) |> List.ofSeq
-//        match elmName, Seq.length elms with
-//        | _ , 0 -> failwith "There are no global elements in the schema"
-//        | "", 1 -> parseElement (Seq.exactlyOne elms)
-//        | "", _ -> 
-//            //parseElement (Seq.head elms)
-//            failwithf "Element name must be specified because there are multiple global elements: %A." names
-//        | _ ->
-//            elms
-//            |> Seq.tryFind (fun x -> 
-//                x.QualifiedName.Name = elmName && 
-//                x.QualifiedName.Namespace = elmNs)
-//            |> Option.map parseElement
-//            |> function 
-//                | None -> failwithf "No element found with name '%s' and namespace '%s'. Available elements: %A." elmName elmNs names
-//                | Some e -> e
 
 
 /// Element definitions in a schema are mapped to InferedType instances
@@ -187,6 +172,11 @@ module XsdInference =
         | 1M, 1M -> InferedMultiplicity.Single
         | 0M, 1M -> InferedMultiplicity.OptionalSingle
         | _ -> InferedMultiplicity.Multiple
+
+    let mult' parentMultiplicity occurs = 
+        if parentMultiplicity = InferedMultiplicity.Multiple 
+        then InferedMultiplicity.Multiple 
+        else mult occurs
 
     let getType = function
         | XmlTypeCode.Int -> typeof<int>
@@ -233,48 +223,39 @@ module XsdInference =
             let ty = InferedType.Primitive (getType typeCode, None, false)
             { Name = ""; Type = ty }::attrs
         | ComplexContent xsdParticle ->
-            match inferParticle xsdParticle with
+            match inferParticle InferedMultiplicity.Single xsdParticle with
             | InferedTypeTag.Null, _ -> attrs // empty content
-            | InferedTypeTag.Collection, (InferedMultiplicity.Multiple, ty) -> 
-                { Name = ""; Type = ty }::attrs
             | _tag, (_mul, ty) -> { Name = ""; Type = ty }::attrs
-                
-
-            // we're ignoring multiplicity!!
-//            let _,(_, ty) = inferParticle xsdParticle
-//            match ty with
-//            | InferedType.Null -> attrs // empty content
-//            | _ -> { Name = ""; Type = ty }::attrs
 
 
-    and inferParticle = function
+    and inferParticle (parentMultiplicity: InferedMultiplicity) = function
         | Element (occurs, e) -> 
             InferedTypeTag.Record(Some e.Name.Name), 
-            (mult occurs, inferElement e)
+            (mult' parentMultiplicity occurs, inferElement e)
         | All (occurs, items) 
         | Sequence (occurs, items) -> 
-            let inner = items |> List.map inferParticle
+            let mul = mult' parentMultiplicity occurs
+            let inner = items |> List.map (inferParticle mul)
             let tags  = inner |> List.map fst
             let types = inner |> Map.ofList
             InferedTypeTag.Collection, 
-            (mult occurs, InferedType.Collection(tags, types))
+            (mul, InferedType.Collection(tags, types))
         | Choice (occurs, items) ->  
+            let mul = mult' parentMultiplicity occurs
             let makeOptional = function Single -> OptionalSingle | x -> x
-            let inner = items |> List.map inferParticle
+            let inner = items |> List.map (inferParticle mul)
             let tags  = inner |> List.map fst
             let types = 
                 inner 
                 |> List.map (fun (tag, (mult, ty)) -> tag, (makeOptional mult, ty))
                 |> Map.ofList
             InferedTypeTag.Collection, 
-            (mult occurs, InferedType.Collection(tags, types))
+            (mul, InferedType.Collection(tags, types))
         | Empty -> 
             InferedTypeTag.Null, 
             (InferedMultiplicity.OptionalSingle, InferedType.Null)
-//            InferedTypeTag.Collection,
-//            (InferedMultiplicity.OptionalSingle, InferedType.Top)
-        | Any _ -> 
+        | Any occurs -> 
             let name = Some "{anyNs}anyElement"
             InferedTypeTag.Record(name), 
-            (InferedMultiplicity.Multiple, 
+            (mult' parentMultiplicity occurs, 
                 InferedType.Record (name, [{Name = ""; Type = InferedType.Top}], false))

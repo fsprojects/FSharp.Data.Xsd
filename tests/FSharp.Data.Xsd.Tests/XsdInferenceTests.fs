@@ -153,7 +153,7 @@ let ``sequence of multiple elements``() =
     check xsd [| sample |]
 
 // this is a bit tricky
-//[<Test>]
+[<Test>]
 let ``repeated sequence``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
