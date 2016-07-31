@@ -60,7 +60,7 @@ printfn "%s was born in %d" turing.Surname turing.BirthDate.Year
 
 The properties of the provided type are derived from the schema instead of being inferred from samples.
 
-Please notice that only a basic set of XML schema features are supported (forget about recursive schemas,
+Please notice that only basic XML schema features are supported (forget about recursive schemas,
 substitution groups and other fancy stuff). 
 Nevertheless a lot of schemas out there don't use advanced features, so this type provider may be useful in many cases.
 Also notice that this is just an early release (the docs look nice just 
