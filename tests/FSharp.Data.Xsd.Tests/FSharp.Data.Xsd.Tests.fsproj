@@ -100,9 +100,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FSharp.Data.Xsd\FSharp.Data.Xsd.fsproj">
-      <Name>FSharp.Data.Xsd</Name>
-      <Project>{ed25fc21-5203-4da6-b50d-010cb6ae4b5b}</Project>
+    <ProjectReference Include="..\..\src\FSharp.Data.Xsd\FSharp.Data.Xsd.DesignTime.fsproj">
+      <Name>FSharp.Data.Xsd.DesignTime</Name>
+      <Project>{558574f5-9943-4496-ba9c-95ab522c4300}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

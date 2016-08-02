@@ -111,7 +111,8 @@ Target "AssemblyInfo" (fun _ ->
 Target "CopyBinaries" (fun _ ->
     !! "src/**/*.??proj"
     -- "src/**/*.shproj"
-    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+    //|>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "bin" ))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
 )
 
@@ -173,11 +174,33 @@ Target "SourceLink" (fun _ ->
 // Build a NuGet package
 
 Target "NuGet" (fun _ ->
+    failwith "packaging manually for now"
     Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes})
+)
+
+Target "NuGet2" (fun _ ->
+        // Format the release notes
+    let releaseNotes = release.Notes |> String.concat "\n"
+    NuGet (fun p -> 
+        { p with   
+            Authors = authors
+            Project = project
+            Summary = summary
+            Description = description
+            Version = release.NugetVersion
+            ReleaseNotes = releaseNotes
+            Tags = tags
+            OutputPath = "bin"
+            AccessKey = getBuildParamOrDefault "nugetkey" ""
+            Publish = hasBuildParam "nugetkey"
+            Dependencies = [] })
+        "nuget/FSharp.Data.Xsd.nuspec"
+
+    
 )
 
 Target "PublishNuget" (fun _ ->
