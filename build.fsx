@@ -175,6 +175,8 @@ Target "SourceLink" (fun _ ->
 
 Target "NuGet" (fun _ ->
     failwith "packaging manually for now"
+    
+
     Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
@@ -424,11 +426,11 @@ Target "All" DoNothing
 "GenerateHelpDebug"
   ==> "KeepRunning"
 
-"ReleaseDocs"
-  ==> "Release"
+//"ReleaseDocs"
+//  ==> "Release"
 
-"BuildPackage"
-  ==> "PublishNuget"
-  ==> "Release"
+//"BuildPackage"
+//  ==> "PublishNuget"
+//  ==> "Release"
 
 RunTargetOrDefault "All"
