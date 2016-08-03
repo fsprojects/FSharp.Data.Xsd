@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Xml\XsdInference.fs" />
     <Compile Include="Xml\XmlProvider.fs" />
+    <Compile Include="AssemblyInfo.DesignTime.fs" />
     <None Include="Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />

@@ -86,23 +86,26 @@ Target "AssemblyInfo" (fun _ ->
           Attribute.Version release.AssemblyVersion
           Attribute.FileVersion release.AssemblyVersion ]
 
-    let getProjectDetails projectPath =
-        let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
-        ( projectPath,
-          projectName,
-          System.IO.Path.GetDirectoryName(projectPath),
-          (getAssemblyInfoAttributes projectName)
-        )
+//    let getProjectDetails projectPath =
+//        let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
+//        ( projectPath,
+//          projectName,
+//          System.IO.Path.GetDirectoryName(projectPath),
+//          (getAssemblyInfoAttributes projectName)
+//        )
+    let folder = "src" </> "FSharp.Data.Xsd"
+    CreateFSharpAssemblyInfo (folder </> "AssemblyInfo.fs") (getAssemblyInfoAttributes "FSharp.Data.Xsd")
+    CreateFSharpAssemblyInfo (folder </> "AssemblyInfo.DesignTime.fs") (getAssemblyInfoAttributes "FSharp.Data.Xsd.DesignTime")
 
-    !! "src/**/*.??proj"
-    |> Seq.map getProjectDetails
-    |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
-        match projFileName with
-        | Fsproj -> CreateFSharpAssemblyInfo (folderName </> "AssemblyInfo.fs") attributes
-        | Csproj -> CreateCSharpAssemblyInfo ((folderName </> "Properties") </> "AssemblyInfo.cs") attributes
-        | Vbproj -> CreateVisualBasicAssemblyInfo ((folderName </> "My Project") </> "AssemblyInfo.vb") attributes
-        | Shproj -> ()
-        )
+//    !! "src/**/*.??proj"
+//    |> Seq.map getProjectDetails
+//    |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
+//        match projFileName with
+//        | Fsproj -> CreateFSharpAssemblyInfo (folderName </> "AssemblyInfo.fs") attributes
+//        | Csproj -> CreateCSharpAssemblyInfo ((folderName </> "Properties") </> "AssemblyInfo.cs") attributes
+//        | Vbproj -> CreateVisualBasicAssemblyInfo ((folderName </> "My Project") </> "AssemblyInfo.vb") attributes
+//        | Shproj -> ()
+//        )
 )
 
 // Copies binaries from default VS location to expected bin folder

@@ -120,6 +120,7 @@
       <Link>Xml/XmlRuntime.fs</Link>
     </Compile>
     <Compile Include="Library.fs" />
+    <Compile Include="AssemblyInfo.fs" />
     <None Include="Script.fsx" />
     <None Include="paket.references" />
     <None Include="paket.template" />
