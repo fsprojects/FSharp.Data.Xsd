@@ -45,31 +45,10 @@ let isValid xsd =
             false
 
 
-
-let rec compare = function
-| InferedType.Record (name1, fields1, opt1), InferedType.Record (name2, fields2, opt2) ->
-    name1 = name2 && opt1 = opt2 && fields1 = fields2
-    //TODO compare fields
-
-//| InferedType.Top, InferedType.Top -> true
-//| InferedType.Null, InferedType.Null -> true
-//| InferedType.Primitive (typ1, unit1, opt1), InferedType.Primitive (typ2, unit2, opt2) -> 
-//    typ1 = typ2 && unit1 = unit2 && opt1 = opt2
-//| InferedType.Json (typ1, opt1), InferedType.Json (typ2, opt2) -> 
-//    opt1 = opt2 && compare(typ1, typ2)
-
-| InferedType.Heterogeneous map1, InferedType.Heterogeneous map2 -> 
-    true //TODO
-| InferedType.Collection _, InferedType.Collection _ -> 
-    true //TODO
-| x, y -> x = y
-
-
-let check xsd xmlSamples =
-    
+let print xsd xmlSamples =
     let isValid = isValid xsd
     for xml in xmlSamples do
-        isValid (xml.ToString()) |> should equal true
+        xml.ToString() |> isValid |> should equal true
 
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
@@ -77,9 +56,14 @@ let check xsd xmlSamples =
     let inferedTypeFromSamples = getInferedTypeFromSamples xmlSamples
     printfn "%A" inferedTypeFromSamples
 
-    compare (inferedTypeFromSchema, inferedTypeFromSamples)
-    |> should equal true
+    inferedTypeFromSchema, inferedTypeFromSamples
 
+
+
+let check xsd xmlSamples =
+    let inferedTypeFromSchema, inferedTypeFromSamples = print xsd xmlSamples
+    inferedTypeFromSchema = inferedTypeFromSamples
+    |> should equal true
 
 [<Test>]
 let ``at least one global complex element is needed``() =
@@ -218,26 +202,50 @@ let ``sequence of sequence``() =
     </foo>"""
     check xsd [| sample |]
 
-// this is failing
-//[<Test>]
-//let ``sequence of sequences``() =
-//    let xsd = """
-//    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-//      elementFormDefault="qualified" attributeFormDefault="unqualified">
-//      <xs:element name="foo">
-//        <xs:complexType>
-//		  <xs:sequence maxOccurs='1'>
-//            <xs:sequence maxOccurs='unbounded'>
-//			  <xs:element name="bar" type="xs:int"/>
-//			  <xs:element name="baz" type="xs:int"/>
-//            </xs:sequence>
-//		  </xs:sequence>
-//		</xs:complexType>
-//	  </xs:element>
-//    </xs:schema>    """
-//    let sample = """
-//    <foo>
-//        <bar>2</bar><baz>5</baz>
-//        <bar>3</bar><baz>6</baz>
-//    </foo>"""
-//    check xsd [| sample |]
+[<Test>]
+let ``sequence of sequences``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <xs:element name="foo">
+        <xs:complexType>
+		  <xs:sequence maxOccurs='1'>
+            <xs:sequence maxOccurs='unbounded'>
+			  <xs:element name="bar" type="xs:int"/>
+			  <xs:element name="baz" type="xs:int"/>
+            </xs:sequence>
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+    </xs:schema>    """
+    let sample = """
+    <foo>
+        <bar>2</bar><baz>5</baz>
+        <bar>3</bar><baz>6</baz>
+    </foo>"""
+    print xsd [| sample |]
+    |> ignore
+
+
+[<Test>]
+let ``element with simple content``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <xs:element name="foo">
+		<xs:complexType>
+		  <xs:simpleContent>
+			  <xs:extension base="xs:date">
+				  <xs:attribute name="bar" type="xs:string" />
+				  <xs:attribute name="baz" type="xs:int" />
+			  </xs:extension>
+		  </xs:simpleContent>
+		</xs:complexType>
+	  </xs:element>
+    </xs:schema>"""
+    let sample1 = """<foo bar="hello">1957-08-13</foo>"""
+    let sample2 = """<foo bar="hello" baz="2">1957-08-13</foo>"""
+    print xsd [| sample1; sample2 |]
+    |> ignore
+
+
