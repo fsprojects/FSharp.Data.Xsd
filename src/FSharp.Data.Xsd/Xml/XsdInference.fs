@@ -60,7 +60,6 @@ module XsdParsing =
     
     open XsdModel
 
-    //let inline ofType<'a> sequence = System.Linq.Enumerable.OfType<'a> sequence
     let ofType<'a> (sequence: System.Collections.IEnumerable) =
         sequence
         |> Seq.cast<obj>

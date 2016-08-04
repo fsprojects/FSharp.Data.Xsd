@@ -1,7 +1,7 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/FSharp.Data.Xsd/"
+#I "../../bin/"
 
 (**
 FSharp.Data.Xsd
@@ -50,7 +50,7 @@ type person = XmlProvider<Schema = """
 let turing = person.Parse("""
   <person>
     <surname>Turing</surname>
-    <birthDate>06-23-1912</birthDate>
+    <birthDate>1912-06-23</birthDate>
   </person>""")
 
 printfn "%s was born in %d" turing.Surname turing.BirthDate.Year

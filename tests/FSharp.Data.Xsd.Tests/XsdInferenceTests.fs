@@ -4,7 +4,9 @@ open FSharp.Data
 open ProviderImplementation
 open FSharp.Data.Runtime.StructuralTypes
 open FSharp.Data.Runtime.StructuralInference
+open System.Xml
 open System.Xml.Linq
+open System.Xml.Schema
 open NUnit.Framework
 open FsUnit
 
@@ -22,13 +24,27 @@ let getInferedTypeFromSamples samples =
     |> infer 
     |> Seq.fold (subtypeInfered (*allowEmptyValues*)false) InferedType.Top
 
-    
 let getInferedTypeFromSchema xsd =
     xsd
     |> XsdParsing.parseSchema ""
     |> XsdParsing.getElements
     |> List.ofSeq
     |> XsdInference.inferElements
+
+let isValid xsd =
+    let xmlSchemaSet = XsdParsing.parseSchema "" xsd
+    fun xml -> 
+        let settings = XmlReaderSettings(ValidationType = ValidationType.Schema)
+        settings.Schemas <- xmlSchemaSet
+        use reader = XmlReader.Create(new System.IO.StringReader(xml), settings)
+        try
+            while reader.Read() do ()
+            true
+        with :? XmlSchemaException as e -> 
+            printfn "%s/n%s" xml e.Message
+            false
+
+
 
 let rec compare = function
 | InferedType.Record (name1, fields1, opt1), InferedType.Record (name2, fields2, opt2) ->
@@ -50,6 +66,11 @@ let rec compare = function
 
 
 let check xsd xmlSamples =
+    
+    let isValid = isValid xsd
+    for xml in xmlSamples do
+        isValid (xml.ToString()) |> should equal true
+
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
 
@@ -108,7 +129,7 @@ let ``multiple root elements are allowed``() =
       </xs:schema>    
       """
     let sample1 = "<root1 foo='aa' fow='34' />"
-    let sample2 = "<root2 bar='aa' baz='12-22-2017' />"
+    let sample2 = "<root2 bar='aa' baz='2017-12-22' />"
     check xsd [| sample1; sample2 |]
   
 
@@ -152,7 +173,7 @@ let ``sequence of multiple elements``() =
     </foo>"""
     check xsd [| sample |]
 
-// this is a bit tricky
+
 [<Test>]
 let ``repeated sequence``() =
     let xsd = """
@@ -174,3 +195,49 @@ let ``repeated sequence``() =
     </foo>"""
     check xsd [| sample |]
     
+[<Test>]
+let ``sequence of sequence``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <xs:element name="foo">
+        <xs:complexType>
+		  <xs:sequence maxOccurs='unbounded'>
+            <xs:sequence maxOccurs='1'>
+			  <xs:element name="bar" type="xs:int"/>
+			  <xs:element name="baz" type="xs:int"/>
+            </xs:sequence>
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+    </xs:schema>    """
+    let sample = """
+    <foo>
+        <bar>2</bar><baz>5</baz>
+        <bar>3</bar><baz>6</baz>
+    </foo>"""
+    check xsd [| sample |]
+
+// this is failing
+//[<Test>]
+//let ``sequence of sequences``() =
+//    let xsd = """
+//    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+//      elementFormDefault="qualified" attributeFormDefault="unqualified">
+//      <xs:element name="foo">
+//        <xs:complexType>
+//		  <xs:sequence maxOccurs='1'>
+//            <xs:sequence maxOccurs='unbounded'>
+//			  <xs:element name="bar" type="xs:int"/>
+//			  <xs:element name="baz" type="xs:int"/>
+//            </xs:sequence>
+//		  </xs:sequence>
+//		</xs:complexType>
+//	  </xs:element>
+//    </xs:schema>    """
+//    let sample = """
+//    <foo>
+//        <bar>2</bar><baz>5</baz>
+//        <bar>3</bar><baz>6</baz>
+//    </foo>"""
+//    check xsd [| sample |]

@@ -1,7 +1,7 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/FSharp.Data.Xsd/"
+#I "../../bin/"
 
 (**
 Tutorial
@@ -37,7 +37,7 @@ or as a file:
 
 *)
 
-type foo' = XmlProvider<Schema="c:\temp\foo.xsd">
+type foo' = XmlProvider<Schema="c:/temp/foo.xsd">
 
 (**
 
@@ -45,7 +45,7 @@ When the file includes other schema files, the `ResolutionFolder` parameter can 
 
 *)
 
-type foo'' = XmlProvider<Schema="foo.xsd", ResolutionFolder="c:\temp">
+type foo'' = XmlProvider<Schema="foo.xsd", ResolutionFolder="c:/temp">
 
 (**
 
@@ -82,7 +82,7 @@ match e1.Root1, e1.Root2 with
     assert(x.Foo = "aa")
     assert(x.Fow = Some 2)
 | _ -> failwith "Invalid"
-let e2 = twoRoots.Parse("<root2 bar='aa' baz='12-22-2017' />")
+let e2 = twoRoots.Parse("<root2 bar='aa' baz='2017-12-22' />")
 match e2.Root1, e2.Root2 with
 | None, Some x -> 
     assert(x.Bar = "aa")
