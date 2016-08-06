@@ -435,6 +435,8 @@ Target "All" DoNothing
 "GenerateHelpDebug"
   ==> "KeepRunning"
 
+"All"
+  ==> "Release"
 //"ReleaseDocs"
 //  ==> "Release"
 

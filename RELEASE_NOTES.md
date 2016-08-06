@@ -1,3 +1,6 @@
+#### 0.0.5 - August 6 2016
+* Support for nested particles
+
 #### 0.0.4 - August 3 2016
 * Fixes to NuGet package
 
