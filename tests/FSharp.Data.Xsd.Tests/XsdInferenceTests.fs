@@ -46,8 +46,12 @@ let isValid xsd =
 
 
 let print xsd xmlSamples =
+    printfn "%s" xsd
+    printfn "-----------------------------------------------------"
     let isValid = isValid xsd
     for xml in xmlSamples do
+        printfn "%A" xml
+        printfn "-----------------------------------------------------"
         xml.ToString() |> isValid |> should equal true
 
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
@@ -61,6 +65,7 @@ let print xsd xmlSamples =
 
 
 let check xsd xmlSamples =
+    printfn "checking schema and samples"
     let inferedTypeFromSchema, inferedTypeFromSamples = print xsd xmlSamples
     inferedTypeFromSchema = inferedTypeFromSamples
     |> should equal true
@@ -118,7 +123,7 @@ let ``multiple root elements are allowed``() =
   
 
 [<Test>]
-let ``sequence of elements``() =
+let ``sequences can have elements``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -135,7 +140,7 @@ let ``sequence of elements``() =
     check xsd [| sample |]
 
 [<Test>]
-let ``sequence of multiple elements``() =
+let ``sequences can have multiple elements``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -159,7 +164,7 @@ let ``sequence of multiple elements``() =
 
 
 [<Test>]
-let ``repeated sequence``() =
+let ``sequences may occur multiple times``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -180,7 +185,7 @@ let ``repeated sequence``() =
     check xsd [| sample |]
     
 [<Test>]
-let ``sequence of sequence``() =
+let ``sequences can be nested``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -203,7 +208,7 @@ let ``sequence of sequence``() =
     check xsd [| sample |]
 
 [<Test>]
-let ``sequence of sequences``() =
+let ``sequences can have multiple nested sequences``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -223,12 +228,11 @@ let ``sequence of sequences``() =
         <bar>2</bar><baz>5</baz>
         <bar>3</bar><baz>6</baz>
     </foo>"""
-    print xsd [| sample |]
-    |> ignore
+    check xsd [| sample |]
 
 
 [<Test>]
-let ``element with simple content``() =
+let ``simple content can be extended with attributes``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -243,9 +247,47 @@ let ``element with simple content``() =
 		</xs:complexType>
 	  </xs:element>
     </xs:schema>"""
-    let sample1 = """<foo bar="hello">1957-08-13</foo>"""
+    let sample1 = """<foo>1957-08-13</foo>"""
     let sample2 = """<foo bar="hello" baz="2">1957-08-13</foo>"""
-    print xsd [| sample1; sample2 |]
-    |> ignore
+    check xsd [| sample1; sample2 |]
+
+[<Test>]
+let ``elements in a choice become optional``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <xs:element name="foo">
+		<xs:complexType>
+		  <xs:choice>
+            <xs:element name="bar" type="xs:int" />
+            <xs:element name="baz" type="xs:date" />
+		  </xs:choice>
+		</xs:complexType>
+	  </xs:element>
+    </xs:schema>"""
+    let sample1 = """<foo><bar>5</bar></foo>"""
+    let sample2 = """<foo><baz>1957-08-13</baz></foo>"""
+    check xsd [| sample1; sample2 |]
+
+[<Test>]
+let ``elements can reference attribute groups``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:attributeGroup name="myAttributes">
+		    <xs:attribute name="myNr" type="xs:int" use="required" />
+		    <xs:attribute name="available" type="xs:boolean" use="required" />
+	    </xs:attributeGroup>
+	    <xs:element name="foo">
+            <xs:complexType>
+                <xs:attributeGroup ref="myAttributes"/>
+                <xs:attribute name="lang" type="xs:language" use="required" />
+            </xs:complexType>
+	    </xs:element>
+    </xs:schema>"""
+    let sample1 = """
+    <foo myNr="42" available="false" lang="en-US" />"""
+    check xsd [| sample1 |]
+    
 
 
