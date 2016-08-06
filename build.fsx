@@ -141,12 +141,18 @@ Target "Build" (fun _ ->
     |> MSBuildRelease "" "Rebuild"
 #endif
     |> ignore
+
 )
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
 Target "RunTests" (fun _ ->
+
+    ["FSharp.Data.Xsd.ProviderTests.sln"]
+    |> MSBuildRelease "" "Rebuild"
+    |> ignore
+
     !! testAssemblies
     |> NUnit (fun p ->
         { p with

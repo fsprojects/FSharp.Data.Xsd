@@ -83,6 +83,26 @@ let ``at least one global complex element is needed``() =
     |> should (throwWithMessage msg) typeof<System.Exception>
     
 [<Test>]
+let ``recursive schemas are not supported``() =
+    let xsd = """ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:complexType name="TextType" mixed="true">
+		    <xs:choice minOccurs="0" maxOccurs="unbounded">
+			    <xs:element ref="bold"/>
+			    <xs:element ref="italic"/>
+			    <xs:element ref="underline"/>
+		    </xs:choice>
+	    </xs:complexType>
+	    <xs:element name="bold" type="TextType"/>
+	    <xs:element name="italic" type="TextType"/>
+	    <xs:element name="underline" type="TextType"/>
+    </xs:schema>"""
+    let msg = "Recursive schemas are not supported yet."
+    (fun () -> getInferedTypeFromSchema xsd |> ignore) 
+    |> should (throwWithMessage msg) typeof<System.Exception>
+
+
+[<Test>]
 let ``attributes become properties``() =
     let xsd = """
       <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
