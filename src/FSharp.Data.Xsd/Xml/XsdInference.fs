@@ -183,11 +183,6 @@ module XsdInference =
         | 0M, 1M -> OptionalSingle
         | _ -> Multiple
 
-//    let mult' parentMultiplicity occurs = 
-//        if parentMultiplicity = Multiple 
-//        then Multiple 
-//        else getMultiplicity occurs
-
     // how multiplicity is affected when nesting particles
     let combineMultiplicity = function
         | Single, x -> x
@@ -204,12 +199,12 @@ module XsdInference =
             [ (elm, combineMultiplicity(parentMultiplicity, getMultiplicity occ)) ]
         | XsdParticle.Sequence (occ, particles)
         | XsdParticle.All (occ, particles) -> 
-            let m = combineMultiplicity(parentMultiplicity, getMultiplicity occ)
-            particles |> List.collect (getElements m)
+            let mult = combineMultiplicity(parentMultiplicity, getMultiplicity occ)
+            particles |> List.collect (getElements mult)
         | XsdParticle.Choice (occ, particles) -> 
-            let mult' = makeOptional (getMultiplicity occ)
-            let m = combineMultiplicity(parentMultiplicity, mult')
-            particles |> List.collect (getElements m)
+            let mult = makeOptional (getMultiplicity occ)
+            let mult' = combineMultiplicity(parentMultiplicity, mult)
+            particles |> List.collect (getElements mult')
         | XsdParticle.Empty -> []
         | XsdParticle.Any occ -> 
             let name = XmlQualifiedName "{anyNs}anyElement"
@@ -276,37 +271,3 @@ module XsdInference =
             InferedTypeTag.Collection, 
             (parentMultiplicity, InferedType.Collection(tags, types))
             
-
-
-
-//    and inferParticle2 (parentMultiplicity: InferedMultiplicity) = function
-//        | Element (occurs, e) -> 
-//            InferedTypeTag.Record(Some e.Name.Name), 
-//            (mult' parentMultiplicity occurs, inferElement e)
-//        | All (occurs, items) 
-//        | Sequence (occurs, items) -> 
-//            let mul = mult' parentMultiplicity occurs
-//            let inner = items |> List.map (inferParticle mul)
-//            let tags  = inner |> List.map fst
-//            let types = inner |> Map.ofList
-//            InferedTypeTag.Collection, 
-//            (mul, InferedType.Collection(tags, types))
-//        | Choice (occurs, items) ->  
-//            let mul = mult' parentMultiplicity occurs
-//            let makeOptional = function Single -> OptionalSingle | x -> x
-//            let inner = items |> List.map (inferParticle mul)
-//            let tags  = inner |> List.map fst
-//            let types = 
-//                inner 
-//                |> List.map (fun (tag, (mult, ty)) -> tag, (makeOptional mult, ty))
-//                |> Map.ofList
-//            InferedTypeTag.Collection, 
-//            (mul, InferedType.Collection(tags, types))
-//        | Empty -> 
-//            InferedTypeTag.Null, 
-//            (InferedMultiplicity.OptionalSingle, InferedType.Null)
-//        | Any occurs -> 
-//            let name = Some "{anyNs}anyElement"
-//            InferedTypeTag.Record(name), 
-//            (mult' parentMultiplicity occurs, 
-//                InferedType.Record (name, [{Name = ""; Type = InferedType.Top}], false))
