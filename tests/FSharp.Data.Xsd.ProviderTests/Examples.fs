@@ -98,22 +98,75 @@ type untypedElement = XmlProvider<Schema = """
   </xs:schema>""">
 
 [<Test>]
-let ``untyped element may contain anything``() =
+let ``untyped elements have only the XElement property``() =
   let foo = untypedElement.Parse """
   <foo>
     <anything />
     <greetings>hi</greetings>
   </foo>"""
-  foo.AnyElements
-  |> Array.iter (printfn "%s")
-  // not working as expected
-  //foo.AnyElements.[0].XElement.Name.LocalName |> should equal "anything"
-  //foo.AnyElements.[1].XElement.Name.LocalName |> should equal "greetings"
+  printfn "%A" foo.XElement
+  foo.XElement.Element(XName.Get "greetings").Value
+  |> should equal "hi"
 
 
+type wildcard = XmlProvider<Schema = """ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="foo">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+          <xs:any minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    </xs:schema>    
+    """>
 
+[<Test>]
+let ``wildcard elements have only the XElement property``() =
+  let foo = wildcard.Parse """
+  <foo>
+    <id>XYZ</id>
+    <anything name='abc' />
+  </foo>"""
+  printfn "%A" foo.XElement
+  foo.Id |> should equal "XYZ"
+  foo.XElement.Element(XName.Get "anything").FirstAttribute.Value
+  |> should equal "abc"
+
+type recursiveElements = XmlProvider<Schema = """ 
+     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:complexType name="TextType" mixed="true">
+		    <xs:choice minOccurs="0" maxOccurs="unbounded">
+			    <xs:element ref="bold"/>
+			    <xs:element ref="italic"/>
+			    <xs:element ref="underline"/>
+		    </xs:choice>
+	    </xs:complexType>
+	    <xs:element name="bold" type="TextType"/>
+	    <xs:element name="italic" type="TextType"/>
+	    <xs:element name="underline" type="TextType"/>
+    </xs:schema>
+    """>
+
+[<Test>]
+let ``recursive elements have only the XElement property``() =
+  let doc = recursiveElements.Parse """
+    <italic>
+      <bold></bold>
+      <underline></underline>
+      <bold>
+        <italic />
+        <bold />
+      </bold>
+    </italic>
+    """ 
+  printfn "%A" doc.XElement
+  //let root = doc.Italic.Value
   
 
+ 
 
 type elmWithChildChoice = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 

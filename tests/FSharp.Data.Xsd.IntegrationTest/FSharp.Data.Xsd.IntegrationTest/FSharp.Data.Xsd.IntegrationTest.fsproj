@@ -58,6 +58,9 @@
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
+    <None Include="AllSchemas2.fsx" />
+    <None Include="Script.fsx" />
+    <None Include="AllSchemas.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data.Xsd">

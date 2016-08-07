@@ -1,0 +1,292 @@
+ERROR for c:/temp/schemas\altova\files\raptorxml\options.xsd:
+The 'http://www.w3.org/2001/XMLSchema:alternative' element is not supported in this context.
+ERROR for c:/temp/schemas\dita\files\bookmap.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\bookmapMod.xsd:
+Reference to undeclared attribute group 'topicref-atts'.
+ERROR for c:/temp/schemas\dita\files\commonElementMod.xsd:
+Reference to undeclared model group 'ph'.
+ERROR for c:/temp/schemas\dita\files\concept.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\conceptMod.xsd:
+Reference to undeclared model group 'concept'.
+ERROR for c:/temp/schemas\dita\files\ditabase.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\glossary.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\glossaryMod.xsd:
+Reference to undeclared model group 'no-topic-nesting'.
+ERROR for c:/temp/schemas\dita\files\highlightDomain.xsd:
+Reference to undeclared attribute group 'global-atts'.
+ERROR for c:/temp/schemas\dita\files\indexingDomain.xsd:
+Reference to undeclared attribute group 'univ-atts'.
+ERROR for c:/temp/schemas\dita\files\map.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\mapGroupMod.xsd:
+Reference to undeclared attribute group 'topicref-atts'.
+ERROR for c:/temp/schemas\dita\files\mapMod.xsd:
+Type 'scope-att.class' is not declared, or is not a simple type.
+ERROR for c:/temp/schemas\dita\files\metaDeclMod.xsd:
+Reference to undeclared model group 'brand'.
+ERROR for c:/temp/schemas\dita\files\programmingDomain.xsd:
+Reference to undeclared attribute group 'id-atts'.
+ERROR for c:/temp/schemas\dita\files\reference.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\referenceMod.xsd:
+Reference to undeclared model group 'reference'.
+ERROR for c:/temp/schemas\dita\files\softwareDomain.xsd:
+Reference to undeclared attribute group 'univ-atts'.
+ERROR for c:/temp/schemas\dita\files\task.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\taskMod.xsd:
+Reference to undeclared model group 'task'.
+ERROR for c:/temp/schemas\dita\files\tblDeclMod.xsd:
+Type 'scale-atts.class' is not declared, or is not a simple type.
+ERROR for c:/temp/schemas\dita\files\topic.xsd:
+'SchemaLocation' must successfully resolve if <redefine> contains any child other than <annotation>.
+ERROR for c:/temp/schemas\dita\files\topicMod.xsd:
+Reference to undeclared model group 'basic.block'.
+ERROR for c:/temp/schemas\dita\files\uiDomain.xsd:
+Reference to undeclared attribute group 'global-atts'.
+ERROR for c:/temp/schemas\dita\files\utilitiesDomain.xsd:
+Reference to undeclared attribute group 'univ-atts'.
+ERROR for c:/temp/schemas\dita\files\xnalDomain.xsd:
+Reference to undeclared attribute group 'univ-atts'.
+ERROR for c:/temp/schemas\math\files\common\math.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-token.class'.
+ERROR for c:/temp/schemas\math\files\content\arith.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Definition.attrib'.
+ERROR for c:/temp/schemas\math\files\content\calculus.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\constants.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Definition.attrib'.
+ERROR for c:/temp/schemas\math\files\content\constructs.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\elementary-functions.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\functions.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\linear-algebra.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\logic.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Definition.attrib'.
+ERROR for c:/temp/schemas\math\files\content\relations.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Definition.attrib'.
+ERROR for c:/temp/schemas\math\files\content\semantics.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\sets.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\statistics.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Content-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\tokens.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\content\vector-calculus.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Definition.attrib'.
+ERROR for c:/temp/schemas\math\files\presentation\action.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\presentation\common-attribs.xsd:
+Type 'http://www.w3.org/1998/Math/MathML:simple-size' is not declared, or is not a simple type.
+ERROR for c:/temp/schemas\math\files\presentation\error.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\presentation\layout.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Common.attrib'.
+ERROR for c:/temp/schemas\math\files\presentation\scripts.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\presentation\space.xsd:
+Type 'http://www.w3.org/1998/Math/MathML:length-with-unit' is not declared, or is not a simple type.
+ERROR for c:/temp/schemas\math\files\presentation\style.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\presentation\table.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:Presentation-expr.class'.
+ERROR for c:/temp/schemas\math\files\presentation\tokens.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:Token-style.attrib'.
+ERROR for c:/temp/schemas\mathml3\files\mathml3-common.xsd:
+Reference to undeclared attribute group 'http://www.w3.org/1998/Math/MathML:math.attributes'.
+ERROR for c:/temp/schemas\mathml3\files\mathml3-content.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:semantics'.
+ERROR for c:/temp/schemas\mathml3\files\mathml3-presentation.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:MathExpression'.
+ERROR for c:/temp/schemas\mathml3\files\mathml3-strict-content.xsd:
+Reference to undeclared model group 'http://www.w3.org/1998/Math/MathML:binary-arith.class'.
+ERROR for c:/temp/schemas\p3p\files\P3Pv11.xsd:
+Type 'http://www.w3.org/2006/01/P3Pv11BDS:dynamicComplexType' is not declared.
+ERROR for c:/temp/schemas\p3p\files\P3Pv11BDS.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\teilite\files\teilite.xsd:
+The 'http://www.w3.org/XML/1998/namespace:id' attribute is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-CommonExtensionComponents-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-CommonSignatureComponents-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-ExtensionContentDataType-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-SignatureAggregateComponents-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-XAdESv132-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-XAdESv141-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\common\UBL-xmldsig-core-schema-2.1.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ApplicationResponse-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-AttachedDocument-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-AwardedNotification-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-BillOfLading-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CallForTenders-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Catalogue-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CatalogueDeletion-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CatalogueItemSpecificationUpdate-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CataloguePricingUpdate-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CatalogueRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CertificateOfOrigin-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ContractAwardNotice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ContractNotice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-CreditNote-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-DebitNote-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-DespatchAdvice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-DocumentStatus-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-DocumentStatusRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ExceptionCriteria-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ExceptionNotification-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Forecast-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ForecastRevision-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ForwardingInstructions-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-FreightInvoice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-FulfilmentCancellation-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-GoodsItemItinerary-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-GuaranteeCertificate-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-InstructionForReturns-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-InventoryReport-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Invoice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ItemInformationRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Order-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-OrderCancellation-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-OrderChange-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-OrderResponse-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-OrderResponseSimple-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-PackingList-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-PriorInformationNotice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ProductActivity-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Quotation-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-ReceiptAdvice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Reminder-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-RemittanceAdvice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-RequestForQuotation-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-RetailEvent-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-SelfBilledCreditNote-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-SelfBilledInvoice-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Statement-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-StockAvailabilityReport-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Tender-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TendererQualification-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TendererQualificationResponse-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TenderReceipt-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TradeItemLocationProfile-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportationStatus-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportationStatusRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportExecutionPlan-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportExecutionPlanRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportProgressStatus-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportProgressStatusRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportServiceDescription-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-TransportServiceDescriptionRequest-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-UnawardedNotification-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-UtilityStatement-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\UBL\files\maindoc\UBL-Waybill-2.1.xsd:
+The 'http://www.w3.org/2000/09/xmldsig#:Signature' element is not declared.
+ERROR for c:/temp/schemas\voicexml\files\vxml-synthesis-extension.xsd:
+Reference to undeclared model group 'http://www.w3.org/2001/vxml:executable.content'.
+ERROR for c:/temp/schemas\wsdl\files\http.xsd:
+Undefined complexType 'http://schemas.xmlsoap.org/wsdl/:tExtensibilityElement' is used as a base for complex type extension.
+ERROR for c:/temp/schemas\wsdl\files\mime.xsd:
+Undefined complexType 'http://schemas.xmlsoap.org/wsdl/:tExtensibilityElement' is used as a base for complex type extension.
+ERROR for c:/temp/schemas\wsdl\files\soap.xsd:
+Undefined complexType 'http://schemas.xmlsoap.org/wsdl/:tExtensibilityElement' is used as a base for complex type extension.
+ERROR for c:/temp/schemas\wsdl\files\wsdl2.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\wsdl\files\wsdl20-extensions.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\wsdl\files\wsdl20-instance.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\wsdl\files\wsdl20_http.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\wsdl\files\wsdl20_rpc.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\wsdl\files\wsdl20_soap.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\xmldsig\files\xmldsig-core-schema.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\xsd10\files\datatypes.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\xsd10\files\XMLSchema-instance.xsd:
+The target namespace of an attribute declaration, whether local or global, must not match http://www.w3.org/2001/XMLSchema-instance.
+ERROR for c:/temp/schemas\xsd10\files\XMLSchema.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\xsd11\files\datatypes.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.
+ERROR for c:/temp/schemas\xsd11\files\XMLSchema.xsd:
+For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.

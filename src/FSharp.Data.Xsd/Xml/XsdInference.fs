@@ -89,20 +89,29 @@ module XsdParsing =
 
 
     let rec parseElement (elm: XmlSchemaElement) =  
+        if hasCycles elm 
+        then //failwith "Recursive schemas are not supported yet."
+            { Name = elm.QualifiedName
+              Type =  
+                { Attributes = []
+                  Contents = ComplexContent Empty 
+                  IsMixed = false }
+                |> ComplexType
+              IsNillable = elm.IsNillable }
 
-        if hasCycles elm then failwith "Recursive schemas are not supported yet."
-
-        { Name = elm.QualifiedName
-          Type = 
-            match elm.ElementSchemaType with
-            | :? XmlSchemaSimpleType  as x -> SimpleType x.Datatype.TypeCode
-            | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType x)
-            | x -> failwithf "unknown ElementSchemaType: %A" x
-          IsNillable = elm.IsNillable }
+        else
+          { Name = elm.QualifiedName
+            Type = 
+              match elm.ElementSchemaType with
+              | :? XmlSchemaSimpleType  as x -> SimpleType x.Datatype.TypeCode
+              | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType x)
+              | x -> failwithf "unknown ElementSchemaType: %A" x
+            IsNillable = elm.IsNillable }
 
     and parseComplexType (x: XmlSchemaComplexType) =
         { Attributes = 
-            x.AttributeUses.Values |> ofType<XmlSchemaAttribute>
+            x.AttributeUses.Values 
+            |> ofType<XmlSchemaAttribute>
             |> Seq.filter (fun a -> a.Use <> XmlSchemaUse.Prohibited)
             |> Seq.map (fun a -> a.QualifiedName,
                                     a.AttributeSchemaType.Datatype.TypeCode, 
@@ -206,12 +215,8 @@ module XsdInference =
             let mult' = combineMultiplicity(parentMultiplicity, mult)
             particles |> List.collect (getElements mult')
         | XsdParticle.Empty -> []
-        | XsdParticle.Any occ -> 
-            let name = XmlQualifiedName "{anyNs}anyElement"
-            let typ = SimpleType XmlTypeCode.UntypedAtomic
-            let elm = { Name = name; Type = typ; IsNillable = false }
-            [ (elm, combineMultiplicity(parentMultiplicity, getMultiplicity occ))] 
-        
+        | XsdParticle.Any _ -> []
+
 
     // derives an InferedType for an element definition
     let rec inferElementType (elm: XsdElement) =
