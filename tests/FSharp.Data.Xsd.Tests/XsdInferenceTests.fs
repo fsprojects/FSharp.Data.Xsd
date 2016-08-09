@@ -95,29 +95,9 @@ let ``untyped elements have no properties``() =
     let ty, _ = print xsd [| sample1; sample2 |]
     ty |> should equal (InferedType.Record (Some "foo",[],false))
 
-[<Test>]
-let ``elements with wildcards have no properties``() =
-    let xsd = """ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-      elementFormDefault="qualified" attributeFormDefault="unqualified">
-    <xs:element name="foo">
-      <xs:complexType>
-        <xs:sequence>
-          <xs:element name="id" type="xs:string"/>
-          <xs:any minOccurs="0"/>
-        </xs:sequence>
-      </xs:complexType>
-    </xs:element>
-    </xs:schema>    
-    """
-//    let sample1 = "<foo><id>aa</id></foo>"
-//    let sample2 = "<foo><id>aa</id><hello /></foo>"
-//    let ty, _ = print xsd [| sample1; sample2 |]
-//    ty |> should equal (InferedType.Record (Some "foo",[],false))
-    ()
 
-    
 [<Test>]
-let ``recursive schemas are not supported``() =
+let ``recursive schemas don't cause loops``() =
     let xsd = """ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
 	    <xs:complexType name="TextType" mixed="true">
@@ -134,11 +114,6 @@ let ``recursive schemas are not supported``() =
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
     
-
-//    let msg = "Recursive schemas are not supported yet."
-//    (fun () -> getInferedTypeFromSchema xsd |> ignore) 
-//    |> should (throwWithMessage msg) typeof<System.Exception>
-
 
 [<Test>]
 let ``attributes become properties``() =

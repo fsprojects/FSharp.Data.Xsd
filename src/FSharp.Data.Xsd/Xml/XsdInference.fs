@@ -4,11 +4,11 @@
 
 // The XML Provider infers a type from sample documents: an instance of InferedType 
 // represents elements having a structure compatible with the given samples.
-// When a schema is availbale we can use it to derive an InferedType representing
+// When a schema is available we can use it to derive an InferedType representing
 // valid elements according to the definitions in the given schema.
 // The InferedType derived from a schema should be essentialy the same as one
 // infered from a significant set of valid samples.
-// This is an easy way to support some XSD leveraging the existing functionalities.
+// With this perspective we can support some XSD leveraging the existing functionalities.
 // The implementation uses a simplfied XSD model to split the task of deriving an InferedType:
 // - element definitions in xsd files map to this simplified xsd model
 // - instances of this xsd model map to InferedType.
@@ -23,19 +23,20 @@ open System.Xml.Schema
 
 /// Simplified model to represent schemas (XSD).
 module XsdModel =
+    
+    type IsOptional = bool
+    type Occurs = decimal * decimal
 
     type XsdElement = { Name: XmlQualifiedName; Type: XsdType; IsNillable: bool }
 
     and XsdType = SimpleType of XmlTypeCode | ComplexType of XsdComplexType
 
     and XsdComplexType = 
-        { Attributes: (XmlQualifiedName * XmlTypeCode * bool) list // bool is for optional
+        { Attributes: (XmlQualifiedName * XmlTypeCode * IsOptional) list
           Contents: XsdContent 
           IsMixed: bool }
 
     and XsdContent = SimpleContent of XmlTypeCode | ComplexContent of XsdParticle
-
-    and Occurs = decimal * decimal
 
     and XsdParticle = 
         | Empty
@@ -66,8 +67,7 @@ module XsdParsing =
         |> Seq.filter (fun x -> x :? 'a)
         |> Seq.cast<'a>
         
-
-    let hasCycles x = 
+    let hasCycles xmlSchemaObject = 
         let items = System.Collections.Generic.HashSet<XmlSchemaObject>()
         let rec closure (obj: XmlSchemaObject) =
             let nav innerObj =
@@ -84,21 +84,20 @@ module XsdParsing =
                 |> ofType<XmlSchemaObject> 
                 |> Seq.iter nav
             | _ -> ()
-        closure x
-        items.Contains x
+        closure xmlSchemaObject
+        items.Contains xmlSchemaObject
 
 
     let rec parseElement (elm: XmlSchemaElement) =  
         if hasCycles elm 
-        then //failwith "Recursive schemas are not supported yet."
-            { Name = elm.QualifiedName
-              Type =  
-                { Attributes = []
-                  Contents = ComplexContent Empty 
-                  IsMixed = false }
-                |> ComplexType
-              IsNillable = elm.IsNillable }
-
+        then
+          { Name = elm.QualifiedName
+            Type =  
+              { Attributes = []
+                Contents = ComplexContent Empty 
+                IsMixed = false }
+              |> ComplexType
+            IsNillable = elm.IsNillable }
         else
           { Name = elm.QualifiedName
             Type = 

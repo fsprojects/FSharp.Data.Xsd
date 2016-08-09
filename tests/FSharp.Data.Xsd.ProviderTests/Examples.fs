@@ -18,12 +18,12 @@ type elemWithAttrs = XmlProvider<Schema = """
 
 [<Test>]
 let ``attributes are parsed``() =
-    let e1 = elemWithAttrs.Parse "<foo bar='aa' baz='2' />"
-    e1.Bar |> should equal "aa"
-    e1.Baz |> should equal (Some 2)
-    let e2 = elemWithAttrs.Parse "<foo bar='aa' />"
-    e2.Bar |> should equal "aa"
-    e2.Baz |> should equal None
+    let elm = elemWithAttrs.Parse "<foo bar='aa' baz='2' />"
+    elm.Bar |> should equal "aa"
+    elm.Baz |> should equal (Some 2)
+    let elm = elemWithAttrs.Parse "<foo bar='aa' />"
+    elm.Bar |> should equal "aa"
+    elm.Baz |> should equal None
     
 
 type twoElems = XmlProvider<Schema = """
@@ -46,17 +46,17 @@ type twoElems = XmlProvider<Schema = """
 
 [<Test>]
 let ``multiple root elements are handled``() =
-    let e1 = twoElems.Parse "<foo bar='aa' baz='2' />"
-    match e1.Foo, e1.Azz with
+    let elm = twoElems.Parse "<foo bar='aa' baz='2' />"
+    match elm.Foo, elm.Azz with
     | Some x, None -> 
-        Assert.AreEqual("aa", x.Bar)
-        Assert.AreEqual(Some 2, x.Baz)
+        x.Bar |> should equal "aa"
+        x.Baz |> should equal (Some 2)
     | _ -> failwith "Invalid"
-    let e2 = twoElems.Parse "<azz foffolo='aa' fuffola='12-22-2017' />"
-    match e2.Foo, e2.Azz with
+    let elm = twoElems.Parse "<azz foffolo='aa' fuffola='2017-12-22' />"
+    match elm.Foo, elm.Azz with
     | None, Some x -> 
-        Assert.AreEqual("aa", x.Foffolo)
-        Assert.AreEqual(System.DateTime(2017, 12, 22) |> Some, x.Fuffola)
+        x.Foffolo |> should equal "aa"
+        x.Fuffola |> should equal (Some <| System.DateTime(2017, 12, 22))
     | _ -> failwith "Invalid"
 
 
@@ -78,7 +78,7 @@ type attrsAndSimpleContent = XmlProvider<Schema = """
   </xs:schema>""">
 
 [<Test>]
-let ``element with attributes and simple content``() =
+let ``element with attributes can have simple content``() =
     let date = System.DateTime(1957, 8, 13)
     let foo = attrsAndSimpleContent.Parse("""<foo bar="hello">1957-08-13</foo>""")
     foo.Value |> should equal date
@@ -163,7 +163,13 @@ let ``recursive elements have only the XElement property``() =
     </italic>
     """ 
   printfn "%A" doc.XElement
-  //let root = doc.Italic.Value
+  match doc.Bold, doc.Italic, doc.Underline with
+  | None, Some x, None -> 
+    x.Bolds.Length |> should equal 2
+    x.Italics.Length |> should equal 0
+    x.Underlines.Length |> should equal 1
+    
+  | _ -> failwith "unexpected"
   
 
  
@@ -191,7 +197,7 @@ let ``choice makes properties optional``() =
     foo.Baz |> should equal None
 
 
-type elmWithMultipleChoice = XmlProvider<Schema = """
+type elmWithMultipleChildElements = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
       <xs:element name="foo">
@@ -205,14 +211,16 @@ type elmWithMultipleChoice = XmlProvider<Schema = """
   </xs:schema>""">
 
 [<Test>]
-let ``element with multiple choice``() =
-    let foo = elmWithMultipleChoice.Parse """
+let ``multiple child elements become an array``() =
+    let foo = elmWithMultipleChildElements.Parse """
     <foo>
         <bar>42</bar>
+        <bar>43</bar>
         <baz>1957-08-13</baz>
     </foo>"""
-    foo.Bars.Length |> should equal 1
+    foo.Bars.Length |> should equal 2
     foo.Bars.[0] |> should equal 42
+    foo.Bars.[1] |> should equal 43
     foo.Baz |> should equal (Some(System.DateTime(1957, 08, 13)))
         
 
@@ -231,7 +239,7 @@ type substGroup = XmlProvider<Schema = """
   </xs:schema>""">
 
 [<Test>]
-let ``substitution groups``() =
+let ``substitution groups are ignored``() =
   let doc = substGroup.Parse "<kunde><name>hello</name></kunde>"
   match doc.Customer, doc.Kunde with
   | None, Some x -> x.Name |> should equal "hello"
@@ -240,8 +248,11 @@ let ``substitution groups``() =
   let doc = substGroup.Parse "<kunde><navn>hello2</navn></kunde>"
   match doc.Customer, doc.Kunde with
   | None, Some x -> 
+    x.XElement.Element(XName.Get "navn").Value |> should equal "hello2"
     // accessing x.Name throws
-    ()
+    let msg = "XML mismatch: Expected exactly one 'name' child, got 0"
+    (fun () -> x.Name |> ignore) 
+    |> should (throwWithMessage msg) typeof<System.Exception>
   | _ -> failwith "unexpected"
 
 
