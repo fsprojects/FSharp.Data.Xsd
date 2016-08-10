@@ -6,13 +6,12 @@
 
 open FSharp.Data
 
-
-//type t1 = XmlProvider<Schema ="ImportCreditRegistry_v.3.xsd", ResolutionFolder="""c:\temp\schemas""">
-//type t2 = XmlProvider<Schema ="xmlopts.xsd", ResolutionFolder="""c:\temp\schemas\altova\files""">
-//type t3 = XmlProvider<Schema ="config.xsd", ResolutionFolder="""c:\temp\schemas\altova\files\raptorxml""">
-//type t5 = XmlProvider<Schema ="parameters.xsd", ResolutionFolder="""c:\temp\schemas\altova\files\raptorxml""">
-//type t6 = XmlProvider<Schema ="cmlCore.xsd", ResolutionFolder="""c:\temp\schemas\cml\files""">
-//type t45 = XmlProvider<Schema ="container.xsd", ResolutionFolder="""c:\temp\schemas\epub\files""">
+type t1 = XmlProvider<Schema ="ImportCreditRegistry_v.3.xsd", ResolutionFolder="""c:\temp\schemas""">
+type t2 = XmlProvider<Schema ="xmlopts.xsd", ResolutionFolder="""c:\temp\schemas\altova\files""">
+type t3 = XmlProvider<Schema ="config.xsd", ResolutionFolder="""c:\temp\schemas\altova\files\raptorxml""">
+type t5 = XmlProvider<Schema ="parameters.xsd", ResolutionFolder="""c:\temp\schemas\altova\files\raptorxml""">
+type t6 = XmlProvider<Schema ="cmlCore.xsd", ResolutionFolder="""c:\temp\schemas\cml\files""">
+type t45 = XmlProvider<Schema ="container.xsd", ResolutionFolder="""c:\temp\schemas\epub\files""">
 //*DUP* type t46 = XmlProvider<Schema ="opf.xsd", ResolutionFolder="""c:\temp\schemas\epub\files""">
 //*DUP* type t47 = XmlProvider<Schema ="opf2.xsd", ResolutionFolder="""c:\temp\schemas\epub\files""">
 //type t48 = XmlProvider<Schema ="ApplicationAcknowledgement.xsd", ResolutionFolder="""c:\temp\schemas\hr-xml""">

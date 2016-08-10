@@ -1,3 +1,6 @@
+#### 0.0.7 - August 11 2016
+* Caching to improve design time performance
+
 #### 0.0.6 - August 10 2016
 * Wildcard and recursive elements considered empty
 
