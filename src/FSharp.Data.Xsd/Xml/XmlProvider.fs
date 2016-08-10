@@ -23,7 +23,17 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
   let ns = "FSharp.Data"
   let xmlProvTy = bindingContext.ProvidedTypeDefinition(asm, ns, "XmlProvider", None, hideObjectMethods=true, nonNullable=true)
 
-  let buildTypes (typeName:string) (args:obj[]) =
+  let cache: Caching.ICache<ProvidedTypeDefinition> = 
+      Caching.createInMemoryCache (System.TimeSpan(0, 2, 0)) // expires in two minutes
+      //Caching.createNonCachingCache()
+
+
+  let buildTypes (typeName:string) (args:obj[]) = 
+    
+    match cache.TryRetrieve typeName with
+    | Some x -> x
+    | None ->
+
 
     // Generate the required type
     let tpType = bindingContext.ProvidedTypeDefinition(asm, ns, typeName, None, hideObjectMethods=true, nonNullable=true)
@@ -88,12 +98,15 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
         CreateFromTextReaderForSampleList = fun reader -> 
           result.Converter <@@ XmlElement.CreateList(%reader) @@> }
 
-    if schema = "" then
-        generateType "XML" sample sampleIsList parseSingle parseList getSpecFromSamples 
-            version this cfg bindingContext encodingStr resolutionFolder resource typeName None
-    else
-        generateType "XML" schema false parseSingleSchema parseListOfSchema getSpecFromSchema 
-            version this cfg bindingContext "" resolutionFolder resource typeName None
+    let result =
+        if schema = "" then
+            generateType "XML" sample sampleIsList parseSingle parseList getSpecFromSamples 
+                version this cfg bindingContext encodingStr resolutionFolder resource typeName None
+        else
+            generateType "XML" schema false parseSingleSchema parseListOfSchema getSpecFromSchema 
+                version this cfg bindingContext "" resolutionFolder resource typeName None
+    cache.Set(typeName, result)
+    result
 
   // Add static parameter that specifies the API we want to get (compile-time) 
   let parameters = 
