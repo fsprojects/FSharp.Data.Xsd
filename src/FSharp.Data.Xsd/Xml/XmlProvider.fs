@@ -23,17 +23,12 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
   let ns = "FSharp.Data"
   let xmlProvTy = bindingContext.ProvidedTypeDefinition(asm, ns, "XmlProvider", None, hideObjectMethods=true, nonNullable=true)
 
-  let cache: Caching.ICache<ProvidedTypeDefinition> = 
-      Caching.createInMemoryCache (System.TimeSpan(0, 2, 0)) // expires in two minutes
+  let cache = System.Collections.Concurrent.ConcurrentDictionary<string, ProvidedTypeDefinition>()
       //Caching.createNonCachingCache()
 
 
   let buildTypes (typeName:string) (args:obj[]) = 
-    
-    match cache.TryRetrieve typeName with
-    | Some x -> x
-    | None ->
-
+   cache.GetOrAdd(typeName, fun typeName ->
 
     // Generate the required type
     let tpType = bindingContext.ProvidedTypeDefinition(asm, ns, typeName, None, hideObjectMethods=true, nonNullable=true)
@@ -105,8 +100,10 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
         else
             generateType "XML" schema false parseSingleSchema parseListOfSchema getSpecFromSchema 
                 version this cfg bindingContext "" resolutionFolder resource typeName None
-    cache.Set(typeName, result)
+    async { do! Async.Sleep (2*60*1000)
+            if cache <> null then cache.TryRemove(typeName) |> ignore } |> Async.Start
     result
+   )
 
   // Add static parameter that specifies the API we want to get (compile-time) 
   let parameters = 
