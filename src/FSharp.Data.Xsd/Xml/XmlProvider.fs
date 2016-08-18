@@ -100,7 +100,7 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
         else
             generateType "XML" schema false parseSingleSchema parseListOfSchema getSpecFromSchema 
                 version this cfg bindingContext "" resolutionFolder resource typeName None
-    async { do! Async.Sleep (2*60*1000)
+    async { do! Async.Sleep (10000)
             if cache <> null then cache.TryRemove(typeName) |> ignore } |> Async.Start
     result
    )
