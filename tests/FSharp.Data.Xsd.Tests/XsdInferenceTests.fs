@@ -321,6 +321,21 @@ let ``elements can reference attribute groups``() =
     let sample1 = """
     <foo myNr="42" available="false" lang="en-US" />"""
     check xsd [| sample1 |]
+
+
+[<Test>]
+let ``can import namespaces``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+        <xs:element name="test">
+		    <xs:complexType>
+			    <xs:attribute ref="xml:base"/>
+		    </xs:complexType>
+	    </xs:element>
+    </xs:schema>"""
+    let inferedTypeFromSchema = getInferedTypeFromSchema xsd
+    printfn "%A" inferedTypeFromSchema
     
 
 

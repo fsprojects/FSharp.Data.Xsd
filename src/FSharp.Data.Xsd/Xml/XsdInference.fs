@@ -151,14 +151,28 @@ module XsdParsing =
         | :? XmlSchemaElement as elm -> Element (occurs, parseElement elm)
         | _ -> Empty // XmlSchemaParticle.EmptyParticle
 
-
+    open System.Linq
 
     let parseSchema resolutionFolder xsdText =
         let schemaSet = XmlSchemaSet()
         if resolutionFolder <> "" then
             schemaSet.XmlResolver <- ResolutionFolderResolver(resolutionFolder)
-        use reader = new XmlTextReader(new System.IO.StringReader(xsdText))
-        XmlSchema.Read(reader, null) |> schemaSet.Add |> ignore
+
+        use reader = XmlReader.Create(new System.IO.StringReader(xsdText))
+
+        let schema = XmlSchema.Read(reader, null)
+        let enums = schema.Includes.Cast<XmlSchemaObject>()
+
+        for cur in enums do
+            match cur with
+            | :? XmlSchemaImport as c ->
+                let settings = new XmlReaderSettings()
+                settings.DtdProcessing <- DtdProcessing.Ignore
+                use r = XmlReader.Create(c.SchemaLocation,settings)
+                schemaSet.Add(null, r) |> ignore
+            | _ -> ()
+
+        schema |> schemaSet.Add |> ignore
         schemaSet.Compile()
         schemaSet
 
