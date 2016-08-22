@@ -38,6 +38,11 @@ type TextRuntime =
     text |> Option.bind (TextConversions.AsFloat (TextRuntime.GetMissingValues missingValuesStr)
                                                  (*useNoneForMissingValues*)true 
                                                  (TextRuntime.GetCulture cultureStr))
+   
+  static member ConvertSingle(cultureStr, missingValuesStr, text) = 
+                    text |> Option.bind (TextConversions.AsSingle (TextRuntime.GetMissingValues missingValuesStr)
+                                                                  (*useNoneForMissingValues*)true 
+                                                                  (TextRuntime.GetCulture cultureStr))
 
   static member ConvertBoolean(text) = 
     text |> Option.bind TextConversions.AsBoolean
@@ -72,6 +77,18 @@ type TextRuntime =
     match value with
     | Some value ->
         if Double.IsNaN value then
+          let missingValues = TextRuntime.GetMissingValues missingValuesStr
+          if missingValues.Length = 0 
+          then (TextRuntime.GetCulture cultureStr).NumberFormat.NaNSymbol 
+          else missingValues.[0]
+        else
+          value.ToString(TextRuntime.GetCulture cultureStr)
+    | None -> ""
+
+  static member ConvertSingleBack(cultureStr, missingValuesStr, value:single option) = 
+    match value with
+    | Some value ->
+        if Single.IsNaN value then
           let missingValues = TextRuntime.GetMissingValues missingValuesStr
           if missingValues.Length = 0 
           then (TextRuntime.GetCulture cultureStr).NumberFormat.NaNSymbol 

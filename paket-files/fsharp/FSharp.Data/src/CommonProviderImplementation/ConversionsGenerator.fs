@@ -22,7 +22,9 @@ let getConversionQuotation missingValuesStr cultureStr typ (value:Expr<string op
   elif typ = typeof<bool> || typ = typeof<Bit> then <@@ TextRuntime.ConvertBoolean(%value) @@>
   elif typ = typeof<DateTime> then <@@ TextRuntime.ConvertDateTime(cultureStr, %value) @@>
   elif typ = typeof<Guid> then  <@@ TextRuntime.ConvertGuid(%value) @@>
-  else failwith "getConversionQuotation: Unsupported primitive type"
+  elif typ = typeof<Single> then  <@@ TextRuntime.ConvertSingle(cultureStr, missingValuesStr, %value) @@>
+  else failwith <| sprintf "getConversionQuotation: Unsupported primitive type: %A" typ
+
 
 let getBackConversionQuotation missingValuesStr cultureStr typ value : Expr<string> =
   if typ = typeof<int> || typ = typeof<Bit0> || typ = typeof<Bit1> then <@ TextRuntime.ConvertIntegerBack(cultureStr, %%value) @>
@@ -33,7 +35,8 @@ let getBackConversionQuotation missingValuesStr cultureStr typ value : Expr<stri
   elif typ = typeof<bool> || typ = typeof<Bit> then <@ TextRuntime.ConvertBooleanBack(%%value, false) @>
   elif typ = typeof<Guid> then <@ TextRuntime.ConvertGuidBack(%%value) @>
   elif typ = typeof<DateTime> then <@ TextRuntime.ConvertDateTimeBack(cultureStr, %%value) @>
-  else failwith "getBackConversionQuotation: Unsupported primitive type"
+  elif typ = typeof<Single> then  <@ TextRuntime.ConvertSingleBack(cultureStr, missingValuesStr, %%value) @>
+  else failwith <| sprintf "getConversionQuotation: Unsupported primitive type: %A" typ
 
 /// Creates a function that takes Expr<string option> and converts it to 
 /// an expression of other type - the type is specified by `field`
