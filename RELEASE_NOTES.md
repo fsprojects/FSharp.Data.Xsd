@@ -1,3 +1,8 @@
+#### 0.0.8 - August 25 2016
+* Improved design time caching
+* Improved resolution of includes
+* support for namespaces
+
 #### 0.0.7 - August 11 2016
 * Caching to improve design time performance
 
