@@ -1,4 +1,4 @@
-﻿#r"../packages/FSharp.Data.Xsd.0.0.5/lib/net45/FSharp.Data.Xsd.dll"
+﻿#r"../packages/FSharp.Data.Xsd.0.0.7/lib/net45/FSharp.Data.Xsd.dll"
 #r"System.IO"
 #r"System.Xml"
 #r"System.Xml.Linq"
@@ -27,7 +27,7 @@ let hasElements inputUri =
 let folder = "c:/temp/schemas"
 let writer = File.CreateText(Path.Combine(__SOURCE_DIRECTORY__, "AllSchemas.fsx"))
 writer.WriteLine """
-#r"../packages/FSharp.Data.Xsd.0.0.5/lib/net45/FSharp.Data.Xsd.dll"
+#r"../packages/FSharp.Data.Xsd.0.0.7/lib/net45/FSharp.Data.Xsd.dll"
 #r"System.Xml"
 #r"System.Xml.Linq"
 

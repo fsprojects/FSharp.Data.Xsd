@@ -5,6 +5,31 @@
 #r"System.Xml.Linq"
 
 open FSharp.Data
+open System.Xml.Linq
+type t = XmlProvider<Schema="""http://www.beniculturali.it/mibac/xsd/MibacSchema-1.2.xsd""">
+
+// dbunico20.beniculturali.it
+// http://151.12.58.144:8080
+[<Literal>]
+let req ="""http://dbunico20.beniculturali.it/DBUnicoManagerWeb/dbunicomanager/searchPlace?regione=Toscana&provincia=Livorno"""
+
+type tt = XmlProvider<req>
+let xml = tt.GetSample()
+
+xml.Mibacs.Length
+
+let xml = t.Load req
+xml.XElement.Elements() |> Seq.map (fun x -> x.Name) |> Seq.take 3
+xml.XElement.Element(XName.Get "{http://www.beniculturali.it/MibacSchema}Query")
+xml.Query
+
+let valid = xml.Mibacs |> Array.filter (fun x -> x.Metainfo.Workflow.Stato = Some "Validato")
+let foo =
+    valid 
+    |> Array.choose (fun x -> x.Luogodellacultura)
+    |> Array.map (fun z -> z.Proprieta)
+    
+
 
 type t1 = XmlProvider<Schema ="ImportCreditRegistry_v.3.xsd", ResolutionFolder="""c:\temp\schemas""">
 type t2 = XmlProvider<Schema ="xmlopts.xsd", ResolutionFolder="""c:\temp\schemas\altova\files""">
@@ -81,26 +106,26 @@ type t45 = XmlProvider<Schema ="container.xsd", ResolutionFolder="""c:\temp\sche
 //type t145 = XmlProvider<Schema ="ShippingAdvice_NCA_V1R1.xsd", ResolutionFolder="""c:\temp\schemas\NCAXML""">
 //type t146 = XmlProvider<Schema ="nitf-3-4-ruby-include.xsd", ResolutionFolder="""c:\temp\schemas\NITF\files""">
 //*!!!!!!*type t147 = XmlProvider<Schema ="nitf-3-4.xsd", ResolutionFolder="""c:\temp\schemas\NITF\files""">
-//*LANG* type t148 = XmlProvider<Schema ="P3Pv1.xsd", ResolutionFolder="""c:\temp\schemas\p3p\files""">
+type t148 = XmlProvider<Schema ="P3Pv1.xsd", ResolutionFolder="""c:\temp\schemas\p3p\files""">
 //type t151 = XmlProvider<Schema ="RIXML-2_2.xsd", ResolutionFolder="""c:\temp\schemas\rixml""">
 //type t152 = XmlProvider<Schema ="RIXML-Common-2_2.xsd", ResolutionFolder="""c:\temp\schemas\rixml""">
 //*****type t157 = XmlProvider<Schema ="UBL-CommonAggregateComponents-2.1.xsd", ResolutionFolder="""c:\temp\schemas\UBL\files\common""">
 //type t158 = XmlProvider<Schema ="UBL-CommonBasicComponents-2.1.xsd", ResolutionFolder="""c:\temp\schemas\UBL\files\common""">
 //type t165 = XmlProvider<Schema ="UBL-SignatureBasicComponents-2.1.xsd", ResolutionFolder="""c:\temp\schemas\UBL\files\common""">
-//*LANG* type t235 = XmlProvider<Schema ="grammar-core.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
-//*LANG* type t236 = XmlProvider<Schema ="grammar.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
-//*LANG* type t237 = XmlProvider<Schema ="synthesis-core.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
-//*LANG* type t238 = XmlProvider<Schema ="synthesis.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
+type t235 = XmlProvider<Schema ="grammar-core.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
+type t236 = XmlProvider<Schema ="grammar.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
+type t237 = XmlProvider<Schema ="synthesis-core.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
+type t238 = XmlProvider<Schema ="synthesis.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
 //*LANG* type t241 = XmlProvider<Schema ="vxml-grammar-extension.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
 //*LANG* type t242 = XmlProvider<Schema ="vxml-grammar-restriction.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
 //type t244 = XmlProvider<Schema ="vxml-synthesis-restriction.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
 //type t245 = XmlProvider<Schema ="vxml.xsd", ResolutionFolder="""c:\temp\schemas\voicexml\files""">
 //type t246 = XmlProvider<Schema ="encoding.xsd", ResolutionFolder="""c:\temp\schemas\wsdl\files""">
 //type t247 = XmlProvider<Schema ="envelope.xsd", ResolutionFolder="""c:\temp\schemas\wsdl\files""">
-//*LANG* type t250 = XmlProvider<Schema ="soap-envelope.xsd", ResolutionFolder="""c:\temp\schemas\wsdl\files""">
+type t250 = XmlProvider<Schema ="soap-envelope.xsd", ResolutionFolder="""c:\temp\schemas\wsdl\files""">
 //type t252 = XmlProvider<Schema ="wsdl.xsd", ResolutionFolder="""c:\temp\schemas\wsdl\files""">
-//*LANG* type t259 = XmlProvider<Schema ="xlink.xsd", ResolutionFolder="""c:\temp\schemas\xlink\files""">
-//*LANG* type t260 = XmlProvider<Schema ="xlink11.xsd", ResolutionFolder="""c:\temp\schemas\xlink\files""">
+type t259 = XmlProvider<Schema ="xlink.xsd", ResolutionFolder="""c:\temp\schemas\xlink\files""">
+type t260 = XmlProvider<Schema ="xlink11.xsd", ResolutionFolder="""c:\temp\schemas\xlink\files""">
 //*DUP* type t262 = XmlProvider<Schema ="xlink.xsd", ResolutionFolder="""c:\temp\schemas\xmlspec\files""">
 //*DUP* type t263 = XmlProvider<Schema ="xml.xsd", ResolutionFolder="""c:\temp\schemas\xmlspec\files""">
 //*DUP* type t264 = XmlProvider<Schema ="xmlspec.xsd", ResolutionFolder="""c:\temp\schemas\xmlspec\files""">

@@ -24,6 +24,7 @@ let getInferedTypeFromSamples samples =
     |> infer 
     |> Seq.fold (subtypeInfered (*allowEmptyValues*)false) InferedType.Top
 
+
 let getInferedTypeFromSchema xsd =
     xsd
     |> XsdParsing.parseSchema ""
@@ -67,8 +68,8 @@ let print xsd xmlSamples =
 let check xsd xmlSamples =
     printfn "checking schema and samples"
     let inferedTypeFromSchema, inferedTypeFromSamples = print xsd xmlSamples
-    inferedTypeFromSchema = inferedTypeFromSamples
-    |> should equal true
+    inferedTypeFromSchema |> should equal inferedTypeFromSamples
+    
 
 [<Test>]
 let ``at least one global complex element is needed``() =
@@ -337,5 +338,4 @@ let ``can import namespaces``() =
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
     
-
 

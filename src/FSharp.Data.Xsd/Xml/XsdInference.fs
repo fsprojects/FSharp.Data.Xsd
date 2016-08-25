@@ -55,9 +55,11 @@ module XsdParsing =
     /// able to find the location of included schema files.
     type ResolutionFolderResolver(resolutionFolder) =
         inherit XmlUrlResolver()
-        override _this.ResolveUri(_, relativeUri) = 
-            System.Uri(System.IO.Path.Combine(resolutionFolder, relativeUri))
-
+        override _this.ResolveUri(baseUri, relativeUri) = 
+            //System.Uri(System.IO.Path.Combine(resolutionFolder, relativeUri))
+            if resolutionFolder <> "" && (baseUri = null || baseUri.OriginalString = "")
+            then base.ResolveUri(System.Uri resolutionFolder, relativeUri)
+            else base.ResolveUri(baseUri, relativeUri)
     
     open XsdModel
 
@@ -154,15 +156,15 @@ module XsdParsing =
     open System.Linq
 
     let parseSchema resolutionFolder xsdText =
-        let schemaSet = XmlSchemaSet()
-        if resolutionFolder <> "" then
-            schemaSet.XmlResolver <- ResolutionFolderResolver(resolutionFolder)
-
-        use reader = XmlReader.Create(new System.IO.StringReader(xsdText))
+        let schemaSet = XmlSchemaSet() 
+        let resolver = ResolutionFolderResolver resolutionFolder
+        schemaSet.XmlResolver <- resolver
+        let readerSettings = XmlReaderSettings()
+        readerSettings.CloseInput <- true
+        use reader = XmlReader.Create(new System.IO.StringReader(xsdText), readerSettings)
 
         let schema = XmlSchema.Read(reader, null)
         let enums = schema.Includes.Cast<XmlSchemaObject>()
-
         for cur in enums do
             match cur with
             | :? XmlSchemaImport as c ->
@@ -230,10 +232,14 @@ module XsdInference =
         | XsdParticle.Empty -> []
         | XsdParticle.Any _ -> []
 
+    let getElementName (elm: XsdElement) =
+        if elm.Name.Namespace = "" 
+        then Some elm.Name.Name
+        else Some (sprintf "{%s}%s" elm.Name.Namespace elm.Name.Name)
 
     // derives an InferedType for an element definition
     let rec inferElementType (elm: XsdElement) =
-        let name = Some elm.Name.Name
+        let name = getElementName elm
         match elm.Type with
         | SimpleType typeCode ->
             let ty = InferedType.Primitive (getType typeCode, None, elm.IsNillable)
@@ -249,7 +255,7 @@ module XsdInference =
         | _ -> 
             elms 
             |> List.map (fun elm -> 
-                InferedTypeTag.Record (Some elm.Name.Name), inferElementType elm)
+                InferedTypeTag.Record (getElementName elm), inferElementType elm)
             |> Map.ofList
             |> InferedType.Heterogeneous
 
@@ -271,7 +277,7 @@ module XsdInference =
 
 
     and inferParticle (parentMultiplicity: InferedMultiplicity) particle =
-        let getRecordTag (e:XsdElement) = InferedTypeTag.Record(Some e.Name.Name)
+        let getRecordTag (e:XsdElement) = InferedTypeTag.Record(getElementName e)
         match getElements parentMultiplicity particle with
         | [] -> 
             InferedTypeTag.Null, 
