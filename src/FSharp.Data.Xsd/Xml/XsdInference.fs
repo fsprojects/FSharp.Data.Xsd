@@ -237,15 +237,27 @@ module XsdInference =
         then Some elm.Name.Name
         else Some (sprintf "{%s}%s" elm.Name.Namespace elm.Name.Name)
 
+    let nil = { InferedProperty.Name = "{http://www.w3.org/2001/XMLSchema-instance}nil"
+                Type = InferedType.Primitive(typeof<bool>, None, true) }
+
     // derives an InferedType for an element definition
     let rec inferElementType (elm: XsdElement) =
         let name = getElementName elm
         match elm.Type with
         | SimpleType typeCode ->
             let ty = InferedType.Primitive (getType typeCode, None, elm.IsNillable)
-            InferedType.Record(name, [{ Name = ""; Type = ty }], optional = false)
+            let prop = { InferedProperty.Name = ""; Type = ty }
+            let props = if elm.IsNillable then [prop; nil] else [prop]
+            InferedType.Record(name, props, optional = false)
         | ComplexType cty -> 
-            InferedType.Record(name, inferProperties cty, optional = false)
+            let props = inferProperties cty
+            let props = 
+                if elm.IsNillable then 
+                    for prop in props do 
+                        prop.Type <- prop.Type.EnsuresHandlesMissingValues false
+                    nil::props 
+                else props
+            InferedType.Record(name, props, optional = false)
 
 
     and inferElements (elms: XsdElement list) =
@@ -287,6 +299,7 @@ module XsdInference =
 //            (mul, inferElementType elm)
         | items ->
             let tags = items |> List.map (fst >> getRecordTag)
+            
             let types = 
                 items 
                 |> Seq.zip tags

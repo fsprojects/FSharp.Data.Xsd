@@ -1,4 +1,4 @@
-﻿#r"../packages/FSharp.Data.Xsd.0.0.7/lib/net45/FSharp.Data.Xsd.dll"
+﻿#r"../packages/FSharp.Data.Xsd.0.0.8/lib/net45/FSharp.Data.Xsd.dll"
 #r"System.IO"
 #r"System.Xml"
 #r"System.Xml.Linq"

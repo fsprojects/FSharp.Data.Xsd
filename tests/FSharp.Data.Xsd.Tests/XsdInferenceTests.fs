@@ -338,4 +338,69 @@ let ``can import namespaces``() =
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
     
+[<Test>]
+let ``simple elements can be nillable``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:element name="author">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string" nillable="true" />
+                    <xs:element name="surname" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>"""
+    let sample1 = """
+    <author>
+        <name>Stefano</name>
+        <surname>Benny</surname>
+    </author>
+    """
+    let sample2 = """
+    <author>
+        <name xsi:nil="true"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <surname>Benny</surname>
+    </author>
+    """
+    check xsd [| sample1; sample2 |]
+
+
+
+[<Test>]
+let ``complex elements can be nillable``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:element name="person">
+            <xs:complexType>
+                <xs:sequence>
+	                <xs:element name="address" nillable="true">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="city" type="xs:string" />
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>"""
+    let sample1 = """
+    <person>
+        <address xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    </person>
+    """
+    let sample2 = """
+    <person>
+        <address>
+            <city>Bologna</city>
+        </address>
+    </person>
+    """
+    check xsd [| sample1; sample2 |]
+
+
 
