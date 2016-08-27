@@ -57,9 +57,6 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
-    <None Include="AllSchemas2.fsx" />
-    <None Include="Script.fsx" />
-    <None Include="AllSchemas.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

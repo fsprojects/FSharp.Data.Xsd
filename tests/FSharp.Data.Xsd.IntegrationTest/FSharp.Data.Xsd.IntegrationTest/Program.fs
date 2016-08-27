@@ -1,4 +1,5 @@
-﻿
+﻿// the sole purpose of this test is to check the package downloaded from NuGet
+
 open FSharp.Data
 
 type person = XmlProvider<Schema = """
