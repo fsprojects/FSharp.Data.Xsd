@@ -165,9 +165,10 @@ let ``recursive elements have only the XElement property``() =
   printfn "%A" doc.XElement
   match doc.Bold, doc.Italic, doc.Underline with
   | None, Some x, None -> 
-    x.Bolds.Length |> should equal 2
-    x.Italics.Length |> should equal 0
-    x.Underlines.Length |> should equal 1
+    x.XElement.Elements(XName.Get "bold") |> Seq.length |> should equal 2
+    x.XElement.Elements(XName.Get "italic") |> Seq.length |> should equal 0
+    x.XElement.Elements(XName.Get "underline") |> Seq.length |> should equal 1
+    
     
   | _ -> failwith "unexpected"
   
@@ -239,20 +240,19 @@ type substGroup = XmlProvider<Schema = """
   </xs:schema>""">
 
 [<Test>]
-let ``substitution groups are ignored``() =
+let ``substitution groups are like choices``() =
   let doc = substGroup.Parse "<kunde><name>hello</name></kunde>"
   match doc.Customer, doc.Kunde with
-  | None, Some x -> x.Name |> should equal "hello"
+  | None, Some x -> 
+    x.Name |> should equal (Some "hello")
+    x.Navn |> should equal None
   | _ -> failwith "unexpected"
   
   let doc = substGroup.Parse "<kunde><navn>hello2</navn></kunde>"
   match doc.Customer, doc.Kunde with
   | None, Some x -> 
-    x.XElement.Element(XName.Get "navn").Value |> should equal "hello2"
-    // accessing x.Name throws
-    let msg = "XML mismatch: Expected exactly one 'name' child, got 0"
-    (fun () -> x.Name |> ignore) 
-    |> should (throwWithMessage msg) typeof<System.Exception>
+    x.Navn |> should equal (Some "hello2")
+    x.Name |> should equal None    
   | _ -> failwith "unexpected"
 
 

@@ -54,6 +54,13 @@ printfn "%A" inner.XElement
 type subst = XmlProvider<Schema = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
         elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xs:element name="Root">
+            <xs:complexType>
+			    <xs:sequence>
+				    <xs:element ref="Formula" />
+			    </xs:sequence>
+		    </xs:complexType>
+        </xs:element>
     	<xs:element name="Formula" abstract="true"/>
 	    <xs:element name="Prop" type="xs:string" substitutionGroup="Formula"/>
 	    <xs:element name="And" substitutionGroup="Formula">
@@ -67,6 +74,7 @@ type subst = XmlProvider<Schema = """
 """>
 
 let doc2 = subst.Parse """
+<Root>
 <And>
     <And>
         <Prop>p</Prop>
@@ -74,10 +82,23 @@ let doc2 = subst.Parse """
     </And>
     <Prop>r</Prop>
 </And>
+</Root>
 """
-let pAndq = doc2.And.Value.Formulas.Length
-let r = doc2.And.Value.Formulas.[1]
-printfn "%A and %A" pAndq r
+
+match doc2.Formula, doc2.And, doc2.Root with
+| None, None, Some root ->
+    match root.And, root.Prop with
+    | None, Some prop -> 
+        printfn "%s" prop
+    | Some andElem, None -> 
+        // 'and' is a recursive element, hence we can only use the dynaic api
+        let inner = andElem.XElement.Elements() |> Seq.map (fun x -> subst.Parse (x.ToString()))
+        for item in inner do
+            printfn "item %A" item
+    | _ -> failwith "expected either and or prop"
+| _ -> failwith "expected root"
+
+
 
 
 

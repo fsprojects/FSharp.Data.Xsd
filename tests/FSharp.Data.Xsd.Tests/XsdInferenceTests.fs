@@ -115,6 +115,19 @@ let ``recursive schemas don't cause loops``() =
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
     printfn "%A" inferedTypeFromSchema
     
+    let xsd = """<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xs:element name="Section" type="SectionType" />
+        <xs:complexType name="SectionType">
+          <xs:sequence>
+            <xs:element name="Title" type="xs:string" />
+            <xs:element name="Section" type="SectionType" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+        </xs:schema>"""
+    let inferedTypeFromSchema = getInferedTypeFromSchema xsd
+    printfn "%A" inferedTypeFromSchema
+
 
 [<Test>]
 let ``attributes become properties``() =
@@ -402,5 +415,80 @@ let ``complex elements can be nillable``() =
     """
     check xsd [| sample1; sample2 |]
 
+[<Test>]
+let ``substitution groups``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="nome" substitutionGroup="name" type="xs:string" />
+        <xs:element name="person">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="name"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="persona" substitutionGroup="person"/>
+    </xs:schema>"""
+    let sample1 = """<person><name>Jim</name></person>"""
+    let sample2 = """<persona><name>Jim</name></persona>"""
+    let sample3 = """<person><nome>Jim</nome></person>"""
+    let sample4 = """<persona><nome>Jim</nome></persona>"""
 
+    check xsd [| sample1; sample2; sample3; sample4 |]
+
+
+
+// sample xsd with a recursive abstract element and substitution groups
+let formulaXsd = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Formula" abstract="true"/>
+	<xs:element name="Prop" type="xs:string" substitutionGroup="Formula"/>
+	<xs:element name="And" substitutionGroup="Formula">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Formula" minOccurs="2" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+"""
+
+open System.Xml.Schema
+
+[<Test>]
+let ``abstract recursive``() =
+    let xsd = XsdParsing.parseSchema "" formulaXsd
+    let elms = xsd.GlobalElements.Values |> XsdParsing.ofType<XmlSchemaElement>
+    let andElm = elms |> Seq.filter (fun x -> x.Name = "And") |> Seq.exactlyOne
+    let formElm = elms |> Seq.filter (fun x -> x.Name = "Formula") |> Seq.exactlyOne
+    let formRefElm = // 'And' is a sequence whose only item is a reference to 'Formula'
+        let formRefType = andElm.ElementSchemaType :?> XmlSchemaComplexType
+        (formRefType.ContentTypeParticle :?> XmlSchemaSequence).Items 
+        |> XsdParsing.ofType<XmlSchemaElement> 
+        |> Seq.exactlyOne
+
+    formRefElm.QualifiedName |> should equal formElm.QualifiedName 
+    formRefElm.QualifiedName |> should equal formRefElm.RefName 
+    formElm.ElementSchemaType |> should equal formRefElm.ElementSchemaType
+    // this may be a bit surprising:
+    formElm.IsAbstract |> should equal true
+    formRefElm.IsAbstract |> should equal false
+
+
+
+    let sample1 = """<Prop>p1</Prop>"""
+    let sample2 = """
+    <And>
+        <Prop>p1</Prop>
+        <And>
+            <Prop>p2</Prop>
+            <Prop>p3</Prop>
+        </And>
+    </And>
+    """
+    print formulaXsd [| sample1; sample2 |]
+    |> ignore
 

@@ -27,7 +27,11 @@ module XsdModel =
     type IsOptional = bool
     type Occurs = decimal * decimal
 
-    type XsdElement = { Name: XmlQualifiedName; Type: XsdType; IsNillable: bool }
+    type XsdElement = { Name: XmlQualifiedName
+                        Type: XsdType
+                        SubstitutionGroup: XsdElement list
+                        IsAbstract: bool
+                        IsNillable: bool }
 
     and XsdType = SimpleType of XmlTypeCode | ComplexType of XsdComplexType
 
@@ -61,7 +65,7 @@ module XsdParsing =
             then base.ResolveUri(System.Uri resolutionFolder, relativeUri)
             else base.ResolveUri(baseUri, relativeUri)
     
-    open XsdModel
+
 
     let ofType<'a> (sequence: System.Collections.IEnumerable) =
         sequence
@@ -69,47 +73,100 @@ module XsdParsing =
         |> Seq.filter (fun x -> x :? 'a)
         |> Seq.cast<'a>
         
-    let hasCycles xmlSchemaObject = 
-        let items = System.Collections.Generic.HashSet<XmlSchemaObject>()
-        let rec closure (obj: XmlSchemaObject) =
-            let nav innerObj =
-                if items.Add innerObj then closure innerObj
-            match obj with
-            | :? XmlSchemaElement as e -> 
-                nav e.ElementSchemaType 
-            | :? XmlSchemaComplexType as c -> 
-                nav c.ContentTypeParticle
-            | :? XmlSchemaGroupRef as r -> 
-                nav r.Particle
-            | :? XmlSchemaGroupBase as x -> 
-                x.Items 
-                |> ofType<XmlSchemaObject> 
-                |> Seq.iter nav
-            | _ -> ()
-        closure xmlSchemaObject
-        items.Contains xmlSchemaObject
+
+    type ParsingContext(xmlSchemaSet: XmlSchemaSet) =
+        
+        let getElm name = // lookup elements by name
+            xmlSchemaSet.GlobalElements.Item name :?> XmlSchemaElement
+
+        let subst = // lookup substitution group members 
+            xmlSchemaSet.GlobalElements.Values
+            |> ofType<XmlSchemaElement>
+            |> Seq.filter (fun e -> not e.SubstitutionGroup.IsEmpty)
+            |> Seq.groupBy (fun e -> e.SubstitutionGroup)
+            |> Seq.map (fun (name, values) -> getElm name, values |> List.ofSeq)
+            |> dict
+
+        let getSubst =     
+        
+            let collectSubst elm = // deep lookup (for substitution trees)
+                let items = System.Collections.Generic.HashSet()
+                let rec collect elm =
+                    if subst.ContainsKey elm then
+                        for x in subst.Item elm do 
+                            if items.Add x then collect x 
+                collect elm 
+                items |> List.ofSeq
+
+            let subst' =
+                subst.Keys
+                |> Seq.map (fun x -> x, collectSubst x)
+                |> dict
+
+            fun elm -> if subst'.ContainsKey elm then subst'.Item elm else []
+        
+
+        // worth memoizing?
+        let hasCycles element = 
+            let items = System.Collections.Generic.HashSet<XmlSchemaObject>()
+            let rec closure (obj: XmlSchemaObject) =
+                let nav innerObj =
+                    if items.Add innerObj then closure innerObj
+                match obj with
+                | :? XmlSchemaElement as e -> 
+                    if e.RefName.IsEmpty then
+                        nav e.ElementSchemaType
+                        (getSubst e) |> Seq.iter nav
+                    else nav (getElm e.RefName)
+                | :? XmlSchemaComplexType as c -> 
+                    nav c.ContentTypeParticle
+                | :? XmlSchemaGroupRef as r -> 
+                    nav r.Particle
+                | :? XmlSchemaGroupBase as x -> 
+                    x.Items 
+                    |> ofType<XmlSchemaObject> 
+                    |> Seq.iter nav
+                | _ -> ()
+            closure element
+            items.Contains element
 
 
-    let rec parseElement (elm: XmlSchemaElement) =  
-        if hasCycles elm 
+        member x.getElement name = getElm name
+        member x.getSubstitutions elm = getSubst elm
+        member x.isRecursive elm = hasCycles elm
+
+    open XsdModel
+
+    let rec parseElement (ctx: ParsingContext) (elm: XmlSchemaElement)  =  
+
+        let substitutionGroup = 
+            ctx.getSubstitutions elm 
+            |> List.filter (fun x -> x <> elm) 
+            |> List.map (parseElement ctx)
+
+        if ctx.isRecursive elm 
         then
           { Name = elm.QualifiedName
-            Type =  
+            Type = // empty content
               { Attributes = []
                 Contents = ComplexContent Empty 
                 IsMixed = false }
               |> ComplexType
+            SubstitutionGroup = substitutionGroup
+            IsAbstract = elm.IsAbstract
             IsNillable = elm.IsNillable }
         else
           { Name = elm.QualifiedName
             Type = 
               match elm.ElementSchemaType with
               | :? XmlSchemaSimpleType  as x -> SimpleType x.Datatype.TypeCode
-              | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType x)
+              | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType ctx x)
               | x -> failwithf "unknown ElementSchemaType: %A" x
+            SubstitutionGroup = substitutionGroup
+            IsAbstract = elm.IsAbstract
             IsNillable = elm.IsNillable }
 
-    and parseComplexType (x: XmlSchemaComplexType) =
+    and parseComplexType (ctx: ParsingContext) (x: XmlSchemaComplexType) =  
         { Attributes = 
             x.AttributeUses.Values 
             |> ofType<XmlSchemaAttribute>
@@ -124,13 +181,13 @@ module XsdParsing =
                 | XmlSchemaContentType.Mixed 
                 | XmlSchemaContentType.Empty 
                 | XmlSchemaContentType.ElementOnly -> 
-                    x.ContentTypeParticle |> parseParticle |> ComplexContent
+                    x.ContentTypeParticle |> parseParticle ctx |> ComplexContent
                 | _ -> failwithf "Unknown content type: %A." x.ContentType
 
           IsMixed = x.IsMixed }
 
 
-    and parseParticle (par: XmlSchemaParticle) =
+    and parseParticle (ctx: ParsingContext) (par: XmlSchemaParticle) =  
 
         let occurs = par.MinOccurs, par.MaxOccurs
 
@@ -138,7 +195,7 @@ module XsdParsing =
             let particles = 
                 group.Items
                 |> ofType<XmlSchemaParticle> 
-                |> Seq.map parseParticle
+                |> Seq.map (parseParticle ctx)
                 |> List.ofSeq // beware of recursive schemas
             match group with
             | :? XmlSchemaAll      -> All (occurs, particles)
@@ -149,8 +206,10 @@ module XsdParsing =
         match par with
         | :? XmlSchemaAny -> Any occurs
         | :? XmlSchemaGroupBase as grp -> parseParticles grp
-        | :? XmlSchemaGroupRef as grpRef -> parseParticle grpRef.Particle
-        | :? XmlSchemaElement as elm -> Element (occurs, parseElement elm)
+        | :? XmlSchemaGroupRef as grpRef -> parseParticle ctx grpRef.Particle
+        | :? XmlSchemaElement as elm -> 
+            let e = if elm.RefName.IsEmpty then elm else ctx.getElement elm.RefName
+            Element (occurs, parseElement ctx e)
         | _ -> Empty // XmlSchemaParticle.EmptyParticle
 
     open System.Linq
@@ -179,11 +238,12 @@ module XsdParsing =
         schemaSet
 
 
-    let getElements (schema: XmlSchemaSet) =
+    let getElements schema =
+        let ctx = ParsingContext schema
         schema.GlobalElements.Values 
         |> ofType<XmlSchemaElement>
         |> Seq.filter (fun x -> x.ElementSchemaType :? XmlSchemaComplexType )
-        |> Seq.map parseElement
+        |> Seq.map (parseElement ctx)
 
 
 /// Element definitions in a schema are mapped to InferedType instances
@@ -217,10 +277,23 @@ module XsdInference =
     // the effect of a choice is to make mandatory items optional 
     let makeOptional = function Single -> OptionalSingle | x -> x
 
+    let getElementName (elm: XsdElement) =
+        if elm.Name.Namespace = "" 
+        then Some elm.Name.Name
+        else Some (sprintf "{%s}%s" elm.Name.Namespace elm.Name.Name)
+
+    let nil = { InferedProperty.Name = "{http://www.w3.org/2001/XMLSchema-instance}nil"
+                Type = InferedType.Primitive(typeof<bool>, None, true) }
+
     // collects element definitions in a particle
     let rec getElements parentMultiplicity = function
         | XsdParticle.Element(occ, elm) -> 
-            [ (elm, combineMultiplicity(parentMultiplicity, getMultiplicity occ)) ]
+            let mult = combineMultiplicity(parentMultiplicity, getMultiplicity occ)
+            match elm.IsAbstract, elm.SubstitutionGroup with
+            | _, [] -> [ (elm, mult) ]
+            | true, [x] -> [ (x, mult) ]
+            | true, x -> x |> List.map (fun e -> e,  makeOptional mult)
+            | false, x -> elm::x |> List.map (fun e -> e,  makeOptional mult)
         | XsdParticle.Sequence (occ, particles)
         | XsdParticle.All (occ, particles) -> 
             let mult = combineMultiplicity(parentMultiplicity, getMultiplicity occ)
@@ -232,17 +305,13 @@ module XsdInference =
         | XsdParticle.Empty -> []
         | XsdParticle.Any _ -> []
 
-    let getElementName (elm: XsdElement) =
-        if elm.Name.Namespace = "" 
-        then Some elm.Name.Name
-        else Some (sprintf "{%s}%s" elm.Name.Namespace elm.Name.Name)
-
-    let nil = { InferedProperty.Name = "{http://www.w3.org/2001/XMLSchema-instance}nil"
-                Type = InferedType.Primitive(typeof<bool>, None, true) }
 
     // derives an InferedType for an element definition
-    let rec inferElementType (elm: XsdElement) =
+    and inferElementType (elm: XsdElement) =
         let name = getElementName elm
+        if elm.IsAbstract 
+        then InferedType.Record(name, [], optional = false)
+        else
         match elm.Type with
         | SimpleType typeCode ->
             let ty = InferedType.Primitive (getType typeCode, None, elm.IsNillable)
@@ -259,12 +328,10 @@ module XsdInference =
                 else props
             InferedType.Record(name, props, optional = false)
 
-
-    and inferElements (elms: XsdElement list) =
-        match elms with
+    and inferElements = function
         | [] -> failwith "No suitable element definition found in the schema."
         | [elm] -> inferElementType elm
-        | _ -> 
+        | elms -> 
             elms 
             |> List.map (fun elm -> 
                 InferedTypeTag.Record (getElementName elm), inferElementType elm)
