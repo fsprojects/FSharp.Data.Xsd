@@ -370,9 +370,9 @@ type Nums = XmlProvider<Schema = """
 let ``numeric types are partially supported``() =
     Nums.Parse("<A integer='2' />").Integer |> should equal (Some "2")
     Nums.Parse("<A int='2' />").Int |> should equal (Some 2) // int32
-    Nums.Parse("<A long='2' />").Long |> should equal (Some "2") // should be int64
+    Nums.Parse("<A long='2' />").Long |> should equal (Some 2L) // int64
     Nums.Parse("<A decimal='2' />").Decimal |> should equal (Some 2M) // decimal
-    Nums.Parse("<A float='2' />").Float |> should equal (Some 2.0f) // float32
+    Nums.Parse("<A float='2' />").Float |> should equal (Some "2") // should be float32
     Nums.Parse("<A double='2' />").Double |> should equal (Some 2.0) // float
 
 
