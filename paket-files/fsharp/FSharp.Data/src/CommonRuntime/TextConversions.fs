@@ -77,14 +77,7 @@ type TextConversions private() =
     | _ -> Double.TryParse(text, NumberStyles.Any, cultureInfo)
            |> asOption
            |> Option.bind (fun f -> if useNoneForMissingValues && Double.IsNaN f then None else Some f)
-
-  static member AsSingle missingValues useNoneForMissingValues cultureInfo (text:string) = 
-    match text.Trim() with
-    | OneOfIgnoreCase missingValues -> if useNoneForMissingValues then None else Some Single.NaN
-    | _ -> Single.TryParse(text, NumberStyles.Any, cultureInfo)
-           |> asOption
-           |> Option.bind (fun f -> if useNoneForMissingValues && Single.IsNaN f then None else Some f)
-
+  
   static member AsBoolean (text:string) =     
     match text.Trim() with
     | StringEqualsIgnoreCase "true" | StringEqualsIgnoreCase "yes" | StringEqualsIgnoreCase "1" -> Some true

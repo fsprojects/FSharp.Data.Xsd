@@ -3,30 +3,30 @@ NUGET
     FSharp.Core (4.0.0.1) - redirects: force
 GITHUB
   remote: fsharp/FSharp.Data
-    src/CommonProviderImplementation/AssemblyResolver.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonProviderImplementation/ConversionsGenerator.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonProviderImplementation/Helpers.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonProviderImplementation/QuotationBuilder.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/Caching.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/IO.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/NameUtils.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/Pluralizer.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/StructuralInference.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/StructuralTypes.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/TextConversions.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/CommonRuntime/TextRuntime.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonConversions.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonConversionsGenerator.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonExtensions.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonGenerator.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonInference.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonRuntime.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Json/JsonValue.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Net/Http.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Net/UriUtils.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Xml/XmlGenerator.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Xml/XmlInference.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
-    src/Xml/XmlRuntime.fs (195a0a63f9131ea736ebbbbd313b627cd8745498)
+    src/CommonProviderImplementation/AssemblyResolver.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonProviderImplementation/ConversionsGenerator.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonProviderImplementation/Helpers.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonProviderImplementation/QuotationBuilder.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/Caching.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/IO.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/NameUtils.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/Pluralizer.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/StructuralInference.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/StructuralTypes.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/TextConversions.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/CommonRuntime/TextRuntime.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonConversions.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonConversionsGenerator.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonExtensions.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonGenerator.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonInference.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonRuntime.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Json/JsonValue.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Net/Http.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Net/UriUtils.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Xml/XmlGenerator.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Xml/XmlInference.fs (538137111c848572c4cc485bd971414718bfd2d3)
+    src/Xml/XmlRuntime.fs (538137111c848572c4cc485bd971414718bfd2d3)
   remote: fsprojects/FSharp.TypeProviders.StarterPack
     src/AssemblyReader.fs (8f647a4cde71bdeda10e7f5b534ec3c879601570)
     src/AssemblyReaderReflection.fs (8f647a4cde71bdeda10e7f5b534ec3c879601570)
@@ -37,7 +37,7 @@ GITHUB
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.36)
+    FAKE (4.39)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)
@@ -55,7 +55,7 @@ NUGET
     SourceLink.Fake (1.1)
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (8fd20ae42c996060bc8bedb821edfb50517cdd8b)
+    modules/Octokit/Octokit.fsx (e5870cb85f9b500246e02c6daa94e5131dad7a6e)
       Octokit (>= 0.20)
 GROUP Test
 NUGET
