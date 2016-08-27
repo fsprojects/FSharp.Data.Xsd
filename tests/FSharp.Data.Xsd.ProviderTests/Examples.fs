@@ -349,3 +349,35 @@ let ``simple schema``() =
     root.AnonymousTyped.Covert    |> should equal true
     root.AnonymousTyped.Attr      |> should equal (Some "fish")
     root.AnonymousTyped.Windy     |> should equal (Some "strong")
+
+type Nums = XmlProvider<Schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified" >
+    <xs:element name='A'>
+        <xs:complexType>
+            <xs:attribute name='integer' type='xs:integer' />
+            <xs:attribute name='int' type='xs:int' />
+            <xs:attribute name='long' type='xs:long' />
+            <xs:attribute name='decimal' type='xs:decimal' />
+            <xs:attribute name='float' type='xs:float' />
+            <xs:attribute name='double' type='xs:double' />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+""">
+
+[<Test>]
+let ``numeric types are partially supported``() =
+    Nums.Parse("<A integer='2' />").Integer |> should equal (Some "2")
+    Nums.Parse("<A int='2' />").Int |> should equal (Some 2) // int32
+    Nums.Parse("<A long='2' />").Long |> should equal (Some "2") // should be int64
+    Nums.Parse("<A decimal='2' />").Decimal |> should equal (Some 2M) // decimal
+    Nums.Parse("<A float='2' />").Float |> should equal (Some 2.0f) // float32
+    Nums.Parse("<A double='2' />").Double |> should equal (Some 2.0) // float
+
+
+
+
+
+    
+
