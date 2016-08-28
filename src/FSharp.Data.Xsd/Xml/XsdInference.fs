@@ -37,8 +37,7 @@ module XsdModel =
 
     and XsdComplexType = 
         { Attributes: (XmlQualifiedName * XmlTypeCode * IsOptional) list
-          Contents: XsdContent 
-          IsMixed: bool }
+          Contents: XsdContent }
 
     and XsdContent = SimpleContent of XmlTypeCode | ComplexContent of XsdParticle
 
@@ -137,54 +136,45 @@ module XsdParsing =
 
     open XsdModel
 
-    let rec parseElement (ctx: ParsingContext) (elm: XmlSchemaElement)  =  
-
+    let rec parseElement (ctx: ParsingContext) elm = 
         let substitutionGroup = 
             ctx.getSubstitutions elm 
             |> List.filter (fun x -> x <> elm) 
             |> List.map (parseElement ctx)
-
-        if ctx.isRecursive elm 
-        then
-          { Name = elm.QualifiedName
-            Type = // empty content
-              { Attributes = []
-                Contents = ComplexContent Empty 
-                IsMixed = false }
-              |> ComplexType
-            SubstitutionGroup = substitutionGroup
-            IsAbstract = elm.IsAbstract
-            IsNillable = elm.IsNillable }
-        else
-          { Name = elm.QualifiedName
-            Type = 
-              match elm.ElementSchemaType with
-              | :? XmlSchemaSimpleType  as x -> SimpleType x.Datatype.TypeCode
-              | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType ctx x)
-              | x -> failwithf "unknown ElementSchemaType: %A" x
-            SubstitutionGroup = substitutionGroup
-            IsAbstract = elm.IsAbstract
-            IsNillable = elm.IsNillable }
+        let elementType =
+            if ctx.isRecursive elm
+            then // empty content
+                ComplexType { Attributes = []; Contents = ComplexContent Empty }
+            else 
+                match elm.ElementSchemaType with
+                | :? XmlSchemaSimpleType  as x -> SimpleType x.Datatype.TypeCode
+                | :? XmlSchemaComplexType as x -> ComplexType (parseComplexType ctx x)
+                | x -> failwithf "unknown ElementSchemaType: %A" x
+        { Name = elm.QualifiedName
+          Type = elementType
+          SubstitutionGroup = substitutionGroup
+          IsAbstract = elm.IsAbstract
+          IsNillable = elm.IsNillable }
+        
 
     and parseComplexType (ctx: ParsingContext) (x: XmlSchemaComplexType) =  
         { Attributes = 
             x.AttributeUses.Values 
             |> ofType<XmlSchemaAttribute>
             |> Seq.filter (fun a -> a.Use <> XmlSchemaUse.Prohibited)
-            |> Seq.map (fun a -> a.QualifiedName,
-                                    a.AttributeSchemaType.Datatype.TypeCode, 
-                                    a.Use <> XmlSchemaUse.Required)
+            |> Seq.map (fun a -> 
+                a.QualifiedName,
+                a.AttributeSchemaType.Datatype.TypeCode, 
+                a.Use <> XmlSchemaUse.Required)
             |> List.ofSeq
           Contents = 
-                match x.ContentType with
-                | XmlSchemaContentType.TextOnly -> SimpleContent x.Datatype.TypeCode
-                | XmlSchemaContentType.Mixed 
-                | XmlSchemaContentType.Empty 
-                | XmlSchemaContentType.ElementOnly -> 
-                    x.ContentTypeParticle |> parseParticle ctx |> ComplexContent
-                | _ -> failwithf "Unknown content type: %A." x.ContentType
-
-          IsMixed = x.IsMixed }
+            match x.ContentType with
+            | XmlSchemaContentType.TextOnly -> SimpleContent x.Datatype.TypeCode
+            | XmlSchemaContentType.Mixed 
+            | XmlSchemaContentType.Empty 
+            | XmlSchemaContentType.ElementOnly -> 
+                x.ContentTypeParticle |> parseParticle ctx |> ComplexContent
+            | _ -> failwithf "Unknown content type: %A." x.ContentType }
 
 
     and parseParticle (ctx: ParsingContext) (par: XmlSchemaParticle) =  
@@ -362,9 +352,6 @@ module XsdInference =
         | [] -> 
             InferedTypeTag.Null, 
             (InferedMultiplicity.OptionalSingle, InferedType.Null)
-//        | [ (elm, mul) ] ->
-//            InferedTypeTag.Record(Some elm.Name.Name), 
-//            (mul, inferElementType elm)
         | items ->
             let tags = items |> List.map (fst >> getRecordTag)
             
