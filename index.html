@@ -104,13 +104,16 @@ plain text like in the following example:</p>
 </tr>
 </table>
 <p>The properties of the provided type are derived from the schema instead of being inferred from samples.</p>
-<p>Please notice that only basic XML schema features are supported (forget about recursive schemas,
-substitution groups and other fancy stuff).
-Nevertheless a lot of schemas out there don't use advanced features, so this type provider may be useful in many cases.
-Also notice that this is just an early release (the docs look nice just
-because of <a href="https://github.com/fsprojects/ProjectScaffold">ProjectScaffold</a>
-and <a href="http://tpetricek.github.io/FSharp.Formatting/">FSharp.Formatting</a>).
-Actually it needs far more testing. It may not work properly with every version of the .NET framework, especially on Mono.</p>
+<h2><a name="Project-status" class="anchor" href="#Project-status">Project status</a></h2>
+<p>The XSD support is sufficiently complete.
+Of course there may be bugs or nuances, as well as features with very limited support,
+like <a href="https://github.com/giacomociti/FSharp.Data.Xsd/issues/6">recursive schemas</a>.
+But the type provider should be capable of handling most schemas.</p>
+<p>There are, however, a couple of issues to be properly addressed before considering this project ready for production:
+<a href="https://github.com/giacomociti/FSharp.Data.Xsd/issues/5">memory consumption</a> is only a design time issue,
+but it may hamper the usability of the type provider.</p>
+<p>The other issue is about <a href="https://github.com/giacomociti/FSharp.Data.Xsd/issues/9">external schema resolution</a>:
+certain schemas with nested inclusions may fail to load.</p>
 <h2><a name="Samples-amp-documentation" class="anchor" href="#Samples-amp-documentation">Samples &amp; documentation</a></h2>
 <p>The library comes with comprehensible documentation.
 It can include tutorials automatically generated from <code>*.fsx</code> files in <a href="https://github.com/giacomociti/FSharp.Data.Xsd/tree/master/docs/content">the content folder</a>.
