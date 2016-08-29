@@ -53,19 +53,6 @@ module XsdModel =
 /// The actual parsing is done using BCL classes.
 module XsdParsing =
 
-    /// A custom XmlResolver is needed for included files because we get the contents of the main file 
-    /// directly as a string from the FSharp.Data infrastructure. Hence the default XmlResolver is not
-    /// able to find the location of included schema files.
-    type ResolutionFolderResolver(resolutionFolder) =
-        inherit XmlUrlResolver()
-        override _this.ResolveUri(baseUri, relativeUri) = 
-            //System.Uri(System.IO.Path.Combine(resolutionFolder, relativeUri))
-            if resolutionFolder <> "" && (baseUri = null || baseUri.OriginalString = "")
-            then base.ResolveUri(System.Uri resolutionFolder, relativeUri)
-            else base.ResolveUri(baseUri, relativeUri)
-    
-
-
     let ofType<'a> (sequence: System.Collections.IEnumerable) =
         sequence
         |> Seq.cast<obj>
@@ -78,7 +65,7 @@ module XsdParsing =
         let getElm name = // lookup elements by name
             xmlSchemaSet.GlobalElements.Item name :?> XmlSchemaElement
 
-        let subst = // lookup substitution group members 
+        let subst = // lookup of substitution group members 
             xmlSchemaSet.GlobalElements.Values
             |> ofType<XmlSchemaElement>
             |> Seq.filter (fun e -> not e.SubstitutionGroup.IsEmpty)
@@ -87,8 +74,9 @@ module XsdParsing =
             |> dict
 
         let getSubst =     
-        
-            let collectSubst elm = // deep lookup (for substitution trees)
+            // deep lookup for trees of substitution groups, see 
+            // http://docstore.mik.ua/orelly/xml/schema/ch12_01.htm#xmlschema-CHP-12-SECT-1       
+            let collectSubst elm = 
                 let items = System.Collections.Generic.HashSet()
                 let rec collect elm =
                     if subst.ContainsKey elm then
@@ -202,38 +190,73 @@ module XsdParsing =
             Element (occurs, parseElement ctx e)
         | _ -> Empty // XmlSchemaParticle.EmptyParticle
 
-    open System.Linq
-
-    let parseSchema resolutionFolder xsdText =
-        let schemaSet = XmlSchemaSet() 
-        let resolver = ResolutionFolderResolver resolutionFolder
-        schemaSet.XmlResolver <- resolver
-        let readerSettings = XmlReaderSettings()
-        readerSettings.CloseInput <- true
-        use reader = XmlReader.Create(new System.IO.StringReader(xsdText), readerSettings)
-
-        let schema = XmlSchema.Read(reader, null)
-        let enums = schema.Includes.Cast<XmlSchemaObject>()
-        for cur in enums do
-            match cur with
-            | :? XmlSchemaImport as c ->
-                let settings = new XmlReaderSettings()
-                settings.DtdProcessing <- DtdProcessing.Ignore
-                use r = XmlReader.Create(c.SchemaLocation,settings)
-                schemaSet.Add(null, r) |> ignore
-            | _ -> ()
-
-        schema |> schemaSet.Add |> ignore
-        schemaSet.Compile()
-        schemaSet
-
-
     let getElements schema =
         let ctx = ParsingContext schema
         schema.GlobalElements.Values 
         |> ofType<XmlSchemaElement>
         |> Seq.filter (fun x -> x.ElementSchemaType :? XmlSchemaComplexType )
         |> Seq.map (parseElement ctx)
+
+
+    
+    open FSharp.Data.Runtime
+
+    /// A custom XmlResolver is needed for included files because we get the contents of the main file 
+    /// directly as a string from the FSharp.Data infrastructure. Hence the default XmlResolver is not
+    /// able to find the location of included schema files.
+    type ResolutionFolderResolver(resolutionFolder: string) =
+        inherit XmlUrlResolver()
+
+        let cache, _ = Caching.createInternetFileCache "XmlSchema" (System.TimeSpan.FromMinutes 30.0)
+
+        let uri = // TODO improve this
+            if resolutionFolder = "" then ""
+            elif resolutionFolder.EndsWith "/" || resolutionFolder.EndsWith "\\"
+            then resolutionFolder
+            else resolutionFolder + "/"
+
+        let useResolutionFolder (baseUri: System.Uri) = 
+            resolutionFolder <> "" && (baseUri = null || baseUri.OriginalString = "")
+
+
+        override _this.ResolveUri(baseUri, relativeUri) = 
+            let u = System.Uri(relativeUri, System.UriKind.RelativeOrAbsolute)
+            let result =
+                if u.IsAbsoluteUri && (not <| u.IsFile)
+                then base.ResolveUri(baseUri, relativeUri)
+                elif useResolutionFolder baseUri
+                then base.ResolveUri(System.Uri uri, relativeUri)
+                else base.ResolveUri(baseUri, relativeUri)
+            result
+
+        override _this.GetEntity(absoluteUri, role, ofObjectToReturn) =
+            if IO.isWeb absoluteUri 
+            then
+                let uri = absoluteUri.OriginalString
+                match cache.TryRetrieve uri with
+                | Some value -> value
+                | None ->
+                    let value = FSharp.Data.Http.RequestString uri //TODO async?
+                    cache.Set(uri, value)
+                    value
+                |> fun value ->
+                    // what if it's not UTF8?
+                    let bytes = System.Text.Encoding.UTF8.GetBytes value
+                    new System.IO.MemoryStream(bytes) :> obj
+            else base.GetEntity(absoluteUri, role, ofObjectToReturn)
+
+    
+    let parseSchema resolutionFolder xsdText =
+        let schemaSet = XmlSchemaSet() 
+        schemaSet.XmlResolver <- ResolutionFolderResolver resolutionFolder
+        let readerSettings = XmlReaderSettings()
+        readerSettings.CloseInput <- true
+        readerSettings.DtdProcessing <- DtdProcessing.Ignore
+        use reader = XmlReader.Create(new System.IO.StringReader(xsdText), readerSettings)
+        schemaSet.Add(null, reader) |> ignore
+        schemaSet.Compile()
+        schemaSet
+
 
 
 /// Element definitions in a schema are mapped to InferedType instances

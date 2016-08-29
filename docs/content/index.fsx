@@ -60,14 +60,20 @@ printfn "%s was born in %d" turing.Surname turing.BirthDate.Year
 
 The properties of the provided type are derived from the schema instead of being inferred from samples.
 
-Please notice that only basic XML schema features are supported (forget about recursive schemas,
-substitution groups and other fancy stuff). 
-Nevertheless a lot of schemas out there don't use advanced features, so this type provider may be useful in many cases.
-Also notice that this is just an early release (the docs look nice just 
-because of [ProjectScaffold](https://github.com/fsprojects/ProjectScaffold)
-and [FSharp.Formatting](http://tpetricek.github.io/FSharp.Formatting/)). 
-Actually it needs far more testing. It may not work properly with every version of the .NET framework, especially on Mono.
+Project status
+-----------------------
 
+The XSD support is sufficiently complete. 
+Of course there may be bugs or nuances, as well as features with very limited support,
+like [recursive schemas](https://github.com/giacomociti/FSharp.Data.Xsd/issues/6).
+But the type provider should be capable of handling most schemas.
+
+There are, however, a couple of issues to be properly addressed before considering this project ready for production:
+[memory consumption](https://github.com/giacomociti/FSharp.Data.Xsd/issues/5) is only a design time issue,
+but it may hamper the usability of the type provider.
+
+The other issue is about [external schema resolution](https://github.com/giacomociti/FSharp.Data.Xsd/issues/9):
+certain schemas with nested inclusions may fail to load.
 
 Samples & documentation
 -----------------------
