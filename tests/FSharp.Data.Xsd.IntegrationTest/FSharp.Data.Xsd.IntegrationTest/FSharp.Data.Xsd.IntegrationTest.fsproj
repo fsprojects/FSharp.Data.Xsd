@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data.Xsd">
-      <HintPath>..\packages\FSharp.Data.Xsd.0.0.8\lib\net45\FSharp.Data.Xsd.dll</HintPath>
+      <HintPath>..\packages\FSharp.Data.Xsd.0.0.9\lib\net45\FSharp.Data.Xsd.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
