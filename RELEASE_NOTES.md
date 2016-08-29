@@ -1,3 +1,7 @@
+#### 0.0.9 - August 29 2016
+* nillable elements, abstract types and substitution groups
+* improved resolution of includes, with internet file cache
+
 #### 0.0.8 - August 25 2016
 * Improved design time caching
 * Improved resolution of includes
