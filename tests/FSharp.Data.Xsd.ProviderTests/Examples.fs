@@ -151,7 +151,7 @@ type recursiveElements = XmlProvider<Schema = """
     """>
 
 [<Test>]
-let ``recursive elements have only the XElement property``() =
+let ``recursive elements are supported``() =
   let doc = recursiveElements.Parse """
     <italic>
       <bold></bold>
@@ -165,11 +165,11 @@ let ``recursive elements have only the XElement property``() =
   printfn "%A" doc.XElement
   match doc.Bold, doc.Italic, doc.Underline with
   | None, Some x, None -> 
-    x.XElement.Elements(XName.Get "bold") |> Seq.length |> should equal 2
-    x.XElement.Elements(XName.Get "italic") |> Seq.length |> should equal 0
-    x.XElement.Elements(XName.Get "underline") |> Seq.length |> should equal 1
-    
-    
+    x.Bolds.Length |> should equal 2
+    x.Italics.Length |>should equal 0
+    x.Underlines.Length |> should equal 1
+    x.Bolds.[1].Bolds.Length |> should equal 1
+        
   | _ -> failwith "unexpected"
   
 
