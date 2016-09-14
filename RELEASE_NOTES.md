@@ -1,3 +1,8 @@
+#### 0.1.0 - September 14 2016
+* Support for recursive schemas
+* Performance improvements
+
+
 #### 0.0.9 - August 29 2016
 * nillable elements, abstract types and substitution groups
 * improved resolution of includes, with internet file cache
