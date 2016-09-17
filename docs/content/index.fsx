@@ -60,20 +60,25 @@ printfn "%s was born in %d" turing.Surname turing.BirthDate.Year
 
 The properties of the provided type are derived from the schema instead of being inferred from samples.
 
-Project status
+Design notes
 -----------------------
+ 
+The XML Provider of F# Data infers a type from sample documents: an instance of `InferedType` 
+represents elements having a structure compatible with the given samples.
+When a schema is available we can use it (instead of samples) to derive an `InferedType` representing
+elements valid according to the definitions in the given schema.
 
-The XSD support is sufficiently complete. 
-Of course there may be bugs or nuances, as well as features with very limited support,
-like [recursive schemas](https://github.com/giacomociti/FSharp.Data.Xsd/issues/6).
-But the type provider should be capable of handling most schemas.
+*The `InferedType` derived from a schema should be essentialy the same as one
+infered from a significant set of valid samples.*
 
-There are, however, a couple of issues to be properly addressed before considering this project ready for production:
-[memory consumption](https://github.com/giacomociti/FSharp.Data.Xsd/issues/5) is only a design time issue,
-but it may hamper the usability of the type provider.
+Adopting this perspective we can support XSD leveraging the existing functionalities.
+The implementation uses a simplfied XSD model to split the task of deriving an `InferedType`:
 
-The other issue is about [external schema resolution](https://github.com/giacomociti/FSharp.Data.Xsd/issues/9):
-certain schemas with nested inclusions may fail to load.
+- element definitions in xsd files map to this simplified xsd model
+- instances of this xsd model map to `InferedType`.
+
+
+
 
 Samples & documentation
 -----------------------

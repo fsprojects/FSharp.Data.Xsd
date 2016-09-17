@@ -204,6 +204,14 @@ module XsdParsing =
         let useResolutionFolder (baseUri: System.Uri) = 
             resolutionFolder <> "" && (baseUri = null || baseUri.OriginalString = "")
 
+        let getEncoding xmlText =
+            let settings = new XmlReaderSettings(ConformanceLevel = ConformanceLevel.Fragment)
+            use reader = XmlReader.Create(new System.IO.StringReader(xmlText), settings)
+            if reader.Read() && reader.NodeType = XmlNodeType.XmlDeclaration
+            then
+                let attr = reader.GetAttribute "encoding"
+                if attr = null then System.Text.Encoding.UTF8 else System.Text.Encoding.GetEncoding attr
+            else System.Text.Encoding.UTF8
 
         override _this.ResolveUri(baseUri, relativeUri) = 
             let u = System.Uri(relativeUri, System.UriKind.RelativeOrAbsolute)
@@ -226,10 +234,9 @@ module XsdParsing =
                     cache.Set(uri, value)
                     value
                 |> fun value ->
-                    // what if it's not UTF8? probably we should peek the xml string
-                    // looking for an encoding declaration.
                     // the best solution would be to have the cache store the raw bytes
-                    let bytes = System.Text.Encoding.UTF8.GetBytes value
+                    // instead of going back and forth from bytes to text
+                    let bytes = getEncoding(value).GetBytes value
                     new System.IO.MemoryStream(bytes) :> obj
             else base.GetEntity(absoluteUri, role, ofObjectToReturn)
 
@@ -366,12 +373,13 @@ module XsdInference =
 
 
     let inferElements elms = 
+        let ctx = Ctx()
         match elms |> List.filter (fun elm -> not elm.IsAbstract) with
         | [] -> failwith "No suitable element definition found in the schema."
-        | [elm] -> inferElementType (Ctx()) elm
+        | [elm] -> inferElementType ctx elm
         | elms -> 
             elms 
             |> List.map (fun elm -> 
-                InferedTypeTag.Record (getElementName elm), inferElementType (Ctx()) elm)
+                InferedTypeTag.Record (getElementName elm), inferElementType ctx elm)
             |> Map.ofList
             |> InferedType.Heterogeneous
