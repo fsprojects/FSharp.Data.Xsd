@@ -74,13 +74,14 @@ plain text like in the following example:</p>
 <span class="l">23: </span>
 <span class="l">24: </span>
 <span class="l">25: </span>
+<span class="l">26: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;System.Xml.Linq&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;System.Xml.Linq.dll&quot;</span>
 <span class="prep">#r</span> <span class="s">&quot;FSharp.Data.Xsd.dll&quot;</span>
 
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">Data</span>
 
-<span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">person</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">Person</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">  &lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; </span>
 <span class="s">    elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&gt;</span>
 <span class="s">    &lt;xs:element name=&quot;person&quot;&gt;</span>
@@ -93,11 +94,12 @@ plain text like in the following example:</p>
 <span class="s">    &lt;/xs:element&gt;</span>
 <span class="s">  &lt;/xs:schema&gt;&quot;&quot;&quot;</span><span class="o">&gt;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">turing</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="t">person</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">Parse</span>(<span class="s">&quot;&quot;&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">turing</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="t">Person</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">Parse</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">  &lt;person&gt;</span>
 <span class="s">    &lt;surname&gt;Turing&lt;/surname&gt;</span>
 <span class="s">    &lt;birthDate&gt;1912-06-23&lt;/birthDate&gt;</span>
-<span class="s">  &lt;/person&gt;&quot;&quot;&quot;</span>)
+<span class="s">  &lt;/person&gt;</span>
+<span class="s">  &quot;&quot;&quot;</span>
 
 <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s"> was born in </span><span class="pf">%d</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="i">turing</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">Surname</span> <span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="i">turing</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">BirthDate</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="i">Year</span>
 </code></pre></td>
@@ -105,6 +107,15 @@ plain text like in the following example:</p>
 </table>
 <p>The properties of the provided type are derived from the schema instead of being inferred from samples.</p>
 <h2><a name="Design-notes" class="anchor" href="#Design-notes">Design notes</a></h2>
+<p>The design aims to follow the main ideas of F# Data, favoring ease of use and an <em>open world</em> approach to the shape of data.
+The XML Schema specification also provides a fair degree of <a href="http://docstore.mik.ua/orelly/xml/schema/ch13_02.htm">openness</a>
+which may be difficult to handle in some data binding tools; but in F# Data, when providing typed views on elements becomes
+too challenging, the underlying <code>XElement</code> is still available.</p>
+<p>Another important decision is to focus on elements and not on complex types; while the latter may be valuable in schema design,
+our goal is simply to obtain an easy and safe way to access xml data. In other words the provided types are not intended for
+domain modeling (it's one of the very few cases where optional properties are preferred to sum types).
+Hence we do not provide types corresponding to complex types in a schema but only corresponding to elements (of course
+the underlying complex types still affect the resulting provided types but this happens only implicitly)</p>
 <p>The XML Provider of F# Data infers a type from sample documents: an instance of <code>InferedType</code>
 represents elements having a structure compatible with the given samples.
 When a schema is available we can use it (instead of samples) to derive an <code>InferedType</code> representing
@@ -140,7 +151,7 @@ redistribution for both commercial and non-commercial purposes. For more informa
 
 <div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
 <div class="tip" id="fs2">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
-<div class="tip" id="fs3">type person = XmlProvider&lt;...&gt;<br /><br />Full name: Index.person</div>
+<div class="tip" id="fs3">type Person = XmlProvider&lt;...&gt;<br /><br />Full name: Index.Person</div>
 <div class="tip" id="fs4">type XmlProvider<br /><br />Full name: FSharp.Data.XmlProvider<br /><em><br /><br />&lt;summary&gt;Typed representation of a XML file.&lt;/summary&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Sample&#39;&gt;Location of a XML sample file or a string containing a sample XML document.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;SampleIsList&#39;&gt;If true, the children of the root in the sample document represent individual samples for the inference.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Global&#39;&gt;If true, the inference unifies all XML elements with the same name.&lt;/param&gt;                     <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless `charset` is specified in the `Content-Type` response header.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. &#39;MyCompany.MyAssembly, resource_name.xml&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;InferTypesFromValues&#39;&gt;If true, turns on additional type inference from values. <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. type inference infers string values such as &quot;123&quot; as ints and values constrained to 0 and 1 as booleans. The XmlProvider also infers string values as JSON.)&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Schema&#39;&gt;Location of a schema file or a string containing xsd.&lt;/param&gt;</em></div>
 <div class="tip" id="fs5">val turing : XmlProvider&lt;...&gt;.Person<br /><br />Full name: Index.turing</div>
 <div class="tip" id="fs6">XmlProvider&lt;...&gt;.Parse(text: string) : XmlProvider&lt;...&gt;.Person<br /><em><br /><br />Parses the specified XML string</em></div>
