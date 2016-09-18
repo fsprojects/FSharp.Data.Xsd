@@ -25,7 +25,7 @@ module XsdModel =
     type IsOptional = bool
     type Occurs = decimal * decimal
 
-    // reference equality and mutable type allows for cycles
+    // reference equality and mutable type allow for cycles
     [<ReferenceEquality>] 
     type XsdElement = { Name: XmlQualifiedName
                         mutable Type: XsdType
@@ -129,7 +129,7 @@ module XsdParsing =
             | x -> failwithf "unknown ElementSchemaType: %A" x
         result 
 
-    and parseComplexType (ctx: ParsingContext) (x: XmlSchemaComplexType) =  
+    and parseComplexType ctx (x: XmlSchemaComplexType) =  
         { Attributes = 
             x.AttributeUses.Values 
             |> ofType<XmlSchemaAttribute>
@@ -149,7 +149,7 @@ module XsdParsing =
             | _ -> failwithf "Unknown content type: %A." x.ContentType }
 
 
-    and parseParticle (ctx: ParsingContext) (par: XmlSchemaParticle) =  
+    and parseParticle ctx (par: XmlSchemaParticle) =  
 
         let occurs = par.MinOccurs, par.MaxOccurs
 
@@ -165,16 +165,15 @@ module XsdParsing =
             | :? XmlSchemaSequence -> Sequence (occurs, particles)
             | _ -> failwithf "unknown group base: %A" group
 
-        let result =
-            match par with
-            | :? XmlSchemaAny -> Any occurs
-            | :? XmlSchemaGroupBase as grp -> parseParticles grp
-            | :? XmlSchemaGroupRef as grpRef -> parseParticle ctx grpRef.Particle
-            | :? XmlSchemaElement as elm -> 
-                let e = if elm.RefName.IsEmpty then elm else ctx.GetElement elm.RefName
-                Element (occurs, parseElement ctx e)
-            | _ -> Empty // XmlSchemaParticle.EmptyParticle
-        result
+        match par with
+        | :? XmlSchemaAny -> Any occurs
+        | :? XmlSchemaGroupBase as grp -> parseParticles grp
+        | :? XmlSchemaGroupRef as grpRef -> parseParticle ctx grpRef.Particle
+        | :? XmlSchemaElement as elm -> 
+            let e = if elm.RefName.IsEmpty then elm else ctx.GetElement elm.RefName
+            Element (occurs, parseElement ctx e)
+        | _ -> Empty // XmlSchemaParticle.EmptyParticle
+
 
     let getElements schema =
         let ctx = ParsingContext schema
@@ -195,7 +194,7 @@ module XsdParsing =
 
         let cache, _ = Caching.createInternetFileCache "XmlSchema" (System.TimeSpan.FromMinutes 30.0)
 
-        let uri = // TODO improve this
+        let uri = // Uri must end with separator (maybe there's a better way)
             if resolutionFolder = "" then ""
             elif resolutionFolder.EndsWith "/" || resolutionFolder.EndsWith "\\"
             then resolutionFolder
@@ -204,13 +203,14 @@ module XsdParsing =
         let useResolutionFolder (baseUri: System.Uri) = 
             resolutionFolder <> "" && (baseUri = null || baseUri.OriginalString = "")
 
-        let getEncoding xmlText =
-            let settings = new XmlReaderSettings(ConformanceLevel = ConformanceLevel.Fragment)
+        let getEncoding xmlText = // peek encoding definition
+            let settings = XmlReaderSettings(ConformanceLevel = ConformanceLevel.Fragment)
             use reader = XmlReader.Create(new System.IO.StringReader(xmlText), settings)
             if reader.Read() && reader.NodeType = XmlNodeType.XmlDeclaration
             then
-                let attr = reader.GetAttribute "encoding"
-                if attr = null then System.Text.Encoding.UTF8 else System.Text.Encoding.GetEncoding attr
+                match reader.GetAttribute "encoding" with
+                | null -> System.Text.Encoding.UTF8
+                | attr -> System.Text.Encoding.GetEncoding attr
             else System.Text.Encoding.UTF8
 
         override _this.ResolveUri(baseUri, relativeUri) = 
@@ -294,10 +294,10 @@ module XsdInference =
     let nil = { InferedProperty.Name = "{http://www.w3.org/2001/XMLSchema-instance}nil"
                 Type = InferedType.Primitive(typeof<bool>, None, true) }
 
-    type Ctx = System.Collections.Generic.Dictionary<XsdComplexType, InferedProperty>
+    type InferenceContext = System.Collections.Generic.Dictionary<XsdComplexType, InferedProperty>
 
     // derives an InferedType for an element definition
-    let rec inferElementType (ctx: Ctx) (elm: XsdElement) =
+    let rec inferElementType ctx elm =
         let name = getElementName elm
         if elm.IsAbstract 
         then InferedType.Record(name, [], optional = false)
@@ -319,7 +319,7 @@ module XsdInference =
                 InferedType.Record(name, props, optional = false)
             
 
-    and inferProperties (ctx: Ctx) cty =
+    and inferProperties (ctx: InferenceContext) cty =
         let attrs: InferedProperty list = 
             cty.Attributes
             |> List.map (fun (name, typeCode, optional) ->
@@ -342,17 +342,17 @@ module XsdInference =
                     | [] -> InferedType.Null
                     | items ->
                         let tags = items |> List.map (fst >> getRecordTag)
-                        let types = 
-                            items 
-                            |> Seq.zip tags
-                            |> Seq.map (fun (tag, (e, m)) -> tag, (m, inferElementType ctx e))
+                        let types =
+                            items
+                            |> List.map (fun (e, m) -> m, inferElementType ctx e)
+                            |> Seq.zip tags 
                             |> Map.ofSeq
                         InferedType.Collection(tags, types)
                 result
             if body.Type = InferedType.Null then attrs else body::attrs
        
     // collects element definitions in a particle
-    and getElements (ctx: Ctx) parentMultiplicity = function
+    and getElements ctx parentMultiplicity = function
         | XsdParticle.Element(occ, elm) -> 
             let mult = combineMultiplicity(parentMultiplicity, getMultiplicity occ)
             match elm.IsAbstract, elm.SubstitutionGroup with
@@ -373,7 +373,7 @@ module XsdInference =
 
 
     let inferElements elms = 
-        let ctx = Ctx()
+        let ctx = InferenceContext()
         match elms |> List.filter (fun elm -> not elm.IsAbstract) with
         | [] -> failwith "No suitable element definition found in the schema."
         | [elm] -> inferElementType ctx elm
