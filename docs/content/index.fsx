@@ -34,7 +34,7 @@ plain text like in the following example:
 
 open FSharp.Data
 
-type person = XmlProvider<Schema = """
+type Person = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="person">
@@ -47,11 +47,12 @@ type person = XmlProvider<Schema = """
     </xs:element>
   </xs:schema>""">
 
-let turing = person.Parse("""
+let turing = Person.Parse """
   <person>
     <surname>Turing</surname>
     <birthDate>1912-06-23</birthDate>
-  </person>""")
+  </person>
+  """
 
 printfn "%s was born in %d" turing.Surname turing.BirthDate.Year
 

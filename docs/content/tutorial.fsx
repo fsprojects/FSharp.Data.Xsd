@@ -20,7 +20,7 @@ open FSharp.Data
 an XML schema can be specified either as plain text:
 *)
 
-type foo = XmlProvider<Schema = """
+type Foo = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="foo">
@@ -37,7 +37,7 @@ or as a file:
 
 *)
 
-type foo' = XmlProvider<Schema="c:/temp/foo.xsd">
+type Foo' = XmlProvider<Schema="c:/temp/foo.xsd">
 
 (**
 
@@ -45,7 +45,7 @@ When the file includes other schema files, the `ResolutionFolder` parameter can 
 
 *)
 
-type foo'' = XmlProvider<Schema="foo.xsd", ResolutionFolder="c:/temp">
+type Foo'' = XmlProvider<Schema="foo.xsd", ResolutionFolder="c:/temp">
 
 (**
 
@@ -53,7 +53,7 @@ A schema may define multiple root elements:
 
 *)
 
-type twoRoots = XmlProvider<Schema = """
+type TwoRoots = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="root1">
@@ -76,15 +76,15 @@ In this case the provided type has an optional property for each alternative:
 
 *)
 
-let e1 = twoRoots.Parse("<root1 foo='aa' fow='2' />")
+let e1 = TwoRoots.Parse "<root1 foo='aa' fow='2' />"
 match e1.Root1, e1.Root2 with
 | Some x, None -> 
     assert(x.Foo = "aa")
     assert(x.Fow = Some 2)
-| _ -> failwith "Invalid"
-let e2 = twoRoots.Parse("<root2 bar='aa' baz='2017-12-22' />")
+| _ -> failwith "Unexpected"
+let e2 = TwoRoots.Parse "<root2 bar='aa' baz='2017-12-22' />"
 match e2.Root1, e2.Root2 with
 | None, Some x -> 
     assert(x.Bar = "aa")
     assert(x.Baz = System.DateTime(2017, 12, 22))
-| _ -> failwith "Invalid"
+| _ -> failwith "Unexpected"

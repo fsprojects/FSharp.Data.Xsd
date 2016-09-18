@@ -95,8 +95,8 @@ module XsdParsing =
 
         let elements = System.Collections.Generic.Dictionary<XmlSchemaElement, XsdModel.XsdElement>()
 
-        member x.getElement name = getElm name
-        member x.getSubstitutions elm = getSubst elm
+        member x.GetElement name = getElm name
+        member x.GetSubstitutions elm = getSubst elm
         member x.Elements = elements
 
 
@@ -107,7 +107,7 @@ module XsdParsing =
         | true, x -> x
         | _ ->
         let substitutionGroup = 
-            ctx.getSubstitutions elm 
+            ctx.GetSubstitutions elm 
             |> List.filter (fun x -> x <> elm) 
             |> List.map (parseElement ctx)
         // another attempt in case the element is put while parsing substitution groups
@@ -171,7 +171,7 @@ module XsdParsing =
             | :? XmlSchemaGroupBase as grp -> parseParticles grp
             | :? XmlSchemaGroupRef as grpRef -> parseParticle ctx grpRef.Particle
             | :? XmlSchemaElement as elm -> 
-                let e = if elm.RefName.IsEmpty then elm else ctx.getElement elm.RefName
+                let e = if elm.RefName.IsEmpty then elm else ctx.GetElement elm.RefName
                 Element (occurs, parseElement ctx e)
             | _ -> Empty // XmlSchemaParticle.EmptyParticle
         result
