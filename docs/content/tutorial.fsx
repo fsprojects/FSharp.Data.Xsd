@@ -11,7 +11,7 @@ Once the needed libraries have been referenced and the namespace is open:
 
 *)
 
-#r "System.Xml.Linq"
+#r "System.Xml.Linq.dll"
 #r "FSharp.Data.Xsd.dll"
 
 open FSharp.Data
