@@ -215,13 +215,12 @@ module XsdParsing =
 
         override _this.ResolveUri(baseUri, relativeUri) = 
             let u = System.Uri(relativeUri, System.UriKind.RelativeOrAbsolute)
-            let result =
-                if u.IsAbsoluteUri && (not <| u.IsFile)
-                then base.ResolveUri(baseUri, relativeUri)
-                elif useResolutionFolder baseUri
-                then base.ResolveUri(System.Uri uri, relativeUri)
-                else base.ResolveUri(baseUri, relativeUri)
-            result
+            if u.IsAbsoluteUri && (not <| u.IsFile)
+            then base.ResolveUri(baseUri, relativeUri)
+            elif useResolutionFolder baseUri
+            then base.ResolveUri(System.Uri uri, relativeUri)
+            else base.ResolveUri(baseUri, relativeUri)
+            
 
         override _this.GetEntity(absoluteUri, role, ofObjectToReturn) =
             if IO.isWeb absoluteUri 
@@ -286,10 +285,11 @@ module XsdInference =
     // the effect of a choice is to make mandatory items optional 
     let makeOptional = function Single -> OptionalSingle | x -> x
 
-    let getElementName (elm: XsdElement) =
-        if elm.Name.Namespace = "" 
-        then Some elm.Name.Name
-        else Some (sprintf "{%s}%s" elm.Name.Namespace elm.Name.Name)
+    let formatName (qName: XmlQualifiedName) =
+        if qName.Namespace = "" then qName.Name else 
+        sprintf "{%s}%s" qName.Namespace qName.Name
+        
+    let getElementName (elm: XsdElement) = Some (formatName elm.Name)
 
     let nil = { InferedProperty.Name = "{http://www.w3.org/2001/XMLSchema-instance}nil"
                 Type = InferedType.Primitive(typeof<bool>, None, true) }
@@ -323,7 +323,7 @@ module XsdInference =
         let attrs: InferedProperty list = 
             cty.Attributes
             |> List.map (fun (name, typeCode, optional) ->
-                { Name = name.Name
+                { Name = formatName name
                   Type = InferedType.Primitive (getType typeCode, None, optional) } )
          
         match cty.Contents with

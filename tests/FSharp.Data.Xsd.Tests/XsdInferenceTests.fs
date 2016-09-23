@@ -98,6 +98,22 @@ let ``untyped elements have no properties``() =
 
 
 [<Test>]
+let ``names can be qualified``() =
+    let xsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+      targetNamespace="http://test.001"
+      elementFormDefault="qualified" attributeFormDefault="qualified">
+      <xs:element name="foo">
+        <xs:complexType>
+          <xs:attribute name="bar" type="xs:string" use="required" form="qualified" />
+          <xs:attribute name="baz" type="xs:int" use="required" form="unqualified" />
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>"""
+    let sample = """<foo xmlns='http://test.001' xmlns:t='http://test.001' t:bar='aa' baz='2' />"""
+    check xsd [| sample |] 
+
+[<Test>]
 let ``recursive schemas don't cause loops``() =
     let xsd = """ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
