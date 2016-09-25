@@ -210,7 +210,6 @@ Target "NuGet2" (fun _ ->
             Publish = hasBuildParam "nugetkey"
             Dependencies = [] })
         "nuget/FSharp.Data.Xsd.nuspec"
-
     
 )
 
