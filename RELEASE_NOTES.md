@@ -1,3 +1,8 @@
+#### 0.1.1 - September 26 2016
+* Qualified attribute names
+* Encoding of imported schemas
+
+
 #### 0.1.0 - September 14 2016
 * Support for recursive schemas
 * Performance improvements
