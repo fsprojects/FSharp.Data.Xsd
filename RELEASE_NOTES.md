@@ -1,4 +1,4 @@
-#### 0.1.1 - September 26 2016
+#### 0.1.2 - September 26 2016
 * Qualified attribute names
 * Encoding of imported schemas
 
