@@ -24,8 +24,6 @@ type public XmlProvider(cfg:TypeProviderConfig) as this =
   let xmlProvTy = bindingContext.ProvidedTypeDefinition(asm, ns, "XmlProvider", None, hideObjectMethods=true, nonNullable=true)
 
   let cache = System.Collections.Concurrent.ConcurrentDictionary<string, ProvidedTypeDefinition>()
-      //Caching.createNonCachingCache()
-
 
   let buildTypes (typeName:string) (args:obj[]) = 
    cache.GetOrAdd(typeName, fun typeName ->

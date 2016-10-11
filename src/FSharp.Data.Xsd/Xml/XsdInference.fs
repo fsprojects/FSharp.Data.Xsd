@@ -4,12 +4,12 @@
 
 // The XML Provider infers a type from sample documents: an instance of InferedType 
 // represents elements having a structure compatible with the given samples.
-// When a schema is available we can use it to derive an InferedType representing
+// When a schema is available, we can use it to derive an InferedType representing
 // valid elements according to the definitions in the given schema.
-// The InferedType derived from a schema should be essentialy the same as one
-// infered from a significant set of valid samples.
+// The InferedType derived from a schema should be essentially the same as one
+// inferred from a significant set of valid samples.
 // Adopting this perspective we can support XSD leveraging the existing functionalities.
-// The implementation uses a simplfied XSD model to split the task of deriving an InferedType:
+// The implementation uses a simplified XSD model to split the task of deriving an InferedType:
 // - element definitions in xsd files map to this simplified xsd model
 // - instances of this xsd model map to InferedType.
 
