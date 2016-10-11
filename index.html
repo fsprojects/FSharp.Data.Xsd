@@ -111,19 +111,19 @@ plain text like in the following example:</p>
 The XML Schema specification also provides a fair degree of <a href="http://docstore.mik.ua/orelly/xml/schema/ch13_02.htm">openness</a>
 which may be difficult to handle in some data binding tools; but in F# Data, when providing typed views on elements becomes
 too challenging, the underlying <code>XElement</code> is still available.</p>
-<p>Another important decision is to focus on elements and not on complex types; while the latter may be valuable in schema design,
+<p>An important decision is to focus on elements and not on complex types; while the latter may be valuable in schema design,
 our goal is simply to obtain an easy and safe way to access xml data. In other words the provided types are not intended for
 domain modeling (it's one of the very few cases where optional properties are preferred to sum types).
-Hence we do not provide types corresponding to complex types in a schema but only corresponding to elements (of course
+Hence, we do not provide types corresponding to complex types in a schema but only corresponding to elements (of course
 the underlying complex types still affect the resulting provided types but this happens only implicitly)</p>
 <p>The XML Provider of F# Data infers a type from sample documents: an instance of <code>InferedType</code>
 represents elements having a structure compatible with the given samples.
-When a schema is available we can use it (instead of samples) to derive an <code>InferedType</code> representing
+When a schema is available, we can use it (instead of samples) to derive an <code>InferedType</code> representing
 elements valid according to the definitions in the given schema.</p>
-<p><em>The <code>InferedType</code> derived from a schema should be essentialy the same as one
-infered from a significant set of valid samples.</em></p>
+<p><em>The <code>InferedType</code> derived from a schema should be essentially the same as one
+inferred from a significant set of valid samples.</em></p>
 <p>Adopting this perspective we can support XSD leveraging the existing functionalities.
-The implementation uses a simplfied XSD model to split the task of deriving an <code>InferedType</code>:</p>
+The implementation uses a simplified XSD model to split the task of deriving an <code>InferedType</code>:</p>
 <ul>
 <li>element definitions in xsd files map to this simplified xsd model</li>
 <li>instances of this xsd model map to <code>InferedType</code>.</li>
