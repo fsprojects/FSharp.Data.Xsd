@@ -124,7 +124,7 @@ let ``untyped elements have only the XElement property``() =
     <anything />
     <greetings>hi</greetings>
   </foo>"""
-  printfn "%A" foo.XElement
+  //printfn "%A" foo.XElement
   foo.XElement.Element(XName.Get "greetings").Value
   |> should equal "hi"
 
@@ -150,7 +150,7 @@ let ``wildcard elements have only the XElement property``() =
     <id>XYZ</id>
     <anything name='abc' />
   </foo>"""
-  printfn "%A" foo.XElement
+  //printfn "%A" foo.XElement
   foo.Id |> should equal "XYZ"
   foo.XElement.Element(XName.Get "anything").FirstAttribute.Value
   |> should equal "abc"
@@ -183,7 +183,7 @@ let ``recursive elements are supported``() =
       </bold>
     </italic>
     """ 
-  printfn "%A" doc.XElement
+  //printfn "%A" doc.XElement
   match doc.Bold, doc.Italic, doc.Underline with
   | None, Some x, None -> 
     x.Bolds.Length |> should equal 2
@@ -343,7 +343,7 @@ type SimpleSchema = XmlProvider<Schema = """
 </schema>""">
 
 [<Test>]
-let ``simple schema``() =
+let ``simple schema is parsed``() =
     let xml = 
          """<?xml version="1.0" encoding="utf-8"?>
               <tns:rootElm xmlns:tns="https://github.com/FSharp.Data/">

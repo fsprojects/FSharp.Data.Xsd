@@ -10,18 +10,11 @@ open System.Xml.Schema
 open NUnit.Framework
 open FsUnit
 
-let infer = 
-    let culture = System.Globalization.CultureInfo.InvariantCulture
-    XmlInference.inferType true culture false false
-
-let getInferedTypeFromSample xml =
-    infer [| XElement.Parse xml |]
-    |> Seq.exactlyOne
-
 let getInferedTypeFromSamples samples =
+    let culture = System.Globalization.CultureInfo.InvariantCulture
     samples
     |> Array.map XElement.Parse
-    |> infer 
+    |> XmlInference.inferType true culture false false 
     |> Seq.fold (subtypeInfered (*allowEmptyValues*)false) InferedType.Top
 
 
@@ -42,32 +35,28 @@ let isValid xsd =
             while reader.Read() do ()
             true
         with :? XmlSchemaException as e -> 
-            printfn "%s/n%s" xml e.Message
+            printfn "%s/n%s" e.Message xml
             false
 
 
-let print xsd xmlSamples =
-    printfn "%s" xsd
-    printfn "-----------------------------------------------------"
+let getInferedTypes xsd xmlSamples =
+    //printfn "%s/n---------------------------------------------" xsd
     let isValid = isValid xsd
     for xml in xmlSamples do
-        printfn "%A" xml
-        printfn "-----------------------------------------------------"
+        //printfn "%A/n---------------------------------------------" xml
         xml.ToString() |> isValid |> should equal true
 
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
-    printfn "%A" inferedTypeFromSchema
-
+    //printfn "%A" inferedTypeFromSchema
     let inferedTypeFromSamples = getInferedTypeFromSamples xmlSamples
-    printfn "%A" inferedTypeFromSamples
-
+    //printfn "%A" inferedTypeFromSamples
     inferedTypeFromSchema, inferedTypeFromSamples
 
 
 
 let check xsd xmlSamples =
-    printfn "checking schema and samples"
-    let inferedTypeFromSchema, inferedTypeFromSamples = print xsd xmlSamples
+    //printfn "checking schema and samples"
+    let inferedTypeFromSchema, inferedTypeFromSamples = getInferedTypes xsd xmlSamples
     inferedTypeFromSchema |> should equal inferedTypeFromSamples
     
 
@@ -93,8 +82,8 @@ let ``untyped elements have no properties``() =
     """
     let sample1 = "<foo><a/></foo>"
     let sample2 = "<foo><b/></foo>"
-    let ty, _ = print xsd [| sample1; sample2 |]
-    ty |> should equal (InferedType.Record (Some "foo",[],false))
+    let ty, _ = getInferedTypes xsd [| sample1; sample2 |]
+    ty |> should equal (InferedType.Record (Some "foo", [], false))
 
 
 [<Test>]
@@ -129,7 +118,7 @@ let ``recursive schemas don't cause loops``() =
 	    <xs:element name="underline" type="TextType"/>
     </xs:schema>"""
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
-    printfn "%A" inferedTypeFromSchema
+    //printfn "%A" inferedTypeFromSchema
     
     let xsd = """<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -142,7 +131,8 @@ let ``recursive schemas don't cause loops``() =
         </xs:complexType>
         </xs:schema>"""
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
-    printfn "%A" inferedTypeFromSchema
+    //printfn "%A" inferedTypeFromSchema
+    inferedTypeFromSchema |> ignore
 
 
 [<Test>]
@@ -365,7 +355,8 @@ let ``can import namespaces``() =
 	    </xs:element>
     </xs:schema>"""
     let inferedTypeFromSchema = getInferedTypeFromSchema xsd
-    printfn "%A" inferedTypeFromSchema
+    //printfn "%A" inferedTypeFromSchema
+    inferedTypeFromSchema |> ignore
     
 [<Test>]
 let ``simple elements can be nillable``() =
@@ -432,7 +423,7 @@ let ``complex elements can be nillable``() =
     check xsd [| sample1; sample2 |]
 
 [<Test>]
-let ``substitution groups``() =
+let ``substitution groups are supported``() =
     let xsd = """
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
       elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -456,26 +447,28 @@ let ``substitution groups``() =
 
 
 
-// sample xsd with a recursive abstract element and substitution groups
-let formulaXsd = """
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:element name="Formula" abstract="true"/>
-	<xs:element name="Prop" type="xs:string" substitutionGroup="Formula"/>
-	<xs:element name="And" substitutionGroup="Formula">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="Formula" minOccurs="2" maxOccurs="2"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-</xs:schema>
-"""
 
 open System.Xml.Schema
 
 [<Test>]
-let ``abstract recursive``() =
+let ``abstract elements can be recursive``() =
+
+    // sample xsd with a recursive abstract element and substitution groups
+    let formulaXsd = """
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+        elementFormDefault="qualified" attributeFormDefault="unqualified">
+	    <xs:element name="Formula" abstract="true"/>
+	    <xs:element name="Prop" type="xs:string" substitutionGroup="Formula"/>
+	    <xs:element name="And" substitutionGroup="Formula">
+		    <xs:complexType>
+			    <xs:sequence>
+				    <xs:element ref="Formula" minOccurs="2" maxOccurs="2"/>
+			    </xs:sequence>
+		    </xs:complexType>
+	    </xs:element>
+    </xs:schema>
+    """
+
     let xsd = XsdParsing.parseSchema "" formulaXsd
     let elms = xsd.GlobalElements.Values |> XsdParsing.ofType<XmlSchemaElement>
     let andElm = elms |> Seq.filter (fun x -> x.Name = "And") |> Seq.exactlyOne
@@ -493,8 +486,6 @@ let ``abstract recursive``() =
     formElm.IsAbstract |> should equal true
     formRefElm.IsAbstract |> should equal false
 
-
-
     let sample1 = """<Prop>p1</Prop>"""
     let sample2 = """
     <And>
@@ -505,6 +496,6 @@ let ``abstract recursive``() =
         </And>
     </And>
     """
-    print formulaXsd [| sample1; sample2 |]
+    getInferedTypes formulaXsd [| sample1; sample2 |]
     |> ignore
 
