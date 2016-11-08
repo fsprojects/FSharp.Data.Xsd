@@ -2,7 +2,7 @@
 
 open FSharp.Data
 
-type person = XmlProvider<Schema = """
+type Person = XmlProvider<Schema = """
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="person">
@@ -17,7 +17,7 @@ type person = XmlProvider<Schema = """
 
 [<EntryPoint>]
 let main argv = 
-    let turing = person.Parse """
+    let turing = Person.Parse """
     <person>
       <surname>Turing</surname>
       <birthDate>1912-06-23</birthDate>
