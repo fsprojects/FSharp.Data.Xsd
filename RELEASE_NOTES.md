@@ -1,3 +1,7 @@
+#### 1.0.0 - November 8 2016
+* Stable version
+
+
 #### 0.1.3 - September 26 2016
 * Qualified attribute names
 * Encoding of imported schemas
