@@ -2,7 +2,7 @@
 # FSharp.Data.Xsd
 
 [FSharp.Data.Xsd](http://giacomociti.github.io/FSharp.Data.Xsd/) augments the XML type provider 
-from [F# Data](http://fsharp.github.io/FSharp.Data/) with schema support.
+of [F# Data](http://fsharp.github.io/FSharp.Data/) with schema support.
 
 Please contribute, report issues and provide any kind of feedback.
 

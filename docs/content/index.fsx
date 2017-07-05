@@ -7,7 +7,7 @@
 FSharp.Data.Xsd
 ======================
 
-FSharp.Data.Xsd augments the XML type provider from [FSharp.Data](http://fsharp.github.io/FSharp.Data/) with schema support.
+FSharp.Data.Xsd augments the XML type provider of [FSharp.Data](http://fsharp.github.io/FSharp.Data/) with schema support.
 
 <div class="row">
   <div class="span1"></div>
@@ -61,51 +61,20 @@ printfn "%s was born in %d" turing.Surname turing.BirthDate.Year
 
 The properties of the provided type are derived from the schema instead of being inferred from samples.
 
-Design notes
------------------------
- 
-The design aims to follow the main ideas of F# Data, favoring ease of use and an *open world* approach to the shape of data.
-The XML Schema specification also provides a fair degree of [openness](http://docstore.mik.ua/orelly/xml/schema/ch13_02.htm) 
-which may be difficult to handle in some data binding tools; but in F# Data, when providing typed views on elements becomes 
-too challenging, the underlying `XElement` is still available.
-
-An important decision is to focus on elements and not on complex types; while the latter may be valuable in schema design,
-our goal is simply to obtain an easy and safe way to access xml data. In other words the provided types are not intended for
-domain modeling (it's one of the very few cases where optional properties are preferred to sum types).
-Hence, we do not provide types corresponding to complex types in a schema but only corresponding to elements (of course
-the underlying complex types still affect the resulting provided types but this happens only implicitly)
-
-
-The XML Provider of F# Data infers a type from sample documents: an instance of `InferedType` 
-represents elements having a structure compatible with the given samples.
-When a schema is available, we can use it (instead of samples) to derive an `InferedType` representing
-elements valid according to the definitions in the given schema.
-
-*The `InferedType` derived from a schema should be essentially the same as one
-inferred from a significant set of valid samples.*
-
-Adopting this perspective we can support XSD leveraging the existing functionalities.
-The implementation uses a simplified XSD model to split the task of deriving an `InferedType`:
-
-- element definitions in xsd files map to this simplified xsd model
-- instances of this xsd model map to `InferedType`.
-
-
-
-
 
 Samples & documentation
 -----------------------
 
 The library comes with comprehensible documentation. 
 It can include tutorials automatically generated from `*.fsx` files in [the content folder][content]. 
-The API reference is automatically generated from Markdown comments in the library implementation.
 
  * [Tutorial](tutorial.html) contains a further explanation of this library.
 
- * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
-   and functions in the library. This includes additional brief samples on using most of the
-   functions.
+ * [Sequence and Choice](sequences.html) shows the library in action with the basic structures in a schema.
+
+ * [Substitution Groups](substitutions.html) explains how to deal with extensible and abstract schemas.
+
+ * [Design Notes](design.html) provide some context for implementation decisions.
  
 Contributing and copyright
 --------------------------
