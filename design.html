@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Namespaces - FSharp.Data.Xsd</title>
+    <title>design</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
+    <meta name="description" content="Xml Type Provider based on Xml Schema"/>
     <meta name="author" content="Giacomo Citi"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -32,9 +32,28 @@
       <div class="row">
         <div class="span9" id="main">
           
-
-<h1>FSharp.Data.Xsd</h1>
-
+<h2><a name="Design-notes" class="anchor" href="#Design-notes">Design notes</a></h2>
+<p>The design aims to follow the main ideas of F# Data, favoring ease of use and an <em>open world</em> approach to the shape of data.
+The XML Schema specification also provides a fair degree of <a href="http://docstore.mik.ua/orelly/xml/schema/ch13_02.htm">openness</a>
+which may be difficult to handle in some data binding tools; but in F# Data, when providing typed views on elements becomes
+too challenging, the underlying <code>XElement</code> is still available.</p>
+<p>An important decision is to focus on elements and not on complex types; while the latter may be valuable in schema design,
+our goal is simply to obtain an easy and safe way to access xml data. In other words the provided types are not intended for
+domain modeling (it's one of the very few cases where optional properties are preferred to sum types).
+Hence, we do not provide types corresponding to complex types in a schema but only corresponding to elements (of course
+the underlying complex types still affect the resulting provided types but this happens only implicitly).</p>
+<p>The XML Provider of F# Data infers a type from sample documents: an instance of <code>InferedType</code>
+represents elements having a structure compatible with the given samples.
+When a schema is available, we can use it (instead of samples) to derive an <code>InferedType</code> representing
+elements valid according to the definitions in the given schema.</p>
+<p><em>The <code>InferedType</code> derived from a schema should be essentially the same as one
+inferred from a significant set of valid samples.</em></p>
+<p>Adopting this perspective we can leverage existing functionalities to support XSD.
+The implementation uses a simplified XSD model to split the task of deriving an <code>InferedType</code>:</p>
+<ul>
+<li>element definitions in xsd files map to this simplified xsd model</li>
+<li>instances of this xsd model map to <code>InferedType</code>.</li>
+</ul>
 
 
         </div>
