@@ -10,6 +10,10 @@ XML is in decline but many enterprises still use it heavily. That's why a type p
 
 The XSD support is sufficiently complete and it's been also submitted as a [pull request to F# Data](https://github.com/fsharp/FSharp.Data/pull/1004).
 
+## Maintainer(s)
+
+The default maintainer account for projects under "fsprojects" is [@fsprojectsgit](https://github.com/fsprojectsgit) - F# Community Project Incubation Space (repo management)
+
 
 
 
