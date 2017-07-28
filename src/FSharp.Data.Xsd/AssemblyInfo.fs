@@ -10,5 +10,8 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "1.0.0"
-    let [<Literal>] InformationalVersion = "1.0.0"
+    let [<Literal>] AssemblyTitle = "FSharp.Data.Xsd"
+    let [<Literal>] AssemblyProduct = "FSharp.Data.Xsd"
+    let [<Literal>] AssemblyDescription = "Xml Type Provider based on Xml Schema"
+    let [<Literal>] AssemblyVersion = "1.0.0"
+    let [<Literal>] AssemblyFileVersion = "1.0.0"
