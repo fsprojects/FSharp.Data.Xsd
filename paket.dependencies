@@ -32,13 +32,13 @@ github fsharp/FSharp.Data src/Xml/XmlRuntime.fs
 github fsharp/FSharp.Data src/Xml/XmlInference.fs
 github fsharp/FSharp.Data src/Xml/XmlGenerator.fs
 
-group TypeProviders
-	github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fsi
-	github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fs
-	github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReader.fs
-	github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReaderReflection.fs
-	github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesContext.fs
-	github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesTesting.fs
+
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fsi
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReader.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/AssemblyReaderReflection.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesContext.fs
+github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesTesting.fs
 
 group Build
   source https://nuget.org/api/v2
