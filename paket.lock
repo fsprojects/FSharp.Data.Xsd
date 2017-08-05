@@ -446,6 +446,13 @@ GITHUB
     src/Xml/XmlGenerator.fs (503ed03c0ab56dcd4938946d898df886a7c5a79c)
     src/Xml/XmlInference.fs (503ed03c0ab56dcd4938946d898df886a7c5a79c)
     src/Xml/XmlRuntime.fs (503ed03c0ab56dcd4938946d898df886a7c5a79c)
+  remote: fsprojects/FSharp.TypeProviders.StarterPack
+    src/AssemblyReader.fs (1dab4f94411500794342f61f877feab772e5a754)
+    src/AssemblyReaderReflection.fs (1dab4f94411500794342f61f877feab772e5a754)
+    src/ProvidedTypes.fs (1dab4f94411500794342f61f877feab772e5a754)
+    src/ProvidedTypes.fsi (1dab4f94411500794342f61f877feab772e5a754)
+    src/ProvidedTypesContext.fs (1dab4f94411500794342f61f877feab772e5a754)
+    src/ProvidedTypesTesting.fs (1dab4f94411500794342f61f877feab772e5a754)
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
@@ -897,14 +904,3 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (&& (< net451) (>= netstandard1.2) (< monotouch) (< xamarintvos) (< xamarinwatchos) (< xamarinios) (< xamarinmac) (< win81) (< wpa81)) (>= dnxcore50)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (&& (< net451) (>= netstandard1.2) (< monotouch) (< xamarintvos) (< xamarinwatchos) (< xamarinios) (< xamarinmac) (< win81) (< wpa81)) (>= dnxcore50)
       System.Runtime (>= 4.3) - restriction: || (&& (< net451) (>= netstandard1.2) (< monotouch) (< xamarintvos) (< xamarinwatchos) (< xamarinios) (< xamarinmac) (< win81) (< wpa81)) (>= dnxcore50)
-
-GROUP TypeProviders
-
-GITHUB
-  remote: fsprojects/FSharp.TypeProviders.StarterPack
-    src/AssemblyReader.fs (1dab4f94411500794342f61f877feab772e5a754)
-    src/AssemblyReaderReflection.fs (1dab4f94411500794342f61f877feab772e5a754)
-    src/ProvidedTypes.fs (1dab4f94411500794342f61f877feab772e5a754)
-    src/ProvidedTypes.fsi (1dab4f94411500794342f61f877feab772e5a754)
-    src/ProvidedTypesContext.fs (1dab4f94411500794342f61f877feab772e5a754)
-    src/ProvidedTypesTesting.fs (1dab4f94411500794342f61f877feab772e5a754)
