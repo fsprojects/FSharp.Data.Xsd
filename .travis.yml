@@ -1,11 +1,9 @@
 language: csharp
-dist: trusty
 
 sudo: false  # use the new container-based Travis infrastructure
 
 mono:
   - latest
-  - 4.6.1
 
 os:
   - linux
