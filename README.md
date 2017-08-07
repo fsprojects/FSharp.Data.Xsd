@@ -1,6 +1,9 @@
 
 # FSharp.Data.Xsd
 
+[![NuGet Badge](https://buildstats.info/nuget/FSharp.Data.Xsd)](https://www.nuget.org/packages/FSharp.Data.Xsd)
+[![Travis build status](https://travis-ci.org/fsprojects/FSharp.Data.Xsd.svg)](https://travis-ci.org/fsprojects/FSharp.Data.Xsd)
+
 [FSharp.Data.Xsd](http://fsprojects.github.io/FSharp.Data.Xsd/) augments the XML type provider 
 of [F# Data](http://fsharp.github.io/FSharp.Data/) with schema support.
 
