@@ -1,3 +1,7 @@
+#### 1.0.1 - August 7 2017
+* non-atomic simple types (list and union) fallback to string
+
+
 #### 1.0.0 - November 8 2016
 * Stable version
 

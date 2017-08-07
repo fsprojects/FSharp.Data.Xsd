@@ -5,13 +5,13 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("FSharp.Data.Xsd")>]
 [<assembly: AssemblyProductAttribute("FSharp.Data.Xsd")>]
 [<assembly: AssemblyDescriptionAttribute("Xml Type Provider based on Xml Schema")>]
-[<assembly: AssemblyVersionAttribute("1.0.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.0.0")>]
+[<assembly: AssemblyVersionAttribute("1.0.1")>]
+[<assembly: AssemblyFileVersionAttribute("1.0.1")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "FSharp.Data.Xsd"
     let [<Literal>] AssemblyProduct = "FSharp.Data.Xsd"
     let [<Literal>] AssemblyDescription = "Xml Type Provider based on Xml Schema"
-    let [<Literal>] AssemblyVersion = "1.0.0"
-    let [<Literal>] AssemblyFileVersion = "1.0.0"
+    let [<Literal>] AssemblyVersion = "1.0.1"
+    let [<Literal>] AssemblyFileVersion = "1.0.1"
