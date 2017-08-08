@@ -1,6 +1,6 @@
 source https://nuget.org/api/v2
 
-nuget FSharp.Core redirects: force
+nuget FSharp.Core ~> 4.0.0 redirects: force
 
 
 github fsharp/FSharp.Data src/Net/UriUtils.fs
@@ -42,7 +42,7 @@ github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypesTesting.fs
 
 group Build
   source https://nuget.org/api/v2
-  
+
   nuget SourceLink.Fake
   nuget FAKE
   nuget FSharp.Formatting
@@ -51,7 +51,7 @@ group Build
 
 group Test
   source https://nuget.org/api/v2
-  
+
   nuget FSUnit
   nuget NUnit ~> 2
   nuget NUnit.Runners ~> 2
