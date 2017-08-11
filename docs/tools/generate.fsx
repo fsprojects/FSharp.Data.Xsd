@@ -13,7 +13,7 @@ let referenceBinaries = []
 // Web site location for the generated documentation
 let website = "/FSharp.Data.Xsd"
 
-let githubLink = "http://github.com/giacomociti/FSharp.Data.Xsd"
+let githubLink = "http://github.com/fsprojects/FSharp.Data.Xsd"
 
 // Specify more information about your project
 let info =

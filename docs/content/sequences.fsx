@@ -17,7 +17,7 @@ Sequence and Choice
 
 A `sequence` is the most common way of structuring elements in a schema.
 
-the following xsd defines `foo` as a sequence made of an arbitrary number 
+The following xsd defines `foo` as a sequence made of an arbitrary number 
 of `bar` elements followed by a single `baz` element.
 *)
 
@@ -86,7 +86,7 @@ intellisense can show both alternatives. There is a lack of precision but this i
 
 (**
 Another xsd construct to model the content of an element is `all`, which is used less often and
-is like a sequence where the order of elements does not matter. The corresponding provided type
+it's like a sequence where the order of elements does not matter. The corresponding provided type
 in fact is essentially the same as for a sequence.
 
 *)

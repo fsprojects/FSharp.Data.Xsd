@@ -39,7 +39,7 @@ let summary = "Xml Type Provider based on Xml Schema"
 let description = "F# Xml Type Provider based on Xml Schema"
 
 // List of author names (for NuGet package)
-let authors = [ "Giacomo Citi" ]
+let authors = [ "fsprojects"; "Giacomo Citi" ]
 
 // Tags for your project (for NuGet package)
 let tags = "F# Xml Xsd"
@@ -52,14 +52,14 @@ let testAssemblies = "tests/**/bin/Release/*Tests*.dll"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
-let gitOwner = "giacomociti"
+let gitOwner = "fsprojects"
 let gitHome = "https://github.com/" + gitOwner
 
 // The name of the project on GitHub
 let gitName = "FSharp.Data.Xsd"
 
 // The url for the raw files hosted
-let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/giacomociti"
+let gitRaw = environVarOrDefault "gitRaw" "https://raw.github.com/fsprojects"
 
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps

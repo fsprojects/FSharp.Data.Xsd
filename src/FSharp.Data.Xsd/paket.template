@@ -6,11 +6,11 @@ owners
 authors 
     Giacomo Citi
 projectUrl
-    http://github.com/giacomociti/FSharp.Data.Xsd
+    http://github.com/fsprojects/FSharp.Data.Xsd
 iconUrl
-    https://raw.githubusercontent.com/giacomociti/FSharp.Data.Xsd/master/docs/files/img/logo.png
+    https://raw.githubusercontent.com/fsprojects/FSharp.Data.Xsd/master/docs/files/img/logo.png
 licenseUrl
-    http://github.com/giacomociti/FSharp.Data.Xsd/blob/master/LICENSE.txt
+    http://github.com/fsprojects/FSharp.Data.Xsd/blob/master/LICENSE.txt
 requireLicenseAcceptance
     false
 copyright
