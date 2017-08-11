@@ -25,7 +25,7 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">github page</a></li>
+          <li><a href="http://github.com/fsprojects/FSharp.Data.Xsd">github page</a></li>
         </ul>
         <h3 class="muted"><a href="/FSharp.Data.Xsd/index.html">FSharp.Data.Xsd</a></h3>
       </div>
@@ -35,7 +35,7 @@
           
 <h1><a name="Sequence-and-Choice" class="anchor" href="#Sequence-and-Choice">Sequence and Choice</a></h1>
 <p>A <code>sequence</code> is the most common way of structuring elements in a schema.</p>
-<p>the following xsd defines <code>foo</code> as a sequence made of an arbitrary number
+<p>The following xsd defines <code>foo</code> as a sequence made of an arbitrary number
 of <code>bar</code> elements followed by a single <code>baz</code> element.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -50,7 +50,7 @@ of <code>bar</code> elements followed by a single <code>baz</code> element.</p>
 <span class="l">11: </span>
 <span class="l">12: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">T</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span class="i">T</span> <span class="o">=</span> <span class="i">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        &lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; </span>
 <span class="s">          elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&gt;</span>
 <span class="s">            &lt;xs:element name=&quot;foo&quot;&gt;</span>
@@ -78,16 +78,16 @@ to <code>bar</code>and <code>baz</code> elements, where the former is an array i
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">foo</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="t">T</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">Parse</span> <span class="s">&quot;&quot;&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">let</span> <span class="i">foo</span> <span class="o">=</span> <span class="i">T</span><span class="o">.</span><span class="i">Parse</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">    &lt;foo&gt;</span>
 <span class="s">        &lt;bar&gt;42&lt;/bar&gt;</span>
 <span class="s">        &lt;bar&gt;43&lt;/bar&gt;</span>
 <span class="s">        &lt;baz&gt;1957-08-13&lt;/baz&gt;</span>
 <span class="s">    &lt;/foo&gt;&quot;&quot;&quot;</span>
 
-    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="i">foo</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">Bars</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="n">42</span>)
-    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="i">foo</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="i">Bars</span><span class="o">.</span>[<span class="n">1</span>] <span class="o">=</span> <span class="n">43</span>)
-    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="i">foo</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="i">Baz</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="t">DateTime</span>(<span class="n">1957</span>, <span class="n">08</span>, <span class="n">13</span>))
+    <span class="k">assert</span>(<span class="i">foo</span><span class="o">.</span><span class="i">Bars</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="n">42</span>)
+    <span class="k">assert</span>(<span class="i">foo</span><span class="o">.</span><span class="i">Bars</span><span class="o">.</span>[<span class="n">1</span>] <span class="o">=</span> <span class="n">43</span>)
+    <span class="k">assert</span>(<span class="i">foo</span><span class="o">.</span><span class="i">Baz</span> <span class="o">=</span> <span class="i">System</span><span class="o">.</span><span class="i">DateTime</span>(<span class="n">1957</span>, <span class="n">08</span>, <span class="n">13</span>))
 </code></pre></td>
 </tr>
 </table>
@@ -105,7 +105,7 @@ to <code>bar</code>and <code>baz</code> elements, where the former is an array i
 <span class="l">11: </span>
 <span class="l">12: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="t">T</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 18)" onmouseover="showTip(event, 'fs4', 18)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span class="i">T</span> <span class="o">=</span> <span class="i">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        &lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; </span>
 <span class="s">          elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&gt;</span>
 <span class="s">            &lt;xs:element name=&quot;foo&quot;&gt;</span>
@@ -134,35 +134,19 @@ intellisense can show both alternatives. There is a lack of precision but this i
 <span class="l">5: </span>
 <span class="l">6: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="i">foo</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="t">T</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 21)" onmouseover="showTip(event, 'fs6', 21)" class="f">Parse</span> <span class="s">&quot;&quot;&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">let</span> <span class="i">foo</span> <span class="o">=</span> <span class="i">T</span><span class="o">.</span><span class="i">Parse</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">    &lt;foo&gt;</span>
 <span class="s">      &lt;baz&gt;1957-08-13&lt;/baz&gt;</span>
 <span class="s">    &lt;/foo&gt;&quot;&quot;&quot;</span>
-    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">foo</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 23)" onmouseover="showTip(event, 'fs7', 23)" class="i">Bars</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="i">Length</span> <span class="o">=</span> <span class="n">0</span>)
-    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="i">foo</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="i">Baz</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="p">Some</span> (<span onmouseout="hideTip(event, 'fs9', 28)" onmouseover="showTip(event, 'fs9', 28)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 29)" onmouseover="showTip(event, 'fs10', 29)" class="t">DateTime</span>(<span class="n">1957</span>, <span class="n">08</span>, <span class="n">13</span>)))
+    <span class="k">assert</span>(<span class="i">foo</span><span class="o">.</span><span class="i">Bars</span><span class="o">.</span><span class="i">Length</span> <span class="o">=</span> <span class="n">0</span>)
+    <span class="k">assert</span>(<span class="i">foo</span><span class="o">.</span><span class="i">Baz</span> <span class="o">=</span> <span class="i">Some</span> (<span class="i">System</span><span class="o">.</span><span class="i">DateTime</span>(<span class="n">1957</span>, <span class="n">08</span>, <span class="n">13</span>)))
 </code></pre></td>
 </tr>
 </table>
 <p>Another xsd construct to model the content of an element is <code>all</code>, which is used less often and
-is like a sequence where the order of elements does not matter. The corresponding provided type
+it's like a sequence where the order of elements does not matter. The corresponding provided type
 in fact is essentially the same as for a sequence.</p>
 
-<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
-<div class="tip" id="fs2">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
-<div class="tip" id="fs3">type T = XmlProvider&lt;...&gt;<br /><br />Full name: Sequences.Sequences.T</div>
-<div class="tip" id="fs4">type XmlProvider<br /><br />Full name: FSharp.Data.XmlProvider<br /><em><br /><br />&lt;summary&gt;Typed representation of a XML file.&lt;/summary&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Sample&#39;&gt;Location of a XML sample file or a string containing a sample XML document.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;SampleIsList&#39;&gt;If true, the children of the root in the sample document represent individual samples for the inference.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Global&#39;&gt;If true, the inference unifies all XML elements with the same name.&lt;/param&gt;                     <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless `charset` is specified in the `Content-Type` response header.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. &#39;MyCompany.MyAssembly, resource_name.xml&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;InferTypesFromValues&#39;&gt;If true, turns on additional type inference from values. <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. type inference infers string values such as &quot;123&quot; as ints and values constrained to 0 and 1 as booleans. The XmlProvider also infers string values as JSON.)&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Schema&#39;&gt;Location of a schema file or a string containing xsd.&lt;/param&gt;</em></div>
-<div class="tip" id="fs5">val foo : XmlProvider&lt;...&gt;.Foo<br /><br />Full name: Sequences.Sequences.foo</div>
-<div class="tip" id="fs6">XmlProvider&lt;...&gt;.Parse(text: string) : XmlProvider&lt;...&gt;.Foo<br /><em><br /><br />Parses the specified XML string</em></div>
-<div class="tip" id="fs7">property XmlProvider&lt;...&gt;.Foo.Bars: int []</div>
-<div class="tip" id="fs8">property XmlProvider&lt;...&gt;.Foo.Baz: System.DateTime</div>
-<div class="tip" id="fs9">namespace System</div>
-<div class="tip" id="fs10">Multiple items<br />type DateTime =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;new : ticks:int64 -&gt; DateTime + 10 overloads<br />&#160;&#160;&#160;&#160;member Add : value:TimeSpan -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddDays : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddHours : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMilliseconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMinutes : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMonths : months:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddSeconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddTicks : value:int64 -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddYears : value:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end<br /><br />Full name: System.DateTime<br /><br />--------------------<br />System.DateTime()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(ticks: int64) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(ticks: int64, kind: System.DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, calendar: System.Globalization.Calendar) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: System.DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: System.Globalization.Calendar) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />System.DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: System.DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
-<div class="tip" id="fs11">module Choices<br /><br />from Sequences</div>
-<div class="tip" id="fs12">type T = XmlProvider&lt;...&gt;<br /><br />Full name: Sequences.Choices.T</div>
-<div class="tip" id="fs13">val foo : XmlProvider&lt;...&gt;.Foo<br /><br />Full name: Sequences.Choices.foo</div>
-<div class="tip" id="fs14">property System.Array.Length: int</div>
-<div class="tip" id="fs15">property XmlProvider&lt;...&gt;.Foo.Baz: Option&lt;System.DateTime&gt;</div>
-<div class="tip" id="fs16">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
 
         </div>
         <div class="span3">
@@ -172,7 +156,7 @@ in fact is essentially the same as for a sequence.</p>
             <li><a href="/FSharp.Data.Xsd/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/FSharp.Data.Xsd">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/giacomociti/FSharp.Data.Xsd">Source Code on GitHub</a></li>
+            <li><a href="http://github.com/fsprojects/FSharp.Data.Xsd">Source Code on GitHub</a></li>
             <li><a href="/FSharp.Data.Xsd/license.html">License</a></li>
             <li><a href="/FSharp.Data.Xsd/release-notes.html">Release Notes</a></li>
             
@@ -187,6 +171,6 @@ in fact is essentially the same as for a sequence.</p>
         </div>
       </div>
     </div>
-    <a href="http://github.com/giacomociti/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+    <a href="http://github.com/fsprojects/FSharp.Data.Xsd"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
   </body>
   </html>
