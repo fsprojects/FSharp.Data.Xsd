@@ -30,8 +30,6 @@ github fsharp/FSharp.Data src/Json/JsonGenerator.fs
 
 github fsharp/FSharp.Data src/Xml/XmlRuntime.fs
 github fsharp/FSharp.Data src/Xml/XmlInference.fs
-github fsharp/FSharp.Data src/Xml/XmlGenerator.fs
-
 
 github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fsi
 github fsprojects/FSharp.TypeProviders.StarterPack src/ProvidedTypes.fs

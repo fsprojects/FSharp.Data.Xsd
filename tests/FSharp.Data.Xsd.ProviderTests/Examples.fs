@@ -395,6 +395,41 @@ let ``numeric types are partially supported``() =
     Nums.Parse("<A float='2' />").Float |> should equal (Some "2") // should be float32
     Nums.Parse("<A double='2' />").Double |> should equal (Some 2.0) // float
 
+type SameNames = XmlProvider<Schema="""
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="X">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="E1" type="xs:string"/>
+        <xs:element name="X" type="T"/>
+      </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  <xs:complexType name="T">
+    <xs:sequence>
+      <xs:element name="E2" type="xs:string"/>
+      <xs:element name="X" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>""">
+
+[<Test>]
+let ``different types with the same name are supported``() =
+    let xml = """
+    <X>
+      <E1>a</E1>
+      <X>
+        <E2>b</E2>
+        <X>c</X>
+      </X>
+    </X>"""
+    let x = SameNames.Parse xml
+    x.E1   |> should equal "a"
+    x.X.E2 |> should equal "b"
+    x.X.X  |> should equal "c"
+
+
+
 
 
 

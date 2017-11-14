@@ -146,10 +146,8 @@
     <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Xml\XmlInference.fs">
       <Link>Xml/XmlInference.fs</Link>
     </Compile>
-    <Compile Include="..\..\paket-files\fsharp\FSharp.Data\src\Xml\XmlGenerator.fs">
-      <Link>Xml/XmlGenerator.fs</Link>
-    </Compile>
     <Compile Include="Xml\XsdInference.fs" />
+	<Compile Include="Xml\XmlGenerator.fs" />
     <Compile Include="Xml\XmlProvider.fs" />
     <Compile Include="AssemblyInfo.DesignTime.fs" />
     <None Include="paket.template" />
