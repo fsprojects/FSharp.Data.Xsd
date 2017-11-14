@@ -1,3 +1,7 @@
+#### 1.0.2 - November 15 2017
+* fixed issue #19 on elements with the same name
+
+
 #### 1.0.1 - August 7 2017
 * non-atomic simple types (list and union) fallback to string
 
