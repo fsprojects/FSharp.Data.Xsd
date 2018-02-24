@@ -64,7 +64,7 @@ is a terse summary mixing substitution groups with abstract recursive definition
 <span class="l">26: </span>
 <span class="l">27: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span class="i">T</span> <span class="o">=</span> <span class="i">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">T</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="i">Schema</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        &lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; </span>
 <span class="s">          elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot;&gt;</span>
 <span class="s">	      &lt;xs:element name=&quot;Formula&quot; abstract=&quot;true&quot;/&gt;</span>
@@ -78,7 +78,7 @@ is a terse summary mixing substitution groups with abstract recursive definition
 <span class="s">	      &lt;/xs:element&gt;</span>
 <span class="s">        &lt;/xs:schema&gt;&quot;&quot;&quot;</span><span class="o">&gt;</span>
 
-    <span class="k">let</span> <span class="i">formula</span> <span class="o">=</span> <span class="i">T</span><span class="o">.</span><span class="i">Parse</span> <span class="s">&quot;&quot;&quot;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="i">formula</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="t">T</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="f">Parse</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        &lt;And&gt;</span>
 <span class="s">            &lt;Prop&gt;p1&lt;/Prop&gt;</span>
 <span class="s">            &lt;And&gt;</span>
@@ -87,9 +87,9 @@ is a terse summary mixing substitution groups with abstract recursive definition
 <span class="s">            &lt;/And&gt;</span>
 <span class="s">        &lt;/And&gt;</span>
 <span class="s">        &quot;&quot;&quot;</span>
-    <span class="k">assert</span>(<span class="i">formula</span><span class="o">.</span><span class="i">Props</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="s">&quot;p1&quot;</span>)
-    <span class="k">assert</span>(<span class="i">formula</span><span class="o">.</span><span class="i">Ands</span><span class="o">.</span>[<span class="n">0</span>]<span class="o">.</span><span class="i">Props</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="s">&quot;p2&quot;</span>)
-    <span class="k">assert</span>(<span class="i">formula</span><span class="o">.</span><span class="i">Ands</span><span class="o">.</span>[<span class="n">0</span>]<span class="o">.</span><span class="i">Props</span><span class="o">.</span>[<span class="n">1</span>] <span class="o">=</span> <span class="s">&quot;p3&quot;</span>)
+    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="i">formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="i">Props</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="s">&quot;p1&quot;</span>)
+    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="i">formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">Ands</span><span class="o">.</span>[<span class="n">0</span>]<span class="o">.</span><span class="i">Props</span><span class="o">.</span>[<span class="n">0</span>] <span class="o">=</span> <span class="s">&quot;p2&quot;</span>)
+    <span class="k">assert</span>(<span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="i">formula</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="i">Ands</span><span class="o">.</span>[<span class="n">0</span>]<span class="o">.</span><span class="i">Props</span><span class="o">.</span>[<span class="n">1</span>] <span class="o">=</span> <span class="s">&quot;p3&quot;</span>)
     
 </code></pre></td>
 </tr>
@@ -97,6 +97,15 @@ is a terse summary mixing substitution groups with abstract recursive definition
 <p>Substitution groups are like choices, and the type provider produces an optional
 property for each alternative.</p>
 
+<div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs2">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="tip" id="fs3">module Substitutions<br /><br />from Substitutions</div>
+<div class="tip" id="fs4">type T = XmlProvider&lt;...&gt;<br /><br />Full name: Substitutions.Substitutions.T</div>
+<div class="tip" id="fs5">type XmlProvider<br /><br />Full name: FSharp.Data.XmlProvider<br /><em><br /><br />&lt;summary&gt;Typed representation of a XML file.&lt;/summary&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Sample&#39;&gt;Location of a XML sample file or a string containing a sample XML document.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;SampleIsList&#39;&gt;If true, the children of the root in the sample document represent individual samples for the inference.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Global&#39;&gt;If true, the inference unifies all XML elements with the same name.&lt;/param&gt;                     <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless `charset` is specified in the `Content-Type` response header.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. &#39;MyCompany.MyAssembly, resource_name.xml&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;InferTypesFromValues&#39;&gt;If true, turns on additional type inference from values. <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. type inference infers string values such as &quot;123&quot; as ints and values constrained to 0 and 1 as booleans. The XmlProvider also infers string values as JSON.)&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Schema&#39;&gt;Location of a schema file or a string containing xsd.&lt;/param&gt;</em></div>
+<div class="tip" id="fs6">val formula : XmlProvider&lt;...&gt;.And<br /><br />Full name: Substitutions.Substitutions.formula</div>
+<div class="tip" id="fs7">XmlProvider&lt;...&gt;.Parse(text: string) : XmlProvider&lt;...&gt;.And<br /><em><br /><br />Parses the specified XML string</em></div>
+<div class="tip" id="fs8">property XmlProvider&lt;...&gt;.And.Props: string []</div>
+<div class="tip" id="fs9">property XmlProvider&lt;...&gt;.And.Ands: XmlProvider&lt;...&gt;.And []</div>
 
         </div>
         <div class="span3">
