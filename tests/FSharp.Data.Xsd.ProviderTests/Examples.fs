@@ -428,8 +428,32 @@ let ``different types with the same name are supported``() =
     x.X.E2 |> should equal "b"
     x.X.X  |> should equal "c"
 
+type NillableElements = XmlProvider<Schema= """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="passport" type="passportType" />
+    <xs:complexType name="passportType">
+        <xs:sequence>
+          <xs:element nillable="true" name="PassportCountry" type="xs:string"/>
+          <xs:element nillable="true" name="PassportNumber" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>""">
 
+[<Test>]
+let ``nillable elements are supported``() =
+    let xml = """
+    <passport>
+      <PassportCountry>XY</PassportCountry>
+      <PassportNumber xsi:nil="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    </passport>"""
 
+    let x = NillableElements.Parse xml
+    x.PassportCountry.Nil |> should equal None
+    x.PassportCountry.Value |> should equal (Some "XY")
+    x.PassportNumber.Nil |> should equal (Some true)
+    x.PassportNumber.Value |> should equal None
 
 
 
