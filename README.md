@@ -11,7 +11,7 @@ XML is in decline but many enterprises still use it heavily. That's why a type p
 
 ## Project status and Roadmap
 
-The XSD support is sufficiently complete and it's been also submitted as a [pull request to F# Data](https://github.com/fsharp/FSharp.Data/pull/1004).
+This project is no longer maintained because XSD support is now available in [F# Data version 3.0.0](https://www.nuget.org/packages/FSharp.Data/3.0.0).
 
 ## Maintainer(s)
 
